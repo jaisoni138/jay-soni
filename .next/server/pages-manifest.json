@@ -2,11 +2,8 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
-  "/svs": "pages/svs.js",
-  "/logout": "pages/logout.js",
-  "/": "pages/index.js",
-  "/documents": "pages/documents.js",
   "/maa": "pages/maa.js",
-  "/sl": "pages/sl.js",
-  "/shivYog": "pages/shivYog.js"
+  "/shivYog": "pages/shivYog.js",
+  "/svs": "pages/svs.js",
+  "/rh": "pages/rh.js"
 }

@@ -69,7 +69,7 @@ const ReikiHealing = () => {
           ></iframe>
         ) : (
           <div
-            className="text-2xl font-medium flex align-items-center justify-content-center border-solid mb-4 mt-2"
+            className="text-2xl font-medium flex align-items-center justify-content-center mb-4 mt-2 border-round bg-black-alpha-90 text-white shadow-5"
             style={{ width: "590px", height: "300px" }}
           >
             Please select a video to play...!
