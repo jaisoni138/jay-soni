@@ -39,7 +39,7 @@ a {
 }
 
 .img-background .surface-card {
-  backdrop-filter: blur(50px);
+  backdrop-filter: blur(20px);
   background: transparent !important;
 }
 
@@ -337,3 +337,12 @@ a {
 //   background-color: transparent;
 //   padding: 2px 7px;
 // }
+
+.button-hover {
+  background-color: #C4DCFF;
+}
+
+.button-hover:hover {
+  background-color: #97C1FE;
+  cursor: pointer;
+}

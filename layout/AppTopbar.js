@@ -25,14 +25,15 @@ const AppTopbar = forwardRef((props, ref) => {
 
   return (
     <div className="layout-topbar">
-      <Image
+      {/* <Image
         aria-hidden
         src="/logo.svg"
         alt="Raftaar logo"
         width={100}
         height={100}
         className="mb-3"
-      />
+      /> */}
+      <span className="text-2xl font-semibold uppercase">Priti Soni</span>
 
       <button
         ref={menubuttonRef}

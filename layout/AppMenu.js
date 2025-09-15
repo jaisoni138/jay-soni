@@ -1,114 +1,159 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AppMenuitem from "./AppMenuitem";
 import { LayoutContext } from "./context/layoutcontext";
 import { MenuProvider } from "./context/menucontext";
 import Link from "next/link";
 import { useSelector } from "react-redux";
+import { supabase } from "../config/supabaseClient";
 // import Image from "next/image";
 
 const AppMenu = () => {
-    const { layoutConfig } = useContext(LayoutContext);
-    const user = useSelector((state) => state.initialState.user);
+  const { layoutConfig } = useContext(LayoutContext);
+  const user = useSelector((state) => state.initialState.user);
+  const [fetchedMenuItems, setFetchedMenuItems] = useState([]);
 
-    const model = [
-        {
-            label: "Home",
-            items: [
-                {
-                    label: "Dashboard",
-                    icon: "pi pi-fw pi-home",
-                    to: "/dashboard",
-                    visible: user.role === "SUPER_ADMIN" ? true : false,
-                },
-                { label: "Clients", icon: "pi pi-fw pi-users", to: "/clients" },
-                {
-                    label: "Locations",
-                    icon: "pi pi-fw pi-map-marker",
-                    to: "/locations",
-                },
-            ],
-        },
-        {
-            label: "Order",
-            items: [
-                {
-                    label: "Open Orders",
-                    icon: "pi pi-fw pi-list",
-                    to: "/open-orders",
-                },
-                {
-                    label: "Completed Orders",
-                    icon: "pi pi-fw pi-list-check",
-                    to: "/completed-orders",
-                },
-                {
-                    label: "Canceled Orders",
-                    icon: "pi pi-fw pi-cart-minus",
-                    to: "/canceled-orders",
-                },
-            ],
-        },
-        {
-            label: "Billing",
-            items: [
-                {
-                    label: "Invoices",
-                    icon: "pi pi-fw pi-money-bill",
-                    to: "/invoices",
-                },
-                {
-                    label: "Old Invoices",
-                    icon: "pi pi-fw pi-money-bill",
-                    to: "/old-invoices",
-                    visible: user.role === "SUPER_ADMIN" ? true : false,
-                },
-            ],
-        },
-        {
-            label: "LR",
-            items: [
-                { label: "LRs", icon: "pi pi-fw pi-receipt", to: "/lrs" },
-                {
-                    label: "Old LRs",
-                    icon: "pi pi-fw pi-receipt",
-                    to: "/old-lrs",
-                    visible: user.role === "SUPER_ADMIN" ? true : false,
-                },
-            ],
-        },
-        {
-            label: "Utilities",
-            items: [
-                {
-                    label: "Legder",
-                    icon: "pi pi-fw pi-address-book",
-                    to: "/ledger",
-                    visible: user.role === "SUPER_ADMIN" ? true : false,
-                },
-                {
-                    label: "Outstandings",
-                    icon: "pi pi-fw pi-briefcase",
-                    to: "/outstandings",
-                    visible: user.role === "SUPER_ADMIN" ? true : false,
-                },
-                {
-                    label: "Users",
-                    icon: "pi pi-fw pi-user",
-                    to: "/users",
-                    visible: user.role === "SUPER_ADMIN" ? true : false,
-                },
-                {
-                    label: "Logout",
-                    icon: "pi pi-fw pi-sign-out",
-                    to: "/logout",
-                },
-            ],
-        },
-    ];
+  useEffect(() => {
+    fetchMenuItems();
+  }, []);
 
-    return (
-        <MenuProvider>
-            {/* <Image
+  async function fetchMenuItems() {
+    try {
+      const { data, error } = await supabase
+        .from("collection")
+        .select("*")
+        .order("title", { ascending: true });
+
+      if (error) {
+        console.error("Error fetching data:", error);
+      } else {
+        const sortedMenuItems = data.reduce((acc, cv) => {
+          const var1 = acc.findIndex((item) => item.label == cv.label);
+          if (var1 !== -1) {
+            acc[var1].items.push(cv);
+          } else {
+            acc.push({ label: cv.label, items: [cv] });
+          }
+
+          return acc;
+        }, []);
+
+        // add default menu items
+        sortedMenuItems.push({
+          label: "Utilities",
+          items: [
+            {
+              title: "Logout",
+              icon: "pi pi-fw pi-sign-out",
+              to: "/logout",
+            },
+          ],
+        });
+
+        setFetchedMenuItems(sortedMenuItems);
+      }
+    } catch (err) {}
+  }
+
+  //   const model = [
+  //     {
+  //       label: Object.keys(fetchedMenuItems)[0],
+  //       items: [
+  //         {
+  //           label:
+  //             Object.values(fetchedMenuItems).length > 0
+  //               ? Object.values(fetchedMenuItems)[0][0].title
+  //               : "",
+  //           icon: "pi pi-fw pi-home",
+  //           to: "/shivYog",
+  //           // visible: user.role === "SUPER_ADMIN" ? true : false,
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       label: Object.keys(fetchedMenuItems)[1],
+  //       items: [
+  //         {
+  //           label:
+  //             Object.values(fetchedMenuItems).length > 0
+  //               ? Object.values(fetchedMenuItems)[1][0].title
+  //               : "",
+  //           icon: "pi pi-fw pi-home",
+  //           to: "/shivYog",
+  //           // visible: user.role === "SUPER_ADMIN" ? true : false,
+  //         },
+  //         {
+  //           label:
+  //             Object.values(fetchedMenuItems).length > 0
+  //               ? Object.values(fetchedMenuItems)[1][1].title
+  //               : "",
+  //           icon: "pi pi-fw pi-users",
+  //           to: "/maa",
+  //         },
+  //         {
+  //           label:
+  //             Object.values(fetchedMenuItems).length > 0
+  //               ? Object.values(fetchedMenuItems)[1][2].title
+  //               : "",
+  //           icon: "pi pi-fw pi-map-marker",
+  //           to: "/saundaryLehri",
+  //         },
+  //         {
+  //           label:
+  //             Object.values(fetchedMenuItems).length > 0
+  //               ? Object.values(fetchedMenuItems)[1][3].title
+  //               : "",
+  //           icon: "pi pi-fw pi-map-marker",
+  //           to: "/saundaryLehri",
+  //         },
+  //         {
+  //           label:
+  //             Object.values(fetchedMenuItems).length > 0
+  //               ? Object.values(fetchedMenuItems)[1][4].title
+  //               : "",
+  //           icon: "pi pi-fw pi-map-marker",
+  //           to: "/saundaryLehri",
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       label: "Utilities",
+  //       items: [
+  //         {
+  //           label: "Logout",
+  //           icon: "pi pi-fw pi-sign-out",
+  //           to: "/logout",
+  //         },
+  //       ],
+  //     },
+  //   ];
+
+  //   const model = [];
+  //   Object.keys(fetchedMenuItems).length !== 0 ? .forEach((item, index) => {
+  //     model.push({
+  //       label: item.key,
+  //       items: [
+  //         {
+  //           label: item.title,
+  //           icon: "pi pi-fw pi-home",
+  //           to: "/shivYog",
+  //           // visible: user.role === "SUPER_ADMIN" ? true : false,
+  //         },
+  //         { label: "Maa", icon: "pi pi-fw pi-users", to: "/maa" },
+  //         {
+  //           label: "Saundary Lehri",
+  //           icon: "pi pi-fw pi-map-marker",
+  //           to: "/saundaryLehri",
+  //         },
+  //       ],
+  //     });
+  //     // if (index === 0) {
+  //     //     monthsData.push(monthNames[d.getMonth() - 1]);
+  //     // }
+  //   });
+
+  return (
+    <MenuProvider>
+      {/* <Image
         aria-hidden
         src="/logo.svg"
         alt="Raftaar logo"
@@ -117,22 +162,17 @@ const AppMenu = () => {
         height={100}
         className="mb-3"
       /> */}
-            <ul className="layout-menu">
-                {model.map((item, i) => {
-                    return !item.seperator ? (
-                        <AppMenuitem
-                            item={item}
-                            root={true}
-                            index={i}
-                            key={item.label}
-                        />
-                    ) : (
-                        <li className="menu-separator"></li>
-                    );
-                })}
-            </ul>
-        </MenuProvider>
-    );
+      <ul className="layout-menu">
+        {fetchedMenuItems.map((item, i) => {
+          return !item.seperator ? (
+            <AppMenuitem item={item} root={true} index={i} key={item.label} />
+          ) : (
+            <li className="menu-separator"></li>
+          );
+        })}
+      </ul>
+    </MenuProvider>
+  );
 };
 
 export default AppMenu;

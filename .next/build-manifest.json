@@ -30,15 +30,35 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/clients": [
+    "/documents": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/clients.js"
+      "static/chunks/pages/documents.js"
     ],
-    "/open-orders": [
+    "/logout": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/open-orders.js"
+      "static/chunks/pages/logout.js"
+    ],
+    "/maa": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/maa.js"
+    ],
+    "/shivYog": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/shivYog.js"
+    ],
+    "/sl": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/sl.js"
+    ],
+    "/svs": [
+      "static/chunks/webpack.js",
+      "static/chunks/main.js",
+      "static/chunks/pages/svs.js"
     ]
   },
   "ampFirstPages": []
