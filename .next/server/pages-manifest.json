@@ -3,7 +3,6 @@
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
   "/maa": "pages/maa.js",
-  "/shivYog": "pages/shivYog.js",
   "/svs": "pages/svs.js",
   "/rh": "pages/rh.js"
 }

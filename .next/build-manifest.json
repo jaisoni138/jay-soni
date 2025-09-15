@@ -25,20 +25,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/maa": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/maa.js"
-    ],
     "/rh": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
       "static/chunks/pages/rh.js"
-    ],
-    "/shivYog": [
-      "static/chunks/webpack.js",
-      "static/chunks/main.js",
-      "static/chunks/pages/shivYog.js"
     ],
     "/svs": [
       "static/chunks/webpack.js",
