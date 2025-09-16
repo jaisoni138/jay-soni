@@ -58,7 +58,7 @@ const LoginWithSocial = () => {
       });
 
       setTimeout(() => {
-        Router.push("/documents");
+        Router.push("/dashboard");
       }, 1000);
 
     } catch (err) {

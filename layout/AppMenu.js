@@ -42,6 +42,11 @@ const AppMenu = () => {
           label: "Utilities",
           items: [
             {
+              title: "Dashboard",
+              icon: "pi pi-home",
+              to: "/dashboard",
+            },
+            {
               title: "Logout",
               icon: "pi pi-fw pi-sign-out",
               to: "/logout",

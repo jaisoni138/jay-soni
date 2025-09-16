@@ -49,8 +49,8 @@ const AppMenuitem = (props) => {
     // toggle active state
     // if (item.items) setActiveMenu(active ? props.parentKey : key);
     // else setActiveMenu(key);
-    
-    router.push(event)
+
+    router.push(event);
   };
 
   const subMenu = item.items && item.visible !== false && (
@@ -75,13 +75,19 @@ const AppMenuitem = (props) => {
                 </a>
             ) : null} */}
 
-      {item.to && !item.items && item.visible !== false ? (
+      {!item.items && item.visible !== false ? (
         <Link
-        //   href="/video?id=e63d812c-eb4d-4481-b8be-48e640b4a392"
-        href={`/${encodeURIComponent(item.label?.toLowerCase())}/${encodeURIComponent(item.id)}`}
+          //   href="/video?id=e63d812c-eb4d-4481-b8be-48e640b4a392"
+          href="#"
           replace={item.replaceUrl}
           target={item.target}
-          onClick={(e) => router.push(`/${encodeURIComponent(item.label?.toLowerCase())}/${encodeURIComponent(item.id)}`)}
+          onClick={(e) => {
+            if (!item.to) {
+              router.push(`/${encodeURIComponent(item.label?.toLowerCase())}/${encodeURIComponent(item.id)}`);
+            } else {
+              router.push(item.to);
+            }
+          }}
           className={classNames(item.class, "p-ripple no-underline", { "active-route": isActiveRoute })}
           tabIndex={0}
         >

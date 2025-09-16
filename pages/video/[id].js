@@ -58,23 +58,25 @@ const Video = () => {
 
   return (
     <>
-      <div className="flex flex-column gap-3 align-items-center flex-wrap border-round">
+      <div className="flex flex-column gap-3 align-items-center flex-wrap">
         <div style={{ height: "330px", position: "sticky", top: "100px" }}>
           {selectedVideoSrc ? (
-            <iframe
-              className="flex align-items-center justify-content-center mb-4 mt-4 border-round"
-              width=" 590"
-              height="300"
-              src={selectedVideoSrc}
-              frameborder="0"
-              title="YouTube video player"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen="allowfullscreen"
-              mozallowfullscreen="mozallowfullscreen"
-              msallowfullscreen="msallowfullscreen"
-              oallowfullscreen="oallowfullscreen"
-              webkitallowfullscreen="webkitallowfullscreen"
-            ></iframe>
+            <>
+              <iframe
+                className="flex align-items-center justify-content-center mb-4 mt-1 border-round shadow-4"
+                width=" 590"
+                height="300"
+                src={selectedVideoSrc}
+                frameborder="0"
+                title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen="allowfullscreen"
+                mozallowfullscreen="mozallowfullscreen"
+                msallowfullscreen="msallowfullscreen"
+                oallowfullscreen="oallowfullscreen"
+                webkitallowfullscreen="webkitallowfullscreen"
+              ></iframe>
+            </>
           ) : (
             <div
               className="text-xl font-medium flex align-items-center justify-content-center mb-4 mt-1 border-round bg-black-alpha-90 text-white shadow-5"
@@ -84,10 +86,15 @@ const Video = () => {
             </div>
           )}
         </div>
-        <div className="grid" style={{ height: "400px", overflow: "scroll" }}>
+        <div className="grid lg:ml-3" style={{ height: "400px", overflow: "scroll" }}>
           {Array.from(videoListData).map((videoList) => (
             <div className="col-12 lg:col-6 xl:col-4">
-              <div className="card mb-0">
+              <div
+                className="card mb-0 cursor-pointer custom-shadow-4-on-hover custom-shadow-1"
+                onClick={() => {
+                  playSelectedVideo(videoList);
+                }}
+              >
                 <div className="flex justify-content-between">
                   <div>
                     <span
@@ -102,18 +109,10 @@ const Video = () => {
                     <Tooltip target=".tooltip-show-full-title" mouseTrack mouseTrackLeft={10} />
 
                     <div className="font-medium">
-                      <Chip className="text-sm" label="PDF in Gujarati Version" />
+                      <Chip className="text-sm" label={videoList.description} />
                     </div>
                   </div>
-                  <Button
-                    className="pi pi-play justify-content-center"
-                    tooltip="Play"
-                    tooltipOptions={{ position: "top" }}
-                    onClick={() => {
-                      playSelectedVideo(videoList);
-                    }}
-                    style={{ width: "1rem", height: "2.5rem" }}
-                  />
+                  <i className="pi pi-youtube text-5xl text-red-500 tooltip-show-full-title" data-pr-tooltip="Play" data-pr-position="right" data-pr-at="right+5 top" data-pr-my="left center-2" />
                 </div>
                 {/* <span className="text-green-500 font-medium">24 new </span>
             <span className="text-500">since last visit</span> */}

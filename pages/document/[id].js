@@ -93,7 +93,7 @@ const Document = () => {
                   <span className="block font-medium text-xl mb-3">{document.title}</span>
 
                   <div className="font-medium">
-                    <Chip className="text-sm" label="PDF in Gujarati Version" />
+                    <Chip className="text-sm" label={document.description} />
                   </div>
                 </div>
                 <Button
