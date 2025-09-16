@@ -25,15 +25,15 @@
       "static/chunks/main.js",
       "static/chunks/pages/_error.js"
     ],
-    "/rh": [
+    "/document/[id]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/rh.js"
+      "static/chunks/pages/document/[id].js"
     ],
-    "/svs": [
+    "/video/[id]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/svs.js"
+      "static/chunks/pages/video/[id].js"
     ]
   },
   "ampFirstPages": []

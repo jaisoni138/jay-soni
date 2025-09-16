@@ -12,10 +12,12 @@ const ShivYog = () => {
   async function fetchVideos() {
     // fetch video data
     try {
+      const params = new URLSearchParams(window.location.search);
+      const id = params.get("id");
       const { data, error } = await supabase
         .from("playlist")
         .select("*")
-        .eq("collection_id", "161eb7c3-2ee7-4b3a-bc63-e20c5149a9c5")
+        .eq("collection_id", id)
         .order("created_dttm", { ascending: false });
       if (error) {
         console.error("Error fetching data:", error);
@@ -51,10 +53,13 @@ const ShivYog = () => {
 
   return (
     <>
-      <div className="flex justify-content-center flex-wrap">
+      <div
+        className="flex justify-content-center flex-wrap surface-300 mb-7 border-round shadow-5"
+        style={{ position: "sticky", top: "100px", zIndex: "1000" }}
+      >
         {selectedVideoSrc ? (
           <iframe
-            className="flex align-items-center justify-content-center mb-4 mt-2 border-round"
+            className="flex align-items-center justify-content-center mb-4 mt-4 border-round"
             width=" 590"
             height="300"
             src={selectedVideoSrc}
@@ -69,7 +74,7 @@ const ShivYog = () => {
           ></iframe>
         ) : (
           <div
-            className="text-2xl font-medium flex align-items-center justify-content-center mb-4 mt-2 border-round bg-black-alpha-90 text-white shadow-5"
+            className="text-2xl font-medium flex align-items-center justify-content-center mb-4 mt-4 border-round bg-black-alpha-90 text-white shadow-5"
             style={{ width: "590px", height: "300px" }}
           >
             Please select a video to play...!
