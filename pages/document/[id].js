@@ -4,6 +4,7 @@ import { Button } from "primereact/button";
 import { supabase } from "../../config/supabaseClient";
 import { Chip } from "primereact/chip";
 import { useRouter } from "next/router";
+import { Tooltip } from "primereact/tooltip";
 
 const Document = () => {
   const [documentListData, setDocumentListData] = useState([]);
@@ -84,13 +85,22 @@ const Document = () => {
     //   </div>
     // </div>
     <>
-      <div className="grid">
+      <div className="grid lg:ml-3">
         {Array.from(documentListData).map((document) => (
-          <div className="col-12 lg:col-6 xl:col-3">
+          <div className="col-12 lg:col-6 xl:col-4">
             <div className="card mb-0">
               <div className="flex justify-content-between mb-3">
                 <div>
-                  <span className="block font-medium text-xl mb-3">{document.title}</span>
+                  <span
+                    className="block font-medium text-lg mb-3 surface-overlay overflow-hidden text-overflow-ellipsis white-space-nowrap tooltip-show-full-title"
+                    data-pr-tooltip={document.title}
+                    data-pr-position="right"
+                    style={{ width: "200px" }}
+                  >
+                    {document.title}
+                  </span>
+
+                  <Tooltip target=".tooltip-show-full-title" mouseTrack mouseTrackLeft={10} />
 
                   <div className="font-medium">
                     <Chip className="text-sm" label={document.description} />
