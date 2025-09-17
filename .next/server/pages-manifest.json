@@ -4,5 +4,5 @@
   "/_document": "pages/_document.js",
   "/admin": "pages/admin.js",
   "/uikit/formlayout": "pages/uikit/formlayout.js",
-  "/document/[id]": "pages/document/[id].js"
+  "/dashboard": "pages/dashboard.js"
 }

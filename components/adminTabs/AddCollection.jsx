@@ -1,7 +1,7 @@
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 
-export default function AddCollection({ user, title }) {
+export default function AddCollection({ user }) {
   return (
     <>
       <div className="grid card">

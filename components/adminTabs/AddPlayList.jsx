@@ -2,7 +2,7 @@ import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { Tooltip } from "primereact/tooltip";
 
-export default function AddPlayList({ user, title }) {
+export default function AddPlayList({ user }) {
   return (
     <>
       <Tooltip target=".ap-form-tooltip" />
