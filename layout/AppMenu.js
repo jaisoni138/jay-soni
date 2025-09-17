@@ -47,6 +47,11 @@ const AppMenu = () => {
               to: "/dashboard",
             },
             {
+              title: "Admin Panel",
+              icon: "pi pi-shield",
+              to: "/admin",
+            },
+            {
               title: "Logout",
               icon: "pi pi-fw pi-sign-out",
               to: "/logout",
