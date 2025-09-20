@@ -33,7 +33,7 @@ const AppTopbar = forwardRef((props, ref) => {
         height={100}
         className="mb-3"
       /> */}
-      <span className="text-2xl font-semibold uppercase">Priti Soni</span>
+      {/* <span className="text-2xl font-semibold uppercase">Priti Soni</span> */}
 
       <button
         ref={menubuttonRef}

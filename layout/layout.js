@@ -107,13 +107,13 @@ const Layout = (props) => {
             <Head>
                 {/* <title>Sakai by PrimeReact | Free Admin Template for NextJS</title> */}
                 <meta charSet="UTF-8" />
-                <meta name="description" content="Raftaar Logistics - Truck Transportation Service" />
+                <meta name="description" content="Spiritual Awareness - Priti Soni" />
                 <meta name="robots" content="index, follow" />
                 <meta name="viewport" content="initial-scale=1, width=device-width" />
-                <meta property="og:type" content="erp"></meta>
-                <meta property="og:title" content="Welcome to Raftaar Logistics | ERP"></meta>
-                <meta property="og:url" content="https://www.raftaarlogistics.com"></meta>
-                <meta property="og:description" content="Raftaar Logistics - Truck Transportation Service" />
+                <meta property="og:type" content="software"></meta>
+                <meta property="og:title" content="Welcome to Spiritual World"></meta>
+                <meta property="og:url" content="https://pritisoni-v2.vercel.app"></meta>
+                <meta property="og:description" content="Spiritual Awareness - Priti Soni" />
                 {/* <meta property="og:image" content="https://www.primefaces.org/static/social/sakai-nextjs.png"></meta> */}
                 <meta property="og:ttl" content="604800"></meta>
                 <link rel="icon" href={`/favicon.ico`} type="image/x-icon"></link>
