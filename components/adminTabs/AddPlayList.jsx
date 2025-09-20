@@ -9,13 +9,13 @@ import { SelectButton } from "primereact/selectbutton";
 
 export default function AddPlayList({ user }) {
   const addPlaylistFields = {
-    title: "",
-    description: "",
-    videoId: "",
+    title: null,
+    description: null,
+    videoId: null,
     collectionId: null,
     isDocument: false,
-    documentFolder: "",
-    documentName: "",
+    documentFolder: null,
+    documentName: null,
   };
 
   const toast = useRef(null);
