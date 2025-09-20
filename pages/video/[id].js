@@ -64,8 +64,8 @@ const Video = () => {
             <>
               <iframe
                 className="flex align-items-center justify-content-center mb-4 mt-1 border-round shadow-4"
-                width=" 590"
-                height="300"
+                // width=" 590"
+                // height="300"
                 src={selectedVideoSrc}
                 frameborder="0"
                 title="YouTube video player"
@@ -75,13 +75,12 @@ const Video = () => {
                 msallowfullscreen="msallowfullscreen"
                 oallowfullscreen="oallowfullscreen"
                 webkitallowfullscreen="webkitallowfullscreen"
+                style={{ height: "300px", width: "100%" }}
+                onload='javascript:(function(o){o.style.height=o.contentWindow.document.body.scrollHeight+"px";}(this));'
               ></iframe>
             </>
           ) : (
-            <div
-              className="text-xl font-medium flex align-items-center justify-content-center mb-4 mt-1 border-round bg-black-alpha-90 text-white shadow-5"
-              style={{ width: "590px", height: "300px" }}
-            >
+            <div className="text-xl font-medium flex align-items-center justify-content-center mb-4 mt-1 border-round bg-black-alpha-90 text-white shadow-5" style={{ height: "300px", width: "100%" }}>
               Please select a video to play...!
             </div>
           )}

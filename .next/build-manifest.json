@@ -30,10 +30,10 @@
       "static/chunks/main.js",
       "static/chunks/pages/admin.js"
     ],
-    "/uikit/formlayout": [
+    "/document/[id]": [
       "static/chunks/webpack.js",
       "static/chunks/main.js",
-      "static/chunks/pages/uikit/formlayout.js"
+      "static/chunks/pages/document/[id].js"
     ]
   },
   "ampFirstPages": []
