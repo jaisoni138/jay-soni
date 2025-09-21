@@ -6,6 +6,7 @@ import { supabase } from "../../config/supabaseClient";
 import { Dropdown } from "primereact/dropdown";
 import { Toast } from "primereact/toast";
 import { SelectButton } from "primereact/selectbutton";
+import { ToggleButton } from "primereact/togglebutton";
 
 export default function AddPlayList({ user }) {
   const addPlaylistFields = {
@@ -165,13 +166,27 @@ export default function AddPlayList({ user }) {
         <div className="col-12">
           <div className="p-fluid">
             <div className="field">
-              <label htmlFor="apIsDoc">Is this a Document?</label>
+              <label htmlFor="apIsDoc" className="vertical-align-middle">
+                Is this a Document?
+              </label>
               <i
                 className="pi pi-info-circle ap-form-tooltip mx-2"
                 data-pr-tooltip="Required, If you are adding as a document then you must select 'YES'"
                 data-pr-position="right"
                 style={{ fontSize: "1rem", cursor: "pointer" }}
               />
+              <ToggleButton
+                checked={addPlaylistData.isDocument}
+                onChange={(e) => {
+                  setAddPlaylistData((previousState) => ({
+                    ...previousState,
+                    isDocument: e.target.value,
+                  }));
+                  console.log(e.target.value);
+                }}
+                className="w-auto h-auto vertical-align-middle"
+              />
+              {/* 
               <SelectButton
                 value={addPlaylistData.isDocument}
                 onChange={(e) => {
@@ -181,7 +196,7 @@ export default function AddPlayList({ user }) {
                   }));
                 }}
                 options={["true"]}
-              />
+              /> */}
             </div>
             <div className="field">
               <label htmlFor="apTitle">Title</label>
