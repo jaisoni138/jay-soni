@@ -16,6 +16,7 @@ const Video = () => {
 
   const router = useRouter();
   const toast = useRef(null);
+  const menu = useRef(null);
 
   async function fetchVideos() {
     // fetch video data
@@ -83,7 +84,12 @@ const Video = () => {
 
   const itemTemplate = (item) => {
     return (
-      <div className="flex flex-wrap p-0 align-items-center gap-3">
+      <div
+        className="flex flex-wrap p-0 align-items-center gap-3"
+        onClick={() => {
+          playSelectedVideo(item);
+        }}
+      >
         <img className="shadow-2 flex-shrink-0 border-round" width={64} src={`https://img.youtube.com/vi/${item.videoId}/default.jpg`} alt={item.title} />
         <div className="flex-1 flex flex-column gap-2 xl:mr-8">
           <span className="font-bold">{item.title}</span>
@@ -125,51 +131,15 @@ const Video = () => {
                 style={{ height: "300px", width: "40%" }}
                 onload='javascript:(function(o){o.style.height=o.contentWindow.document.body.scrollHeight+"px";}(this));'
               ></iframe>
-              <div className="grid text-xl font-medium flex mb-4 mt-1 bg-black-alpha-90 shadow-5" style={{ height: "300px", width: "60%", overflow: "scroll" }}>
-                <OrderList
-                  className="w-full"
-                  dataKey="id"
-                  value={playNextVideoListData}
-                  onChange={(e) => setPlayNextVideoListData(e.value)}
-                  itemTemplate={itemTemplate}
-                ></OrderList>
-
-                {/* <span className="text-white">Play Next</span>
-                {Array.from(videoListData).map((videoList) => (
-                  <div className="col-12 p-0">
-                    <div
-                      className="card cursor-pointer"
-                      onClick={() => {
-                        playSelectedVideo(videoList);
-                      }}
-                    >
-                      <div className="flex justify-content-between">
-                        <div>
-                          <span
-                            className="block font-small text-lg surface-overlay overflow-hidden text-overflow-ellipsis white-space-nowrap tooltip-show-full-title"
-                            data-pr-tooltip={videoList.title}
-                            data-pr-position="right"
-                          >
-                            {videoList.title}
-                          </span>
-
-                          <Tooltip target=".tooltip-show-full-title" mouseTrack mouseTrackLeft={10} />
-
-                          <div className="font-medium">
-                            <Chip className="text-sm" label={videoList.description} />
-                          </div>
-                        </div>
-                        <i
-                          className="pi pi-youtube text-5xl text-red-500 tooltip-show-full-title"
-                          data-pr-tooltip="Play"
-                          data-pr-position="right"
-                          data-pr-at="right+5 top"
-                          data-pr-my="left center-2"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                ))} */}
+              <div
+                className="grid text-xl font-medium flex mb-4 mt-1 bg-black-alpha-90 shadow-5 align-items-center justify-content-center"
+                style={{ height: "300px", width: "60%", overflow: "scroll", color: "#aaa" }}
+              >
+                {playNextVideoListData.length > 0 ? (
+                  <OrderList className="w-full" dataKey="id" value={playNextVideoListData} onChange={(e) => setPlayNextVideoListData(e.value)} itemTemplate={itemTemplate}></OrderList>
+                ) : (
+                  "No video selected in queue"
+                )}
               </div>
             </>
           ) : (
@@ -181,14 +151,13 @@ const Video = () => {
         <div className="grid lg:ml-3" style={{ height: "400px", overflow: "scroll" }}>
           {Array.from(videoListData).map((videoList) => (
             <div className="col-12 lg:col-6 xl:col-4">
-              <div
-                className="card mb-0 cursor-pointer custom-shadow-4-on-hover custom-shadow-1"
-                onClick={() => {
-                  playSelectedVideo(videoList);
-                }}
-              >
+              <div className="card mb-0 cursor-pointer custom-shadow-4-on-hover custom-shadow-1">
                 <div className="flex justify-content-between">
-                  <div>
+                  <div
+                    onClick={() => {
+                      playSelectedVideo(videoList);
+                    }}
+                  >
                     <span
                       className="block font-medium text-lg mb-3 mr-3 surface-overlay overflow-hidden text-overflow-ellipsis white-space-nowrap tooltip-show-full-title"
                       data-pr-tooltip={videoList.title}
@@ -206,7 +175,7 @@ const Video = () => {
                   </div>
                   <i
                     className="pi pi-plus text-xl text-red-500 tooltip-show-full-title"
-                    data-pr-tooltip="+ Play next"
+                    data-pr-tooltip="+ Add to queue"
                     data-pr-position="right"
                     data-pr-at="right+5 top"
                     data-pr-my="left center-2"
