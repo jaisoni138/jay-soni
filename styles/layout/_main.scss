@@ -397,3 +397,17 @@ a {
 .custom-shadow-4-on-hover:hover {
   box-shadow: 0 1px 10px rgba(0, 0, 0, .12), 0 4px 5px rgba(0, 0, 0, .14), 0 2px 4px -1px rgba(0, 0, 0, .2) !important;
 }
+
+// css for ul under OrderList - queue/play next div
+.p-orderlist .p-orderlist-list {
+  max-height: 300px;
+  min-height: 300px;
+  background-color: transparent;
+  color: #fff;
+  border: none;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+}
+.p-orderlist .p-orderlist-list .p-orderlist-item {
+  color: white;
+}

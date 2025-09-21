@@ -1,16 +1,21 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Card } from "primereact/card";
 import { Button } from "primereact/button";
 import { supabase } from "../../config/supabaseClient";
 import { Chip } from "primereact/chip";
 import { Tooltip } from "primereact/tooltip";
 import { useRouter } from "next/router";
+import { OrderList } from "primereact/orderlist";
+import { Toast } from "primereact/toast";
 
 const Video = () => {
   const [videoListData, setVideoListData] = useState([]);
   const [selectedVideoSrc, setSelectedVideoSrc] = useState("");
   const [collectionId, setcollectionId] = useState(null);
+  const [playNextVideoListData, setPlayNextVideoListData] = useState([]);
+
   const router = useRouter();
+  const toast = useRef(null);
 
   async function fetchVideos() {
     // fetch video data
@@ -51,19 +56,61 @@ const Video = () => {
     fetchVideos();
   }, [collectionId]);
 
-  async function playSelectedVideo(video) {
-    console.log(video.videoId);
+  function playSelectedVideo(video) {
     setSelectedVideoSrc("https://www.youtube.com/embed/" + video.videoId);
   }
 
+  function addToPlayNextQueue(newItem) {
+    // Check if an item with the same ID already exists
+    const existingItem = playNextVideoListData.find((item) => item.videoId === newItem.videoId);
+
+    // If no existing item was found, create a new array with the new item
+    if (!existingItem) {
+      setPlayNextVideoListData((prevItems) => [...prevItems, newItem]);
+    } else {
+      // open toast
+      toast.current.show({
+        severity: "error",
+        summary: "Error",
+        detail: "This video is already added in queue!",
+      });
+    }
+  }
+
+  function removeFromPlayNextQueue(idToRemove) {
+    setPlayNextVideoListData((prevItems) => prevItems.filter((item) => item.videoId !== idToRemove.videoId));
+  }
+
+  const itemTemplate = (item) => {
+    return (
+      <div className="flex flex-wrap p-0 align-items-center gap-3">
+        <img className="shadow-2 flex-shrink-0 border-round" width={64} src={`https://img.youtube.com/vi/${item.videoId}/default.jpg`} alt={item.title} />
+        <div className="flex-1 flex flex-column gap-2 xl:mr-8">
+          <span className="font-bold">{item.title}</span>
+          <div className="flex align-items-center gap-2">
+            <span>{item.description}</span>
+          </div>
+        </div>
+        <i
+          className="pi pi-minus text-sm"
+          onClick={() => {
+            removeFromPlayNextQueue(item);
+          }}
+        ></i>
+      </div>
+    );
+  };
+
   return (
     <>
-      <div className="flex flex-column gap-3 align-items-center flex-wrap">
-        <div style={{ height: "330px", position: "sticky", top: "100px" }}>
+      <Toast ref={toast} appendTo={null} />
+
+      <div className="flex flex-column gap-3 flex-wrap">
+        <div className="lg:ml-4 flex flex-column flex-wrap" style={{ height: "330px", position: "sticky", top: "100px" }}>
           {selectedVideoSrc ? (
             <>
               <iframe
-                className="flex align-items-center justify-content-center mb-4 mt-1 border-round shadow-4"
+                className="flex align-items-center justify-content-center mb-4 mt-1 shadow-4"
                 // width=" 590"
                 // height="300"
                 src={selectedVideoSrc}
@@ -75,9 +122,55 @@ const Video = () => {
                 msallowfullscreen="msallowfullscreen"
                 oallowfullscreen="oallowfullscreen"
                 webkitallowfullscreen="webkitallowfullscreen"
-                style={{ height: "300px", width: "100%" }}
+                style={{ height: "300px", width: "40%" }}
                 onload='javascript:(function(o){o.style.height=o.contentWindow.document.body.scrollHeight+"px";}(this));'
               ></iframe>
+              <div className="grid text-xl font-medium flex mb-4 mt-1 bg-black-alpha-90 shadow-5" style={{ height: "300px", width: "60%", overflow: "scroll" }}>
+                <OrderList
+                  className="w-full"
+                  dataKey="id"
+                  value={playNextVideoListData}
+                  onChange={(e) => setPlayNextVideoListData(e.value)}
+                  itemTemplate={itemTemplate}
+                ></OrderList>
+
+                {/* <span className="text-white">Play Next</span>
+                {Array.from(videoListData).map((videoList) => (
+                  <div className="col-12 p-0">
+                    <div
+                      className="card cursor-pointer"
+                      onClick={() => {
+                        playSelectedVideo(videoList);
+                      }}
+                    >
+                      <div className="flex justify-content-between">
+                        <div>
+                          <span
+                            className="block font-small text-lg surface-overlay overflow-hidden text-overflow-ellipsis white-space-nowrap tooltip-show-full-title"
+                            data-pr-tooltip={videoList.title}
+                            data-pr-position="right"
+                          >
+                            {videoList.title}
+                          </span>
+
+                          <Tooltip target=".tooltip-show-full-title" mouseTrack mouseTrackLeft={10} />
+
+                          <div className="font-medium">
+                            <Chip className="text-sm" label={videoList.description} />
+                          </div>
+                        </div>
+                        <i
+                          className="pi pi-youtube text-5xl text-red-500 tooltip-show-full-title"
+                          data-pr-tooltip="Play"
+                          data-pr-position="right"
+                          data-pr-at="right+5 top"
+                          data-pr-my="left center-2"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                ))} */}
+              </div>
             </>
           ) : (
             <div className="text-xl font-medium flex align-items-center justify-content-center mb-4 mt-1 border-round bg-black-alpha-90 text-white shadow-5" style={{ height: "300px", width: "100%" }}>
@@ -111,7 +204,16 @@ const Video = () => {
                       <Chip className="text-sm" label={videoList.description} />
                     </div>
                   </div>
-                  <i className="pi pi-youtube text-5xl text-red-500 tooltip-show-full-title" data-pr-tooltip="Play" data-pr-position="right" data-pr-at="right+5 top" data-pr-my="left center-2" />
+                  <i
+                    className="pi pi-plus text-xl text-red-500 tooltip-show-full-title"
+                    data-pr-tooltip="+ Play next"
+                    data-pr-position="right"
+                    data-pr-at="right+5 top"
+                    data-pr-my="left center-2"
+                    onClick={() => {
+                      addToPlayNextQueue(videoList);
+                    }}
+                  />
                 </div>
                 {/* <span className="text-green-500 font-medium">24 new </span>
             <span className="text-500">since last visit</span> */}
