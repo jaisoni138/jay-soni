@@ -4,8 +4,6 @@ import { Card } from "primereact/card";
 import { Chart } from "primereact/chart";
 import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
-import { InputText } from "primereact/inputtext";
-import { Badge } from "primereact/badge";
 import { Toast } from "primereact/toast";
 import { FaBell, FaMoon, FaSun } from "react-icons/fa";
 
@@ -16,6 +14,8 @@ const Dashboard = () => {
   const [reminders, setReminders] = useState([]);
   const [newReminder, setNewReminder] = useState("");
   const [darkMode, setDarkMode] = useState(true);
+  const [timer, setTimer] = useState(0); // in seconds
+  const timerRef = useRef(null);
   const audioRefs = useRef([]);
   const toast = useRef(null);
 
@@ -47,6 +47,28 @@ const Dashboard = () => {
   };
 
   const toggleDarkMode = () => setDarkMode(!darkMode);
+
+  // Countdown Timer
+  const startTimer = (minutes) => {
+    clearInterval(timerRef.current);
+    setTimer(minutes * 60);
+    timerRef.current = setInterval(() => {
+      setTimer((prev) => {
+        if (prev <= 1) {
+          clearInterval(timerRef.current);
+          toast.current.show({ severity: "info", summary: "Meditation Complete", detail: "Well done!" });
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+  };
+
+  const formatTime = (seconds) => {
+    const m = Math.floor(seconds / 60).toString().padStart(2, "0");
+    const s = (seconds % 60).toString().padStart(2, "0");
+    return `${m}:${s}`;
+  };
 
   // Meditation chart
   const meditationData = {
@@ -92,11 +114,11 @@ const Dashboard = () => {
         <div style={{ position: "relative", zIndex: 1 }}>
           {/* Header */}
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "2rem" }}>
-            <h1>Welcome, Seeker</h1>
+            <h1>Welcome, {user.name} </h1>
             <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
               <div style={{ position: "relative", cursor: "pointer" }} onClick={() => setReminderModal(true)}>
                 <FaBell size={24} />
-                {reminders.length > 0 && <Badge value={reminders.length} severity="danger" style={{ position: "absolute", top: -8, right: -8 }} />}
+                {reminders.length > 0 && <span style={{ position: "absolute", top: -8, right: -8, background: "red", color: "#fff", borderRadius: "50%", padding: "2px 6px", fontSize: "0.75rem" }}>{reminders.length}</span>}
               </div>
               <div style={{ cursor: "pointer" }} onClick={toggleDarkMode}>
                 {darkMode ? <FaSun size={24} /> : <FaMoon size={24} />}
@@ -105,45 +127,55 @@ const Dashboard = () => {
           </div>
 
           {/* Meditation Card */}
-          <div className="p-grid" style={{ gap: "1rem", marginBottom: "2rem" }}>
+          <div className="p-grid" style={{ gap: "1rem" }}>
             <div className="p-col-12 p-md-4">
-              <Card title="Meditation" style={{ backgroundColor: darkMode ? "rgba(0,0,0,0.5)" : "rgba(255,255,255,0.6)", color: darkMode ? "#fff" : "#000", cursor: "pointer" }} onClick={() => setMeditationModal(true)}>
+              <Card
+                title="Meditation"
+                style={{ backgroundColor: darkMode ? "rgba(0,0,0,0.5)" : "rgba(255,255,255,0.6)", color: darkMode ? "#fff" : "#000", cursor: "pointer" }}
+                onClick={() => setMeditationModal(true)}
+              >
                 <p>Today's session: 25 min</p>
                 <p>Streak: {streak} days</p>
               </Card>
             </div>
           </div>
 
-          {/* Meditation Modal */}
-          <Dialog header="Meditation Details" visible={meditationModal} onHide={() => setMeditationModal(false)} modal style={{ width: "50vw" }}>
+          {/* Meditation Modal with Timer and Playlist */}
+          <Dialog header="Meditation Dashboard" visible={meditationModal} onHide={() => setMeditationModal(false)} modal style={{ width: "60vw" }}>
+            <h3>Meditation Chart</h3>
             <Chart type="bar" data={meditationData} options={meditationOptions} />
-            <Button label="Complete Today's Session" onClick={incrementStreak} className="p-mt-2" />
+
+            <div style={{ margin: "1rem 0" }}>
+              <h3>Start Meditation Timer</h3>
+              <Button label="5 min" className="p-mr-2" onClick={() => startTimer(5)} />
+              <Button label="10 min" className="p-mr-2" onClick={() => startTimer(10)} />
+              <Button label="15 min" onClick={() => startTimer(15)} />
+              {timer > 0 && <p style={{ marginTop: "0.5rem" }}>Time Remaining: {formatTime(timer)}</p>}
+            </div>
+
+            <Button label="Complete Today's Session" onClick={incrementStreak} className="p-mt-2 p-mb-4" />
+
+            <h3>Playlist</h3>
+            {playlist.map((track, idx) => (
+              <div key={idx} style={{ marginBottom: "1rem" }}>
+                <p>{track.title}</p>
+                <audio ref={(el) => (audioRefs.current[idx] = el)} controls style={{ width: "100%" }}>
+                  <source src={track.src} type="audio/mpeg" />
+                  Your browser does not support the audio element.
+                </audio>
+                <Button label="Play" icon="pi pi-play" className="p-button-text p-ml-1" onClick={() => playAudio(idx)} />
+              </div>
+            ))}
           </Dialog>
 
           {/* Reminder Modal */}
           <Dialog header="Reminders" visible={reminderModal} onHide={() => setReminderModal(false)} modal style={{ width: "40vw" }}>
-            <div className="p-field" style={{ marginBottom: "1rem" }}>
-              <InputText value={newReminder} onChange={(e) => setNewReminder(e.target.value)} placeholder="Add a new reminder..." style={{ width: "70%" }} />
+            <div style={{ marginBottom: "1rem" }}>
+              <input value={newReminder} onChange={(e) => setNewReminder(e.target.value)} placeholder="Add a new reminder..." style={{ width: "70%", padding: "0.5rem" }} />
               <Button label="Add" icon="pi pi-plus" onClick={addReminder} className="p-ml-2" />
             </div>
             {reminders.length === 0 ? <p>No reminders yet.</p> : <ul>{reminders.map((r, i) => <li key={i}>{r}</li>)}</ul>}
           </Dialog>
-
-          {/* Playlist */}
-          <div className="p-grid" style={{ gap: "1rem", marginTop: "2rem" }}>
-            {playlist.map((track, idx) => (
-              <div key={idx} className="p-col-12 p-md-4">
-                <Card style={{ backgroundColor: darkMode ? "rgba(0,0,0,0.5)" : "rgba(255,255,255,0.6)", color: darkMode ? "#fff" : "#000" }}>
-                  <p>{track.title}</p>
-                  <audio ref={(el) => (audioRefs.current[idx] = el)} controls style={{ width: "100%" }}>
-                    <source src={track.src} type="audio/mpeg" />
-                    Your browser does not support the audio element.
-                  </audio>
-                  <Button label="Play" icon="pi pi-play" className="p-button-text p-ml-1" onClick={() => playAudio(idx)} />
-                </Card>
-              </div>
-            ))}
-          </div>
         </div>
       </div>
     </>
