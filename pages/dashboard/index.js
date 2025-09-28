@@ -2,18 +2,15 @@ import Seo from "../../components/seo";
 import { useEffect, useState, useRef } from "react";
 import { Card } from "primereact/card";
 import { Chart } from "primereact/chart";
-import { Carousel } from "primereact/carousel";
 import { Dialog } from "primereact/dialog";
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { Badge } from "primereact/badge";
 import { Toast } from "primereact/toast";
-import { FaBell, FaMoon, FaSun } from 'react-icons/fa';
+import { FaBell, FaMoon, FaSun } from "react-icons/fa";
 
 const Dashboard = () => {
   const [meditationModal, setMeditationModal] = useState(false);
-  const [affirmationModal, setAffirmationModal] = useState(false);
-  const [gratitudeModal, setGratitudeModal] = useState(false);
   const [reminderModal, setReminderModal] = useState(false);
   const [streak, setStreak] = useState(0);
   const [reminders, setReminders] = useState([]);
@@ -22,21 +19,10 @@ const Dashboard = () => {
   const audioRefs = useRef([]);
   const toast = useRef(null);
 
-  // Load streak & reminders from localStorage
   useEffect(() => {
     setStreak(parseInt(localStorage.getItem("meditationStreak") || "0"));
     setReminders(JSON.parse(localStorage.getItem("reminders") || "[]"));
   }, []);
-
-  // Show toast notifications for reminders
-  useEffect(() => {
-    const interval = setInterval(() => {
-      reminders.forEach((reminder) => {
-        toast.current.show({ severity: "info", summary: "Reminder", detail: reminder, life: 5000 });
-      });
-    }, 60000); // every 60 seconds for demo (adjust as needed)
-    return () => clearInterval(interval);
-  }, [reminders]);
 
   const incrementStreak = () => {
     const newStreak = streak + 1;
@@ -62,34 +48,23 @@ const Dashboard = () => {
 
   const toggleDarkMode = () => setDarkMode(!darkMode);
 
-  // Meditation chart data
+  // Meditation chart
   const meditationData = {
     labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
     datasets: [{ label: "Meditation (min)", data: [15, 20, 25, 30, 20, 25, 30], backgroundColor: "rgba(255, 206, 86, 0.6)" }],
   };
   const meditationOptions = { plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } };
 
-  // Quotes and playlist
-  const quotes = [
-    "Peace comes from within. Do not seek it without.",
-    "The mind is everything. What you think you become.",
-    "Meditation is the soul’s perspective glass.",
-    "Be where you are; otherwise you will miss your life.",
-  ];
+  // Playlist
   const playlist = [
     { title: "Morning Meditation", src: "/audio/morning.mp3" },
     { title: "Chakra Healing", src: "/audio/chakra.mp3" },
     { title: "Relaxing Om", src: "/audio/om.mp3" },
   ];
-  const quoteTemplate = (quote) => (
-    <Card style={{ backgroundColor: darkMode ? "rgba(0,0,0,0.5)" : "rgba(255,255,255,0.6)", color: darkMode ? "#fff" : "#000", textAlign: "center", minHeight: "120px" }}>
-      <p style={{ fontStyle: "italic" }}>{quote}</p>
-    </Card>
-  );
 
   return (
     <>
-      <Seo pageTitle="Interactive Spiritual Dashboard" />
+      <Seo pageTitle="Meditation Dashboard" />
       <Toast ref={toast} />
 
       <div
@@ -103,7 +78,6 @@ const Dashboard = () => {
           position: "relative",
         }}
       >
-        {/* Overlay */}
         <div style={{ position: "absolute", inset: 0, background: darkMode ? "rgba(0,0,0,0.3)" : "rgba(255,255,255,0.2)", animation: "pulse 6s infinite alternate", zIndex: 0 }}></div>
         <style>
           {`
@@ -116,7 +90,7 @@ const Dashboard = () => {
         </style>
 
         <div style={{ position: "relative", zIndex: 1 }}>
-          {/* Header with Reminder & Dark Mode */}
+          {/* Header */}
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "2rem" }}>
             <h1>Welcome, Seeker</h1>
             <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
@@ -130,7 +104,7 @@ const Dashboard = () => {
             </div>
           </div>
 
-          {/* Dashboard Cards */}
+          {/* Meditation Card */}
           <div className="p-grid" style={{ gap: "1rem", marginBottom: "2rem" }}>
             <div className="p-col-12 p-md-4">
               <Card title="Meditation" style={{ backgroundColor: darkMode ? "rgba(0,0,0,0.5)" : "rgba(255,255,255,0.6)", color: darkMode ? "#fff" : "#000", cursor: "pointer" }} onClick={() => setMeditationModal(true)}>
@@ -138,34 +112,12 @@ const Dashboard = () => {
                 <p>Streak: {streak} days</p>
               </Card>
             </div>
-            <div className="p-col-12 p-md-4">
-              <Card title="Daily Affirmation" style={{ backgroundColor: darkMode ? "rgba(0,0,0,0.5)" : "rgba(255,255,255,0.6)", color: darkMode ? "#fff" : "#000", cursor: "pointer" }} onClick={() => setAffirmationModal(true)}>
-                <p>"I am calm, centered, and peaceful."</p>
-              </Card>
-            </div>
-            <div className="p-col-12 p-md-4">
-              <Card title="Gratitude" style={{ backgroundColor: darkMode ? "rgba(0,0,0,0.5)" : "rgba(255,255,255,0.6)", color: darkMode ? "#fff" : "#000", cursor: "pointer" }} onClick={() => setGratitudeModal(true)}>
-                <ul>
-                  <li>Health</li>
-                  <li>Family</li>
-                  <li>Peace of Mind</li>
-                </ul>
-              </Card>
-            </div>
           </div>
 
-          {/* Modals */}
+          {/* Meditation Modal */}
           <Dialog header="Meditation Details" visible={meditationModal} onHide={() => setMeditationModal(false)} modal style={{ width: "50vw" }}>
             <Chart type="bar" data={meditationData} options={meditationOptions} />
             <Button label="Complete Today's Session" onClick={incrementStreak} className="p-mt-2" />
-          </Dialog>
-
-          <Dialog header="Affirmations" visible={affirmationModal} onHide={() => setAffirmationModal(false)} modal style={{ width: "50vw" }}>
-            <Carousel value={quotes} numVisible={1} numScroll={1} circular autoplayInterval={5000} itemTemplate={quoteTemplate} />
-          </Dialog>
-
-          <Dialog header="Gratitude Journal" visible={gratitudeModal} onHide={() => setGratitudeModal(false)} modal style={{ width: "50vw" }}>
-            <p>Keep a daily gratitude journal to enhance mindfulness and positivity.</p>
           </Dialog>
 
           {/* Reminder Modal */}
