@@ -8,6 +8,7 @@ import { Toast } from "primereact/toast";
 import { FaBell, FaMoon, FaSun } from "react-icons/fa";
 
 const Dashboard = () => {
+  const user = useSelector((state) => state.initialState.user);
   const [meditationModal, setMeditationModal] = useState(false);
   const [reminderModal, setReminderModal] = useState(false);
   const [streak, setStreak] = useState(0);
