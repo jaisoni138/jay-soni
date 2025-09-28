@@ -8,7 +8,7 @@ import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { Badge } from "primereact/badge";
 import { Toast } from "primereact/toast";
-import { FaBell, FaMoon, FaSun } from "react-icons/fa";
+import { FaBell, FaMoon, FaSun } from 'react-icons/fa';
 
 const Dashboard = () => {
   const [meditationModal, setMeditationModal] = useState(false);
