@@ -5,13 +5,13 @@ import "firebase/compat/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyCspqzvP2FYZGm-Wja_VYgs1_hcp6xVTwM",
-  authDomain: "pritisoni-portal.firebaseapp.com",
-  projectId: "pritisoni-portal",
-  storageBucket: "pritisoni-portal.firebasestorage.app",
-  messagingSenderId: "472433556426",
-  appId: "1:472433556426:web:a073cbdd61159f5ccfad33",
-  measurementId: "G-QEYKD18G6H"
+  apiKey: "AIzaSyAlEaDO1p5mipkqhoxY3d6WJPwl_yKwsMk",
+  authDomain: "jay-soni-a9108.firebaseapp.com",
+  projectId: "jay-soni-a9108",
+  storageBucket: "jay-soni-a9108.firebasestorage.app",
+  messagingSenderId: "424815583189",
+  appId: "1:424815583189:web:d3b9368f646b3223b6675c",
+  measurementId: "G-S6BCHDRKFE"
 };
 const app = firebase.initializeApp(firebaseConfig);
 export const db = getFirestore();
