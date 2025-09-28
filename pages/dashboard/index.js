@@ -1,4 +1,5 @@
 import Seo from "../../components/seo";
+import { useSelector } from "react-redux";
 import { useEffect, useState, useRef } from "react";
 import { Card } from "primereact/card";
 import { Chart } from "primereact/chart";
