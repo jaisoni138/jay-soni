@@ -10,8 +10,8 @@ const firebaseConfig = {
   projectId: "jay-soni-a9108",
   storageBucket: "jay-soni-a9108.firebasestorage.app",
   messagingSenderId: "424815583189",
-  appId: "1:424815583189:web:d3b9368f646b3223b6675c",
-  measurementId: "G-S6BCHDRKFE"
+  appId: "1:424815583189:web:79b5d2ba876ba7a9b6675c",
+  measurementId: "G-4F8MH65LJD"
 };
 const app = firebase.initializeApp(firebaseConfig);
 export const db = getFirestore();
