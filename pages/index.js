@@ -35,7 +35,7 @@ export default function JanaviSoniLysseStyle() {
             <section className="px-4 md:px-8 py-6">
                 <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{duration: 2}}>
                     <Image 
-                        src="https://images.unsplash.com/photo-1590393952601-bfc276082987?q=60&w=2000" 
+                        src="https://697e96d7c4feaabd2d12359b.imgix.net/pexels-bingotheme-421879.jpg?fit=fill&auto=format" 
                         alt="Hero" 
                         width="100%" 
                         imageClassName="w-full h-30rem md:h-screen object-cover block grayscale" 
