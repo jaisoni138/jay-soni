@@ -3,63 +3,66 @@ import Head from 'next/head';
 import { Button } from 'primereact/button';
 import { motion } from 'framer-motion';
 
-export default function JanaviSoniMinimal() {
-    
-    const services = [
-        { type: 'STREET & DOCUMENTARY', price: 'FROM ₹15K', duration: '4 HOURS' },
-        { type: 'EDITORIAL PORTRAITS', price: 'FROM ₹25K', duration: '6 HOURS' },
-        { type: 'COMMERCIAL & BRAND', price: 'UPON REQUEST', duration: 'FLEXIBLE' }
+export default function JanaviSoniCinematic() {
+    const categories = [
+        { name: 'STREET / DOCU', price: '₹15,000', detail: 'Authentic human narratives' },
+        { name: 'EDITORIAL', price: '₹30,000', detail: 'Conceptual high-fashion' },
+        { name: 'ARCHITECTURAL', price: '₹25,000', detail: 'Structure and light play' }
     ];
 
     return (
-        <div className="min-h-screen flex flex-column">
+        <div className="min-h-screen font-main">
             <Head>
                 <title>JANAVI SONI | Visual Artist</title>
-                <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@1,400;1,700&family=Inter:wght@200;400;700&display=swap" rel="stylesheet" />
+                {/* Modern Editorial Fonts */}
+                <link href="https://fonts.googleapis.com/css2?family=Prata&family=Syne:wght@400;700;800&display=swap" rel="stylesheet" />
             </Head>
 
             {/* --- TOP NAV --- */}
-            <nav className="p-4 md:p-6 flex justify-content-between align-items-center">
-                <div className="text-xl font-serif italic tracking-tighter">JS.</div>
-                <div className="flex gap-4 md:gap-6 text-xs tracking-widest uppercase font-bold">
-                    <a href="#services" className="menu-link">Services</a>
-                    <a href="#contact" className="menu-link">Inquiry</a>
+            <nav className="fixed top-0 w-full z-5 glass-nav px-4 py-3 md:px-8 flex justify-content-between align-items-center">
+                <div className="text-2xl font-serif">JS</div>
+                <div className="flex gap-4 text-xs font-bold tracking-widest uppercase">
+                    <a href="#services" className="no-underline text-white opacity-60 hover:opacity-100 transition-all">Rates</a>
+                    <a href="#contact" className="no-underline text-white opacity-60 hover:opacity-100 transition-all">Contact</a>
                 </div>
             </nav>
 
             {/* --- HERO SECTION --- */}
-            <main className="flex-grow-1 flex flex-column justify-content-center px-4 md:px-8">
+            <section className="h-screen flex flex-column justify-content-center px-4 md:px-8">
                 <motion.div 
-                    initial={{ opacity: 0, x: -20 }} 
-                    animate={{ opacity: 1, x: 0 }} 
-                    transition={{ duration: 1 }}
+                    initial={{ opacity: 0, y: 30 }} 
+                    animate={{ opacity: 1, y: 0 }} 
+                    transition={{ duration: 1.2 }}
                 >
-                    <h1 className="text-7xl md:text-9xl font-serif italic m-0 line-height-1">
-                        Janavi Soni.
+                    <span className="text-xs font-bold tracking-widest text-white-alpha-40 mb-3 block">MUMBAI // INDIA</span>
+                    <h1 className="text-7xl md:text-9xl font-serif m-0 leading-tight">
+                        Janavi <br/> <span className="italic">Soni.</span>
                     </h1>
-                    <p className="text-sm md:text-base font-light tracking-widest text-500 mt-4 max-w-30rem line-height-3 uppercase">
-                        Capturing the unscripted narrative of human existence through light and shadow. Based in Mumbai, working worldwide.
+                    <div className="h-1px w-4rem bg-white my-5"></div>
+                    <p className="max-w-25rem text-sm md:text-base font-light tracking-wide leading-relaxed opacity-70">
+                        Professional visual artist specializing in high-contrast street photography and editorial storytelling. 
+                        Transforming unscripted reality into cinematic frames.
                     </p>
                 </motion.div>
-            </main>
+            </section>
 
-            {/* --- SERVICES / RATES SECTION --- */}
-            <section id="services" className="py-8 px-4 md:px-8 border-top-1 border-white-alpha-10 bg-black-alpha-20">
-                <div className="grid">
-                    <div className="col-12 md:col-4 mb-6">
-                        <span className="text-xs font-bold tracking-widest opacity-30 uppercase">01 / Rates & Services</span>
-                        <h2 className="text-4xl font-serif italic mt-3">The Investment</h2>
+            {/* --- SERVICES SECTION --- */}
+            <section id="services" className="py-8 px-4 md:px-8 bg-black-alpha-60 backdrop-blur-sm border-top-1 border-white-alpha-10">
+                <div className="grid max-w-screen-xl mx-auto">
+                    <div className="col-12 md:col-5 mb-6">
+                        <h2 className="text-5xl font-serif">Services</h2>
+                        <p className="text-xs tracking-widest uppercase opacity-40 font-bold mt-3">Investment Guide 2026</p>
                     </div>
-                    <div className="col-12 md:col-8">
-                        {services.map((s, i) => (
-                            <div key={i} className="flex flex-column md:flex-row justify-content-between md:align-items-center py-5 border-bottom-1 border-white-alpha-10 group">
-                                <div className="mb-3 md:mb-0">
-                                    <h3 className="m-0 text-xl md:text-2xl font-bold tracking-tight">{s.type}</h3>
-                                    <span className="text-xs opacity-40 font-mono mt-1 block">{s.duration} SESSION</span>
+                    <div className="col-12 md:col-7">
+                        {categories.map((item, i) => (
+                            <div key={i} className="flex justify-content-between align-items-center py-5 border-bottom-1 border-white-alpha-10 group hover:border-white transition-all">
+                                <div>
+                                    <h3 className="text-xl md:text-2xl font-bold m-0 tracking-tighter">{item.name}</h3>
+                                    <span className="text-xs opacity-40 font-bold uppercase tracking-widest mt-1 block">{item.detail}</span>
                                 </div>
-                                <div className="text-left md:text-right">
-                                    <span className="text-2xl font-serif italic text-primary">{s.price}</span>
-                                    <p className="text-xs opacity-30 m-0 mt-1 uppercase font-bold tracking-tighter">Retouching Included</p>
+                                <div className="text-right">
+                                    <span className="text-2xl font-serif">{item.price}</span>
+                                    <i className="pi pi-arrow-up-right ml-3 text-xs opacity-30 group-hover:opacity-100 transition-opacity"></i>
                                 </div>
                             </div>
                         ))}
@@ -67,32 +70,19 @@ export default function JanaviSoniMinimal() {
                 </div>
             </section>
 
-            {/* --- CONTACT / FINAL DIRECTIVE --- */}
-            <section id="contact" className="py-8 px-4 md:px-8 text-center bg-white text-black">
-                <motion.div 
-                    whileInView={{ opacity: 1, y: 0 }} 
-                    initial={{ opacity: 0, y: 20 }}
-                    viewport={{ once: true }}
-                >
-                    <h2 className="text-5xl md:text-7xl font-serif italic mb-5">Start a project.</h2>
+            {/* --- FOOTER / CONTACT --- */}
+            <section id="contact" className="py-8 px-4 md:px-8 text-center border-top-1 border-white-alpha-10">
+                <motion.div whileInView={{ opacity: 1 }} initial={{ opacity: 0 }}>
+                    <h2 className="text-4xl md:text-6xl font-serif mb-6 italic">Let's collaborate.</h2>
                     <div className="flex flex-column md:flex-row justify-content-center gap-4">
-                        <Button label="SEND EMAIL" className="p-button-lg bg-black text-white border-none border-round-none px-6 py-3 font-bold text-xs" />
-                        <Button label="INSTAGRAM" className="p-button-lg p-button-outlined border-black text-black border-round-none px-6 py-3 font-bold text-xs" />
+                        <Button label="EMAIL ME" className="p-button-lg bg-white text-black border-none px-6 py-4 font-bold text-xs tracking-widest" />
+                        <Button label="INSTAGRAM" className="p-button-lg p-button-outlined border-white text-white px-6 py-4 font-bold text-xs tracking-widest" />
                     </div>
-                    <p className="mt-6 text-xs font-bold tracking-widest opacity-40 uppercase">Replies typically within 24 hours.</p>
                 </motion.div>
+                <div className="mt-8 pt-8 opacity-20 text-xs tracking-widest font-bold uppercase">
+                    &copy; 2026 Janavi Soni &bull; All Visual Rights Reserved
+                </div>
             </section>
-
-            {/* --- MINIMAL FOOTER --- */}
-            <footer className="p-6 flex justify-content-between align-items-center border-top-1 border-white-alpha-10 text-xs tracking-tighter opacity-30">
-                <span>&copy; 2026 JANAVI SONI</span>
-                <span>MUMBAI, IN</span>
-            </footer>
-
-            <style jsx>{`
-                .line-height-1 { line-height: 0.9; }
-                .text-500 { color: #888 !important; }
-            `}</style>
         </div>
     );
 }
