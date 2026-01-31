@@ -35,14 +35,7 @@ const AppTopbar = forwardRef((props, ref) => {
       /> */}
       {/* <span className="text-2xl font-semibold uppercase">Priti Soni</span> */}
 
-      <button
-        ref={menubuttonRef}
-        type="button"
-        className="p-link layout-menu-button layout-topbar-button"
-        onClick={onMenuToggle}
-      >
-        <i className="pi pi-bars" />
-      </button>
+
 
       {/* <button
         ref={topbarmenubuttonRef}
