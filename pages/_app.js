@@ -5,7 +5,6 @@ import "primereact/resources/primereact.css";
 import "primeflex/primeflex.css";
 import "primeicons/primeicons.css";
 import "../styles/layout/layout.scss";
-import "../styles/demo/Demos.scss";
 import { Provider } from "react-redux";
 import { store } from "../app/store";
 import { getDecryptedItem } from "../utils/encryptedStorage";
