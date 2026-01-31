@@ -3,8 +3,6 @@ import { useRouter } from 'next/router';
 import { useEventListener, useMountEffect, useUnmountEffect } from 'primereact/hooks';
 import { classNames, DomHandler } from 'primereact/utils';
 import React, { useContext, useEffect, useRef } from 'react';
-import AppFooter from './AppFooter';
-import AppSidebar from './AppSidebar';
 import AppTopbar from './AppTopbar';
 import AppConfig from './AppConfig';
 import { LayoutContext } from './context/layoutcontext';
@@ -13,13 +11,20 @@ import PrimeReact from 'primereact/api';
 const Layout = (props) => {
     const { layoutConfig, layoutState, setLayoutState } = useContext(LayoutContext);
     const topbarRef = useRef(null);
+    
+    // 1. We keep the ref to prevent breaking hooks, but we won't attach it to a sidebar
     const sidebarRef = useRef(null);
 
     const router = useRouter();
+
+    // 2. Updated Menu Outside Click: Logic simplified since sidebar is gone
     const [bindMenuOutsideClickListener, unbindMenuOutsideClickListener] = useEventListener({
         type: 'click',
         listener: (event) => {
-            const isOutsideClicked = !(sidebarRef.current.isSameNode(event.target) || sidebarRef.current.contains(event.target) || topbarRef.current.menubutton.isSameNode(event.target) || topbarRef.current.menubutton.contains(event.target));
+            const isOutsideClicked = !(
+                topbarRef.current.menubutton.isSameNode(event.target) || 
+                topbarRef.current.menubutton.contains(event.target)
+            );
 
             if (isOutsideClicked) {
                 hideMenu();
@@ -64,7 +69,7 @@ const Layout = (props) => {
 
     useMountEffect(() => {
         PrimeReact.ripple = true;
-    })
+    });
 
     useEffect(() => {
         if (layoutState.overlayMenuActive || layoutState.staticMenuMobileActive) {
@@ -105,8 +110,8 @@ const Layout = (props) => {
     return (
         <React.Fragment>
             <Head>
-                {/* <title>Sakai by PrimeReact | Free Admin Template for NextJS</title> */}
                 <meta charSet="UTF-8" />
+                <title>Welcome to Spiritual World</title>
                 <meta name="description" content="Spiritual Awareness - Priti Soni" />
                 <meta name="robots" content="index, follow" />
                 <meta name="viewport" content="initial-scale=1, width=device-width" />
@@ -114,20 +119,20 @@ const Layout = (props) => {
                 <meta property="og:title" content="Welcome to Spiritual World"></meta>
                 <meta property="og:url" content="https://pritisoni-v2.vercel.app"></meta>
                 <meta property="og:description" content="Spiritual Awareness - Priti Soni" />
-                {/* <meta property="og:image" content="https://www.primefaces.org/static/social/sakai-nextjs.png"></meta> */}
                 <meta property="og:ttl" content="604800"></meta>
                 <link rel="icon" href={`/favicon.ico`} type="image/x-icon"></link>
             </Head>
 
             <div className={containerClass}>
                 <AppTopbar ref={topbarRef} />
-                <div ref={sidebarRef} className="layout-sidebar">
-                    <AppSidebar />
-                </div>
-                <div className="layout-main-container">
+                
+                {/* 3. SIDEBAR DIV REMOVED COMPLETELY */}
+
+                {/* 4. MAIN CONTAINER: Added inline style to remove the left margin */}
+                <div className="layout-main-container" style={{ marginLeft: '0', paddingLeft: '2rem', paddingRight: '2rem' }}>
                     <div className="layout-main">{props.children}</div>
-                    {/* <AppFooter /> */}
                 </div>
+
                 <AppConfig />
                 <div className="layout-mask"></div>
             </div>
