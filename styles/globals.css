@@ -1,0 +1,18 @@
+/* Import PrimeReact Core and Theme */
+@import "primereact/resources/themes/lara-light-indigo/theme.css";
+@import "primereact/resources/primereact.min.css";
+@import "primeicons/primeicons.css";
+@import "primeflex/primeflex.css";
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-family);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Custom transitions for photography hover effects */
+.group:hover img {
+    transform: scale(1.05);
+    transition: transform 0.5s ease;
+}
