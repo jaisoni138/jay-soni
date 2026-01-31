@@ -1,37 +1,37 @@
+/* Import Dark Theme & Core PrimeReact */
 @import "primereact/resources/themes/lara-dark-indigo/theme.css";
 @import "primereact/resources/primereact.min.css";
 @import "primeicons/primeicons.css";
 @import "primeflex/primeflex.css";
 
 :root {
-    --primary-gold: #d4af37;
-    --bg-dark: #0a0a0a;
-    --card-bg: rgba(255, 255, 255, 0.03);
+    --gold: #c5a059;
+    --charcoal: #121212;
+    --border-soft: rgba(255, 255, 255, 0.08);
 }
 
 body {
-    background-color: var(--bg-dark);
+    background-color: #000;
     color: #e0e0e0;
     font-family: 'Inter', sans-serif;
+    margin: 0;
+    overflow-x: hidden;
 }
 
-/* Luxury Glass Effect */
-.glass-card {
-    background: var(--card-bg);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: all 0.3s ease;
-}
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-thumb { background: var(--gold); }
 
-.glass-card:hover {
-    border-color: var(--primary-gold);
-    background: rgba(255, 255, 255, 0.06);
-}
-
-/* Remove default PrimeReact button roundness for a sharper look */
+/* Sharp Buttons */
 .p-button {
-    border-radius: 2px !important;
-    text-transform: uppercase;
+    border-radius: 0 !important;
     letter-spacing: 2px;
-    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+/* Glass Menu */
+.sidebar-menu {
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(20px);
+    border-right: 1px solid var(--border-soft);
 }
