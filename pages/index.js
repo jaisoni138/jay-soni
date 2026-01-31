@@ -9,7 +9,7 @@ export default function JanaviSoniDark() {
         { src: 'https://images.unsplash.com/photo-1524492459426-14fe33230ad0?q=60&w=800&auto=format', title: 'Pink City', size: 'col-12 md:col-8' },
         { src: 'https://images.unsplash.com/photo-1561414927-6d86591d0c4f?q=60&w=800&auto=format', title: 'Varanasi', size: 'col-12 md:col-4' },
         { src: 'https://images.unsplash.com/photo-1598333105121-69632886f42c?q=60&w=800&auto=format', title: 'Kolkata', size: 'col-12 md:col-4' },
-        { src: 'https://images.unsplash.com/photo-1590393952601-bfc276082987?q=60&w=800&auto=format', title: 'Amritsar', size: 'col-12 md:col-8' }
+        { src: 'https://www.gujarattourism.com/central-zone/ahmedabad/ahmedabad-world-heritage-city.html', title: 'Ahmedabad', size: 'col-12 md:col-8' }
     ];
 
     const scrollToPortfolio = () => {
