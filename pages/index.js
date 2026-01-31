@@ -2,117 +2,153 @@ import React from 'react';
 import Head from 'next/head';
 import { Image } from 'primereact/image';
 import { Button } from 'primereact/button';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 
-export default function StreetPhotographyIndia() {
-    const { scrollYProgress } = useScroll();
-    const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
-
+export default function JanaviSoniIndia() {
+    // Optimized URLs with compression & specific dimensions for speed
     const indiaCollection = [
-        { src: 'https://images.unsplash.com/photo-1524492459426-14fe33230ad0', title: 'The Pink City', location: 'Jaipur', size: 'col-12 md:col-8' },
-        { src: 'https://images.unsplash.com/photo-1511739001486-6bfe10ce785f', title: 'Morning Raga', location: 'Varanasi', size: 'col-12 md:col-4' },
-        { src: 'https://images.unsplash.com/photo-1506461883276-594a12b11cf3', title: 'Saffron Soul', location: 'Mathura', size: 'col-12 md:col-5' },
-        { src: 'https://images.unsplash.com/photo-1548013146-72479768bbaa', title: 'Taj Reflection', location: 'Agra', size: 'col-12 md:col-7' }
+        { 
+            src: 'https://images.unsplash.com/photo-1524492459426-14fe33230ad0?q=80&w=1200&auto=format&fit=crop', 
+            title: 'THE PINK PERSPECTIVE', 
+            location: 'JAIPUR', 
+            size: 'col-12 md:col-7' 
+        },
+        { 
+            src: 'https://images.unsplash.com/photo-1561414927-6d86591d0c4f?q=80&w=800&auto=format&fit=crop', 
+            title: 'SACRED GHATS', 
+            location: 'VARANASI', 
+            size: 'col-12 md:col-5' 
+        },
+        { 
+            src: 'https://images.unsplash.com/photo-1598333105121-69632886f42c?q=80&w=800&auto=format&fit=crop', 
+            title: 'SINDUR & SOUL', 
+            location: 'KOLKATA', 
+            size: 'col-12 md:col-4' 
+        },
+        { 
+            src: 'https://images.unsplash.com/photo-1590393952601-bfc276082987?q=80&w=1200&auto=format&fit=crop', 
+            title: 'THE GOLDEN LIGHT', 
+            location: 'AMRITSAR', 
+            size: 'col-12 md:col-8' 
+        }
     ];
 
     return (
         <div className="bg-white text-900 min-h-screen">
             <Head>
-                <title>Janavi Soni | The India Chronicles</title>
-                <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;1,400&family=Inter:wght@300;600&display=swap" rel="stylesheet" />
+                <title>Janavi Soni | India Series</title>
+                <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;1,400&family=Inter:wght@200;400;700&display=swap" rel="stylesheet" />
             </Head>
 
-            {/* --- IMMERSIVE HERO --- */}
-            <section className="relative h-screen flex align-items-center justify-content-center overflow-hidden">
-                <motion.div style={{ opacity }} className="z-2 text-center">
-                    <span className="text-xs tracking-widest uppercase font-semibold text-500 mb-2 block">Series 01 // Street</span>
-                    <h1 className="text-8xl font-serif m-0 italic">India.</h1>
-                    <p className="font-light text-xl mt-4 opacity-60">A visual diary by Janavi Soni</p>
-                </motion.div>
-                <img 
-                    src="https://images.unsplash.com/photo-1524492459426-14fe33230ad0" 
-                    className="absolute inset-0 w-full h-full object-cover opacity-20 filter grayscale-100" 
-                    alt="Background"
-                />
-                <div className="absolute bottom-0 left-0 p-6 flex justify-content-between w-full border-top-1 border-100">
-                    <span className="text-xs font-bold tracking-tighter">EST. 2026</span>
-                    <span className="text-xs font-bold tracking-tighter cursor-pointer hover:text-primary">SCROLL TO EXPLORE</span>
+            {/* --- MINIMALIST FLOATING NAV --- */}
+            <nav className="fixed top-0 left-0 w-full p-4 md:p-6 flex justify-content-between align-items-center z-5 bg-white-alpha-60 backdrop-blur-sm">
+                <div className="text-xl font-serif tracking-tighter uppercase font-bold">
+                    JANAVI <span className="font-light italic">SONI</span>
                 </div>
+                <div className="hidden md:flex gap-5 text-xs tracking-widest uppercase font-bold text-700">
+                    <a href="#series" className="no-underline text-inherit hover:text-primary transition-colors">Series</a>
+                    <a href="#about" className="no-underline text-inherit hover:text-primary transition-colors">About</a>
+                    <a href="#contact" className="no-underline text-inherit hover:text-primary transition-colors">Contact</a>
+                </div>
+            </nav>
+
+            {/* --- HERO SECTION --- */}
+            <section className="h-screen flex flex-column align-items-center justify-content-center px-4 overflow-hidden">
+                <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1 }}
+                    className="text-center"
+                >
+                    <span className="text-xs tracking-widest text-primary font-bold uppercase mb-4 block">Archive 2026 // Street</span>
+                    <h1 className="text-8xl md:text-9xl font-serif m-0 italic leading-tight">India.</h1>
+                    <div className="w-2rem h-1px bg-900 mx-auto my-5"></div>
+                    <p className="max-w-20rem mx-auto font-light text-600 line-height-3 italic">
+                        "Finding the extraordinary in the mundane rhythm of everyday life."
+                    </p>
+                </motion.div>
+                
+                {/* Visual Anchor */}
+                <motion.div 
+                    animate={{ y: [0, 10, 0] }}
+                    transition={{ repeat: Infinity, duration: 2 }}
+                    className="absolute bottom-5 text-xs tracking-widest font-bold opacity-30"
+                >
+                    SCROLL DOWN
+                </motion.div>
             </section>
 
-            {/* --- THE STUDER-INSPIRED GRID --- */}
-            <section className="py-8 px-4 md:px-8 max-w-screen-xl mx-auto">
-                <div className="grid align-items-start">
+            {/* --- THE STUDER-ESQUE GRID --- */}
+            <section id="series" className="py-8 px-4 md:px-8 max-w-screen-xl mx-auto">
+                <div className="grid align-items-center">
                     {indiaCollection.map((img, i) => (
                         <motion.div 
                             key={i}
-                            initial={{ opacity: 0, y: 40 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true, margin: "-100px" }}
-                            className={`${img.size} p-4 mb-8`}
+                            initial={{ opacity: 0 }}
+                            whileInView={{ opacity: 1 }}
+                            viewport={{ once: true, margin: "-50px" }}
+                            transition={{ duration: 0.8 }}
+                            className={`${img.size} p-4 md:p-6 mb-8`}
                         >
-                            <div className="relative group overflow-hidden">
+                            <div className="relative group cursor-crosshair overflow-hidden shadow-1 hover:shadow-8 transition-all duration-500">
                                 <Image 
                                     src={img.src} 
                                     alt={img.title} 
                                     width="100%" 
                                     preview 
-                                    imageClassName="w-full h-full object-cover block transition-transform duration-1000 group-hover:scale-105"
+                                    imageClassName="w-full h-full object-cover block grayscale-hover transition-all duration-1000"
                                 />
-                                <div className="absolute top-0 left-0 p-4 bg-white text-black text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity">
-                                    {img.location}
+                                <div className="absolute bottom-0 left-0 w-full p-4 bg-gradient-to-t from-black-alpha-60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity text-white text-xs font-bold tracking-widest uppercase">
+                                    {img.location} // 2026
                                 </div>
                             </div>
-                            <div className="mt-4 flex justify-content-between align-items-baseline border-bottom-1 border-100 pb-2">
-                                <h3 className="font-serif text-2xl m-0">{img.title}</h3>
-                                <span className="text-xs font-mono text-400">00{i+1}</span>
+                            <div className="mt-5 text-center md:text-left">
+                                <h3 className="font-serif italic text-3xl m-0 text-900">{img.title}</h3>
+                                <p className="text-xs text-400 mt-2 font-bold tracking-widest uppercase">{img.location}, INDIA</p>
                             </div>
                         </motion.div>
                     ))}
                 </div>
             </section>
 
-            {/* --- STORYTELLING DIVIDER --- */}
-            <section className="py-8 my-8 border-y-1 border-100 text-center">
-                <div className="max-w-30rem mx-auto px-4">
-                    <h2 className="font-serif italic text-4xl mb-4">"The chaos is the melody."</h2>
-                    <p className="line-height-4 text-600">
-                        Inspired by the wandering eye of Andrew Studer, this collection captures 
-                        the unscripted theater of Indian streets—where every corner is a stage 
-                        and every face a story.
-                    </p>
-                </div>
-            </section>
-
             {/* --- MODERN MINIMAL FOOTER --- */}
-            <footer className="py-8 px-6 flex flex-column md:flex-row justify-content-between align-items-center bg-gray-900 text-white">
-                <div className="mb-4 md:mb-0">
-                    <h2 className="text-2xl font-serif tracking-tighter m-0 uppercase">Janavi Soni</h2>
-                    <p className="text-xs opacity-40 mt-1">Available for global commissions.</p>
+            <footer className="py-8 px-6 mt-8 flex flex-column align-items-center text-center border-top-1 border-100">
+                <h2 className="text-4xl font-serif italic mb-4">JANAVI SONI</h2>
+                <p className="max-w-20rem text-sm text-500 line-height-3 mb-6">
+                    Fine art and street photography based in Mumbai. <br/>
+                    Available for limited commissions globally.
+                </p>
+                <div className="flex gap-4 mb-6">
+                    <Button icon="pi pi-instagram" className="p-button-rounded p-button-text p-button-plain" />
+                    <Button icon="pi pi-twitter" className="p-button-rounded p-button-text p-button-plain" />
+                    <Button icon="pi pi-envelope" className="p-button-rounded p-button-text p-button-plain" />
                 </div>
-                <div className="flex gap-4">
-                    <Button icon="pi pi-instagram" className="p-button-rounded p-button-text text-white hover:text-primary" />
-                    <Button label="Enquire" className="p-button-outlined p-button-secondary border-round-none px-4 text-xs tracking-widest uppercase" />
+                <div className="text-xs tracking-widest font-bold opacity-30">
+                    &copy; 2026 ALL RIGHTS RESERVED
                 </div>
             </footer>
 
             <style jsx global>{`
                 body {
                     font-family: 'Inter', sans-serif;
-                    background-color: #fcfcfc;
+                    background-color: #ffffff;
                 }
                 .font-serif {
                     font-family: 'Bodoni Moda', serif;
                 }
-                .p-image-preview-indicator {
-                    background-color: rgba(255, 255, 255, 0.9) !important;
-                    color: black !important;
-                    font-size: 12px;
-                    text-transform: uppercase;
-                    letter-spacing: 2px;
+                .grayscale-hover {
+                    filter: grayscale(100%);
                 }
-                /* Custom Thin Border Style */
-                .border-100 { border-color: #eee !important; }
+                .grayscale-hover:hover {
+                    filter: grayscale(0%);
+                }
+                .border-100 { border-color: #f1f1f1 !important; }
+                
+                /* Custom Light Indigo Theme Override */
+                .p-image-preview-indicator {
+                    background-color: rgba(255, 255, 255, 0.8) !important;
+                    color: black !important;
+                }
             `}</style>
         </div>
     );
