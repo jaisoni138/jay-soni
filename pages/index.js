@@ -33,6 +33,14 @@ export default function JanaviSoniIndia() {
         }
     ];
 
+    // Smooth Scroll Function
+    const scrollToGallery = () => {
+        const gallerySection = document.getElementById('series');
+        if (gallerySection) {
+            gallerySection.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
     return (
         <div className="bg-white text-900 min-h-screen">
             <Head>
@@ -40,10 +48,10 @@ export default function JanaviSoniIndia() {
                 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;1,400&family=Inter:wght@200;400;700&display=swap" rel="stylesheet" />
             </Head>
 
-            {/* --- MINIMALIST FLOATING NAV --- */}
-            <nav className="fixed top-0 left-0 w-full p-4 md:p-6 flex justify-content-between align-items-center z-5 bg-white-alpha-60 backdrop-blur-sm">
+            {/* --- NAV --- */}
+            <nav className="fixed top-0 left-0 w-full p-4 md:p-6 flex justify-content-between align-items-center z-5 bg-white-alpha-60 backdrop-blur-sm border-bottom-1 border-100">
                 <div className="text-xl font-serif tracking-tighter uppercase font-bold">
-                    JANAVI <span className="font-light italic">SONI</span>
+                    JANAVI <span className="font-light italic text-primary">SONI</span>
                 </div>
                 <div className="hidden md:flex gap-5 text-xs tracking-widest uppercase font-bold text-700">
                     <a href="#series" className="no-underline text-inherit hover:text-primary transition-colors">Series</a>
@@ -53,7 +61,7 @@ export default function JanaviSoniIndia() {
             </nav>
 
             {/* --- HERO SECTION --- */}
-            <section className="h-screen flex flex-column align-items-center justify-content-center px-4 overflow-hidden">
+            <section className="h-screen flex flex-column align-items-center justify-content-center px-4 overflow-hidden relative">
                 <motion.div 
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -68,18 +76,20 @@ export default function JanaviSoniIndia() {
                     </p>
                 </motion.div>
                 
-                {/* Visual Anchor */}
+                {/* --- UPDATED: ICON SCROLL INDICATOR --- */}
                 <motion.div 
-                    animate={{ y: [0, 10, 0] }}
-                    transition={{ repeat: Infinity, duration: 2 }}
-                    className="absolute bottom-5 text-xs tracking-widest font-bold opacity-30"
+                    animate={{ y: [0, 12, 0] }}
+                    transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+                    className="absolute bottom-5 flex flex-column align-items-center gap-2 cursor-pointer"
+                    onClick={scrollToGallery}
                 >
-                    SCROLL DOWN
+                    <i className="pi pi-mouse text-xl opacity-40"></i>
+                    <i className="pi pi-chevron-down text-xs opacity-30"></i>
                 </motion.div>
             </section>
 
-            {/* --- THE STUDER-ESQUE GRID --- */}
-            <section id="series" className="py-8 px-4 md:px-8 max-w-screen-xl mx-auto">
+            {/* --- GALLERY GRID --- */}
+            <section id="series" className="py-8 px-4 md:px-8 max-w-screen-xl mx-auto pt-8">
                 <div className="grid align-items-center">
                     {indiaCollection.map((img, i) => (
                         <motion.div 
@@ -111,13 +121,9 @@ export default function JanaviSoniIndia() {
                 </div>
             </section>
 
-            {/* --- MODERN MINIMAL FOOTER --- */}
+            {/* --- FOOTER --- */}
             <footer className="py-8 px-6 mt-8 flex flex-column align-items-center text-center border-top-1 border-100">
                 <h2 className="text-4xl font-serif italic mb-4">JANAVI SONI</h2>
-                <p className="max-w-20rem text-sm text-500 line-height-3 mb-6">
-                    Fine art and street photography based in Mumbai. <br/>
-                    Available for limited commissions globally.
-                </p>
                 <div className="flex gap-4 mb-6">
                     <Button icon="pi pi-instagram" className="p-button-rounded p-button-text p-button-plain" />
                     <Button icon="pi pi-twitter" className="p-button-rounded p-button-text p-button-plain" />
@@ -132,6 +138,7 @@ export default function JanaviSoniIndia() {
                 body {
                     font-family: 'Inter', sans-serif;
                     background-color: #ffffff;
+                    scroll-behavior: smooth;
                 }
                 .font-serif {
                     font-family: 'Bodoni Moda', serif;
@@ -144,10 +151,10 @@ export default function JanaviSoniIndia() {
                 }
                 .border-100 { border-color: #f1f1f1 !important; }
                 
-                /* Custom Light Indigo Theme Override */
                 .p-image-preview-indicator {
                     background-color: rgba(255, 255, 255, 0.8) !important;
                     color: black !important;
+                    backdrop-filter: blur(4px);
                 }
             `}</style>
         </div>
