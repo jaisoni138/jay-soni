@@ -2,94 +2,90 @@ import React from 'react';
 import Head from 'next/head';
 import { Image } from 'primereact/image';
 import { Button } from 'primereact/button';
+import { Tag } from 'primereact/tag';
 
-export default function JanaviSoniDark() {
-    // Fast-loading optimized URLs (w=800, q=60)
-    const portfolio = [
-        { src: 'https://images.unsplash.com/photo-1524492459426-14fe33230ad0?q=60&w=800&auto=format', title: 'Pink City', size: 'col-12 md:col-8' },
-        { src: 'https://images.unsplash.com/photo-1561414927-6d86591d0c4f?q=60&w=800&auto=format', title: 'Varanasi', size: 'col-12 md:col-4' },
-        { src: 'https://images.unsplash.com/photo-1598333105121-69632886f42c?q=60&w=800&auto=format', title: 'Kolkata', size: 'col-12 md:col-4' },
-        { src: 'https://whc.unesco.org/document/197865/t=4by3', title: 'Ahmedabad', size: 'col-12 md:col-8' }
+export default function JanaviSoniModern() {
+    const photoTypes = [
+        { name: 'Street', price: '₹15,000', icon: 'pi-camera', desc: 'Raw, unscripted moments.' },
+        { name: 'Editorial', price: '₹25,000', icon: 'pi-palette', desc: 'High-fashion & concepts.' },
+        { name: 'Architecture', price: '₹20,000', icon: 'pi-building', desc: 'Space, lines, and light.' }
     ];
 
-    const scrollToPortfolio = () => {
-        document.getElementById('portfolio')?.scrollIntoView({ behavior: 'smooth' });
-    };
+    const portfolio = [
+        { src: 'https://images.unsplash.com/photo-1524492459426-14fe33230ad0?q=60&w=600', type: 'Street' },
+        { src: 'https://images.unsplash.com/photo-1561414927-6d86591d0c4f?q=60&w=600', type: 'Editorial' },
+        { src: 'https://images.unsplash.com/photo-1598333105121-69632886f42c?q=60&w=600', type: 'Architecture' }
+    ];
 
     return (
-        <div className="min-h-screen">
+        <div className="pb-8">
             <Head>
-                <title>JANAVI SONI | Portfolio</title>
-                <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital@1&family=Inter:wght@300;700&display=swap" rel="stylesheet" />
+                <title>JANAVI SONI | Visuals</title>
+                <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital@1&family=Inter:wght@200;400;700&display=swap" rel="stylesheet" />
             </Head>
 
-            {/* --- TOP BRANDING NAV --- */}
-            <nav className="fixed top-0 w-full z-5 flex justify-content-between align-items-center p-4 md:p-6 bg-black-alpha-80 backdrop-blur-md border-bottom-1 border-white-alpha-10">
-                <div className="text-2xl font-bold tracking-tighter font-serif uppercase">
-                    JANAVI <span className="font-light italic text-primary">SONI</span>
-                </div>
-                <Button label="Contact" className="p-button-text p-button-sm text-white opacity-70 hover:opacity-100" />
-            </nav>
-
-            {/* --- IMPACT START PAGE --- */}
-            <section className="h-screen flex flex-column align-items-center justify-content-center text-center px-4">
-                <div className="animate-fadein">
-                    <h2 className="text-xs uppercase tracking-widest text-primary mb-3 font-bold">Visual Storyteller</h2>
-                    <h1 className="text-7xl md:text-9xl font-serif italic m-0 line-height-1">Janavi Soni.</h1>
-                    <p className="mt-4 text-600 font-light max-w-20rem mx-auto">Capturing the raw essence of Indian streets through a cinematic lens.</p>
-                </div>
-
-                <div className="absolute bottom-5 cursor-pointer opacity-40 hover:opacity-100 transition-all text-center" onClick={scrollToPortfolio}>
-                    <span className="text-xs uppercase tracking-widest block mb-2 font-bold">View Portfolio</span>
-                    <i className="pi pi-mouse text-2xl"></i>
-                    <i className="pi pi-chevron-down block text-xs mt-1 animate-bounce"></i>
+            {/* --- HERO: IDENTITY --- */}
+            <section className="h-screen flex flex-column align-items-center justify-content-center border-bottom-1 border-white-alpha-10">
+                <h1 className="text-8xl md:text-9xl font-serif italic m-0 tracking-tighter fadein">Janavi Soni</h1>
+                <p className="text-xs uppercase tracking-widest mt-4 opacity-50">Mumbai &bull; Global Commissions</p>
+                <div className="mt-6 flex gap-3">
+                    <Button label="View Portfolio" className="p-button-outlined p-button-secondary" onClick={() => document.getElementById('work').scrollIntoView({behavior:'smooth'})} />
+                    <Button label="Rates" className="p-button-primary bg-white text-black border-none" onClick={() => document.getElementById('rates').scrollIntoView({behavior:'smooth'})} />
                 </div>
             </section>
 
-            {/* --- PERFORMANCE PORTFOLIO --- */}
-            <section id="portfolio" className="py-8 px-4 md:px-8 max-w-screen-xl mx-auto">
+            {/* --- WORK: PORTFOLIO --- */}
+            <section id="work" className="py-8 px-4 md:px-8 max-w-screen-xl mx-auto">
+                <div className="flex align-items-center justify-content-between mb-6">
+                    <h2 className="text-4xl font-serif italic">Selected Works</h2>
+                </div>
                 <div className="grid">
                     {portfolio.map((img, i) => (
-                        <div key={i} className={`${img.size} p-2 md:p-4`}>
-                            <div className="img-container border-round-sm">
-                                <Image 
-                                    src={img.src} 
-                                    alt={img.title} 
-                                    width="100%" 
-                                    preview 
-                                    loading="lazy" // Critical for high performance
-                                    imageClassName="w-full h-25rem md:h-30rem object-cover block"
-                                />
-                            </div>
-                            <div className="mt-3 flex justify-content-between align-items-center border-bottom-1 border-white-alpha-10 pb-2">
-                                <span className="font-serif italic text-xl">{img.title}</span>
-                                <span className="text-xs opacity-40 font-bold uppercase tracking-widest">Street // 2026</span>
+                        <div key={i} className="col-12 md:col-4 p-2">
+                            <div className="relative group overflow-hidden bg-white-alpha-5">
+                                <Image src={img.src} alt="Janavi Soni Photography" width="100%" preview loading="lazy" 
+                                       imageClassName="w-full h-30rem object-cover block grayscale hover:grayscale-0 transition-all duration-500" />
+                                <div className="absolute top-0 left-0 p-3">
+                                    <Tag value={img.type} className="bg-black-alpha-60 text-xs font-light" />
+                                </div>
                             </div>
                         </div>
                     ))}
                 </div>
             </section>
 
-            <footer className="py-8 text-center border-top-1 border-white-alpha-10">
-                <p className="text-xs tracking-widest opacity-30 font-bold uppercase">Janavi Soni &copy; 2026</p>
-            </footer>
+            {/* --- SERVICES: TYPES & PRICING --- */}
+            <section id="rates" className="py-8 px-4 md:px-8 bg-black-alpha-20">
+                <div className="max-w-screen-xl mx-auto text-center mb-8">
+                    <h2 className="text-4xl font-serif italic">Investment</h2>
+                    <p className="text-500">Tailored photography services for your vision.</p>
+                </div>
+                
+                <div className="grid max-w-screen-lg mx-auto">
+                    {photoTypes.map((type, i) => (
+                        <div key={i} className="col-12 md:col-4 p-3">
+                            <div className="glass-card p-5 h-full flex flex-column align-items-center text-center">
+                                <i className={`pi ${type.icon} text-3xl mb-4 text-primary`}></i>
+                                <h3 className="text-2xl uppercase tracking-widest font-bold mb-2">{type.name}</h3>
+                                <p className="text-500 text-sm mb-4 line-height-3">{type.desc}</p>
+                                <div className="mt-auto pt-4 border-top-1 border-white-alpha-10 w-full">
+                                    <span className="text-xs opacity-50 block mb-1">Starting from</span>
+                                    <span className="text-2xl font-bold">{type.price}</span>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </section>
 
-            <style jsx>{`
-                .animate-fadein {
-                    animation: fadeIn 1.5s ease-out;
-                }
-                @keyframes fadeIn {
-                    from { opacity: 0; transform: translateY(20px); }
-                    to { opacity: 1; transform: translateY(0); }
-                }
-                .animate-bounce {
-                    animation: bounce 2s infinite;
-                }
-                @keyframes bounce {
-                    0%, 100% { transform: translateY(0); }
-                    50% { transform: translateY(5px); }
-                }
-            `}</style>
+            {/* --- SIMPLE FOOTER --- */}
+            <footer className="py-8 text-center mt-8">
+                <div className="flex justify-content-center gap-4 mb-4">
+                    <i className="pi pi-instagram cursor-pointer hover:text-primary"></i>
+                    <i className="pi pi-envelope cursor-pointer hover:text-primary"></i>
+                </div>
+                <p className="text-xs opacity-30 font-bold uppercase tracking-widest italic">Janavi Soni Photography &copy; 2026</p>
+            </footer>
         </div>
     );
 }
