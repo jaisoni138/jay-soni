@@ -16,7 +16,7 @@ const AppMenu = () => {
     fetchMenuItems();
   }, []);
 
-  async function fetchMenuItems() {
+/*async function fetchMenuItems() {
     try {
       const { data, error } = await supabase
         .from("collection")
@@ -35,7 +35,7 @@ const AppMenu = () => {
           }
 
           return acc;
-        }, []);
+        }, []); */
 
         // add default menu items
         sortedMenuItems.push({
