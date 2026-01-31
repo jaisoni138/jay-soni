@@ -1,88 +1,100 @@
 import React from 'react';
 import Head from 'next/head';
+import { Image } from 'primereact/image';
 import { Button } from 'primereact/button';
 import { motion } from 'framer-motion';
 
-export default function JanaviSoniCinematic() {
+export default function JanaviSoniLysseStyle() {
     const categories = [
-        { name: 'STREET / DOCU', price: '₹15,000', detail: 'Authentic human narratives' },
-        { name: 'EDITORIAL', price: '₹30,000', detail: 'Conceptual high-fashion' },
-        { name: 'ARCHITECTURAL', price: '₹25,000', detail: 'Structure and light play' }
+        { name: 'STREET', price: '₹15,000', src: 'https://images.unsplash.com/photo-1524492459426-14fe33230ad0?q=60&w=1200' },
+        { name: 'EDITORIAL', price: '₹30,000', src: 'https://images.unsplash.com/photo-1561414927-6d86591d0c4f?q=60&w=1200' },
+        { name: 'ARCHIVE', price: '₹25,000', src: 'https://images.unsplash.com/photo-1598333105121-69632886f42c?q=60&w=1200' }
     ];
 
     return (
-        <div className="min-h-screen font-main">
+        <div className="min-h-screen">
             <Head>
-                <title>JANAVI SONI | Visual Artist</title>
-                {/* Modern Editorial Fonts */}
-                <link href="https://fonts.googleapis.com/css2?family=Prata&family=Syne:wght@400;700;800&display=swap" rel="stylesheet" />
+                <title>JANAVI SONI | Visuals</title>
+                <link href="https://fonts.googleapis.com/css2?family=Prata&family=Inter:wght@300;600&display=swap" rel="stylesheet" />
             </Head>
 
-            {/* --- TOP NAV --- */}
-            <nav className="fixed top-0 w-full z-5 glass-nav px-4 py-3 md:px-8 flex justify-content-between align-items-center">
-                <div className="text-2xl font-serif">JS</div>
-                <div className="flex gap-4 text-xs font-bold tracking-widest uppercase">
-                    <a href="#services" className="no-underline text-white opacity-60 hover:opacity-100 transition-all">Rates</a>
-                    <a href="#contact" className="no-underline text-white opacity-60 hover:opacity-100 transition-all">Contact</a>
-                </div>
-            </nav>
+            {/* --- JESSICA LYSSE STYLE HEADER --- */}
+            <header className="centered-logo">
+                <h1 className="text-5xl font-serif m-0 tracking-widest uppercase">Janavi Soni</h1>
+                <p className="text-xs tracking-widest opacity-40 mt-2 font-bold uppercase">Photography & Creative Direction</p>
+                
+                <nav className="flex justify-content-center gap-5 mt-5">
+                    <a href="#about" className="nav-link">About</a>
+                    <a href="#work" className="nav-link">Work</a>
+                    <a href="#rates" className="nav-link">Investment</a>
+                    <a href="#contact" className="nav-link">Contact</a>
+                </nav>
+            </header>
 
-            {/* --- HERO SECTION --- */}
-            <section className="h-screen flex flex-column justify-content-center px-4 md:px-8">
-                <motion.div 
-                    initial={{ opacity: 0, y: 30 }} 
-                    animate={{ opacity: 1, y: 0 }} 
-                    transition={{ duration: 1.2 }}
-                >
-                    <span className="text-xs font-bold tracking-widest text-white-alpha-40 mb-3 block">MUMBAI // INDIA</span>
-                    <h1 className="text-7xl md:text-9xl font-serif m-0 leading-tight">
-                        Janavi <br/> <span className="italic">Soni.</span>
-                    </h1>
-                    <div className="h-1px w-4rem bg-white my-5"></div>
-                    <p className="max-w-25rem text-sm md:text-base font-light tracking-wide leading-relaxed opacity-70">
-                        Professional visual artist specializing in high-contrast street photography and editorial storytelling. 
-                        Transforming unscripted reality into cinematic frames.
-                    </p>
+            {/* --- HERO IMAGE (Full Width Clean) --- */}
+            <section className="px-4 md:px-8 py-6">
+                <motion.div initial={{opacity:0}} animate={{opacity:1}} transition={{duration: 2}}>
+                    <Image 
+                        src="https://images.unsplash.com/photo-1590393952601-bfc276082987?q=60&w=2000" 
+                        alt="Hero" 
+                        width="100%" 
+                        imageClassName="w-full h-30rem md:h-screen object-cover block grayscale" 
+                    />
                 </motion.div>
             </section>
 
-            {/* --- SERVICES SECTION --- */}
-            <section id="services" className="py-8 px-4 md:px-8 bg-black-alpha-60 backdrop-blur-sm border-top-1 border-white-alpha-10">
-                <div className="grid max-w-screen-xl mx-auto">
-                    <div className="col-12 md:col-5 mb-6">
-                        <h2 className="text-5xl font-serif">Services</h2>
-                        <p className="text-xs tracking-widest uppercase opacity-40 font-bold mt-3">Investment Guide 2026</p>
-                    </div>
-                    <div className="col-12 md:col-7">
-                        {categories.map((item, i) => (
-                            <div key={i} className="flex justify-content-between align-items-center py-5 border-bottom-1 border-white-alpha-10 group hover:border-white transition-all">
-                                <div>
-                                    <h3 className="text-xl md:text-2xl font-bold m-0 tracking-tighter">{item.name}</h3>
-                                    <span className="text-xs opacity-40 font-bold uppercase tracking-widest mt-1 block">{item.detail}</span>
-                                </div>
-                                <div className="text-right">
-                                    <span className="text-2xl font-serif">{item.price}</span>
-                                    <i className="pi pi-arrow-up-right ml-3 text-xs opacity-30 group-hover:opacity-100 transition-opacity"></i>
+            {/* --- CLEAN GRID (Masonry Style) --- */}
+            <section id="work" className="py-8 px-4 md:px-8 max-w-screen-xl mx-auto">
+                <div className="grid">
+                    {categories.map((item, i) => (
+                        <div key={i} className="col-12 md:col-4 p-3">
+                            <div className="overflow-hidden bg-white-alpha-5 relative group cursor-crosshair">
+                                <Image src={item.src} alt={item.name} width="100%" preview loading="lazy" 
+                                       imageClassName="w-full h-30rem object-cover block transition-all duration-1000 group-hover:scale-105" />
+                                <div className="absolute top-0 left-0 p-4 w-full h-full flex align-items-end justify-content-center bg-black-alpha-40 opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <span className="text-white text-xs tracking-widest font-bold uppercase pb-4">View Series</span>
                                 </div>
                             </div>
-                        ))}
-                    </div>
+                            <div className="mt-4 text-center">
+                                <h3 className="font-serif text-2xl mb-1">{item.name}</h3>
+                                <div className="w-1rem h-1px bg-white-alpha-20 mx-auto my-2"></div>
+                            </div>
+                        </div>
+                    ))}
                 </div>
             </section>
 
-            {/* --- FOOTER / CONTACT --- */}
-            <section id="contact" className="py-8 px-4 md:px-8 text-center border-top-1 border-white-alpha-10">
-                <motion.div whileInView={{ opacity: 1 }} initial={{ opacity: 0 }}>
-                    <h2 className="text-4xl md:text-6xl font-serif mb-6 italic">Let's collaborate.</h2>
-                    <div className="flex flex-column md:flex-row justify-content-center gap-4">
-                        <Button label="EMAIL ME" className="p-button-lg bg-white text-black border-none px-6 py-4 font-bold text-xs tracking-widest" />
-                        <Button label="INSTAGRAM" className="p-button-lg p-button-outlined border-white text-white px-6 py-4 font-bold text-xs tracking-widest" />
-                    </div>
-                </motion.div>
-                <div className="mt-8 pt-8 opacity-20 text-xs tracking-widest font-bold uppercase">
-                    &copy; 2026 Janavi Soni &bull; All Visual Rights Reserved
+            {/* --- PRICING / INVESTMENT --- */}
+            <section id="rates" className="py-8 px-4 md:px-8 border-y-1 border-white-alpha-10 text-center">
+                <h2 className="text-4xl font-serif italic mb-6">Investment</h2>
+                <div className="max-w-screen-md mx-auto">
+                    {categories.map((item, i) => (
+                        <div key={i} className="flex justify-content-between align-items-center py-4 border-bottom-1 border-white-alpha-5">
+                            <span className="text-xs tracking-widest font-bold uppercase">{item.name} SESSIONS</span>
+                            <span className="text-xl font-serif italic text-primary">{item.price}</span>
+                        </div>
+                    ))}
                 </div>
+                <p className="mt-6 text-xs italic opacity-40">All sessions include professional retouching and private gallery access.</p>
             </section>
+
+            {/* --- FOOTER --- */}
+            <footer className="py-8 text-center bg-black text-white">
+                <div className="flex justify-content-center gap-4 mb-6">
+                    <Button icon="pi pi-instagram" className="p-button-text p-button-rounded text-white" />
+                    <Button icon="pi pi-envelope" className="p-button-text p-button-rounded text-white" />
+                </div>
+                <p className="text-xs tracking-widest font-bold opacity-30 uppercase">
+                    &copy; 2026 JANAVI SONI &bull; EST. IN MUMBAI
+                </p>
+            </footer>
+
+            <style jsx>{`
+                .p-image-preview-indicator {
+                    background: rgba(0,0,0,0.8) !important;
+                    color: white !important;
+                }
+            `}</style>
         </div>
     );
 }
