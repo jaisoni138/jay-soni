@@ -49,7 +49,7 @@ export default function JanaviSoniRestored() {
                         Janavi Soni
                     </h1>
                     <p style={{ letterSpacing: '0.6em', fontSize: '0.7rem' }} className="mt-2 opacity-50 uppercase font-bold">
-                        Creative Director & Photographer
+                        Photography
                     </p>
                 </motion.div>
 

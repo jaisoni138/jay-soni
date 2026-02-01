@@ -70,13 +70,9 @@ export default function AboutMe() {
                             </h2>
                             
                             <p className="line-height-4 text-lg opacity-80 mb-4" style={{ fontFamily: "'Montserrat', sans-serif" }}>
-                                Based in North Carolina, Janavi Soni is a Creative Director and Visual Artist specializing in high-contrast editorial and product photography. Her work explores the delicate balance between commercial precision and artistic vulnerability.
+                            Based in North Carolina, I’m Janavi Soni, a photographer specializing in event photography, newborn photography, family photography, portraits, and product photography. I’m drawn to capturing genuine moments and meaningful details that tell a story, whether it’s a quiet newborn moment, a family connection, or a carefully styled product. My approach is natural and thoughtful, focusing on creating timeless images that feel authentic, emotive, and true to the people and brands I work with.
                             </p>
                             
-                            <p className="line-height-4 text-lg opacity-80 mb-6" style={{ fontFamily: "'Montserrat', sans-serif" }}>
-                                With over 6 years of experience, she has collaborated with luxury brands to redefine their visual identity, focusing on a "less is more" philosophy that allows the subject to breathe.
-                            </p>
-
                             <div className="grid text-center md:text-left">
                                 <div className="col-4">
                                     <h4 className="m-0 text-xl font-serif italic">6+</h4>
