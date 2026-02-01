@@ -23,10 +23,10 @@ export default function JanaviSoniRestored() {
     };
 
     const items = [
-        { label: 'WORK', command: () => scrollToSection('work', 0) },
-        { label: 'ABOUT', command: () => router.push('/about') },
-        { label: 'RATES', command: () => scrollToSection('rates', 2) },
-        { label: 'CONTACT', command: () => scrollToSection('contact', 3) }
+        { label: 'Portfolio', command: () => scrollToSection('work', 0) },
+        { label: 'About', command: () => router.push('/about') },
+        { label: 'Services', command: () => router.push('/services') }, // Updated to route to your new services page
+        { label: 'Contact', command: () => scrollToSection('contact', 3) }
     ];
 
     const portfolio = [
@@ -48,7 +48,8 @@ export default function JanaviSoniRestored() {
                     <h1 className="text-7xl md:text-8xl m-0" style={{ fontFamily: "'Bodoni Moda', serif", fontStyle: 'italic', fontWeight: 400 }}>
                         Janavi Soni
                     </h1>
-                    <p style={{ letterSpacing: '0.6em', fontSize: '0.7rem' }} className="mt-2 opacity-50 uppercase font-bold">
+                    {/* Text-based subheading as requested */}
+                    <p style={{ letterSpacing: '0.8em', fontSize: '0.65rem', textIndent: '0.8em' }} className="mt-2 opacity-50 uppercase font-bold">
                         Photography
                     </p>
                 </motion.div>
@@ -85,7 +86,7 @@ export default function JanaviSoniRestored() {
                     </div>
                 </section>
 
-                {/* --- RATES --- */}
+                {/* --- RATES (Now accessible via Services page, or keep as section) --- */}
                 <section id="rates" className="py-8 border-y-1 border-gray-200">
                     <div className="max-w-screen-sm mx-auto">
                         <h2 className="text-4xl text-center mb-8" style={{ fontFamily: "'Bodoni Moda', serif", fontStyle: 'italic' }}>Packages</h2>
