@@ -39,7 +39,7 @@ export default function Services() {
             title: 'Business Portraits',
             description: 'Elevated headshots and personal branding that project confidence, character, and professionalism.',
             // Using your newly generated portrait here
-            src: 'https://r.jina.ai/i/655f448c66e24b088e50529d6389f417' 
+            src: 'https://plus.unsplash.com/premium_photo-1682438002958-3211f7107e46?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8YnVzaW5lc3MlMjBwb3J0cmFpdHN8ZW58MHx8MHx8fDA%3D' 
         }
     ];
 
