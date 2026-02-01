@@ -1,82 +1,35 @@
-/* Import PrimeReact Core and Theme */
-@import "primereact/resources/themes/lara-dark-indigo/theme.css";
-@import "primereact/resources/primereact.min.css";
-@import "primeicons/primeicons.css";
-@import "primeflex/primeflex.css";
+/* ... keep your existing imports ... */
 
 :root {
-    /* Jessica Lysse Inspired Palette */
-    --bg-matte: #000000;         /* Pure Matte Black */
-    --surface-section: blue-100;  /* Very Dark Grey for subtle layering */
-    --text-primary: #e5e5e5;
-    --accent: #d4af37;           /* Gold Accent */
+    --bg-deep: #000000;
+    --bg-header: #0a0a0a; /* The dark background for the name box */
+    --text-main: #e5e5e5;
+    --accent-gold: #d4af37;
 }
 
-/* Force PrimeReact surfaces to respect your Matte Black theme */
-.surface-ground {
-    background-color: var(--bg-matte) !important;
+/* Custom Branding Box Style */
+.branding-box {
+    background-color: var(--bg-header);
+    padding: 6rem 2rem; /* Increased padding for luxury feel */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    text-align: center;
 }
 
-.surface-section {
-    background-color: var(--surface-section) !important;
-}
-
-body {
-    margin: 0;
-    padding: 0;
-    background-color: var(--bg-matte);
-    color: var(--text-primary);
-    font-family: 'Inter', sans-serif;
-    -webkit-font-smoothing: antialiased;
-    scroll-behavior: smooth;
-}
-
-/* Custom Serif for Studio Branding */
 .font-serif {
     font-family: 'Prata', serif;
 }
 
-/* Navigation & Branding */
-.centered-logo {
-    text-align: center;
-    padding: 4rem 0;
-}
-
 .nav-link {
     text-decoration: none;
-    color: var(--text-primary);
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.25em; /* Extra spacing for high-end look */
+    color: var(--text-main);
+    font-size: 0.75rem;
+    letter-spacing: 3px;
     text-transform: uppercase;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    opacity: 0.6;
+    opacity: 0.5;
+    transition: all 0.3s ease;
 }
 
 .nav-link:hover {
-    color: var(--accent);
     opacity: 1;
-    letter-spacing: 0.3em; /* Subtle expansion on hover */
-}
-
-/* Photography Grid Styling */
-.img-container {
-    overflow: hidden;
-    background-color: #111;
-}
-
-.grayscale-img {
-    filter: grayscale(100%);
-    transition: filter 0.8s ease, transform 0.8s ease;
-}
-
-.grayscale-img:hover {
-    filter: grayscale(0%);
-    transform: scale(1.03);
-}
-
-/* Customizing PrimeReact Lightbox/Preview */
-:global(.p-image-preview-mask) {
-    background: rgba(0, 0, 0, 0.9) !important;
-    backdrop-filter: blur(8px);
+    color: var(--accent-gold);
 }
