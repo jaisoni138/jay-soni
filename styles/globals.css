@@ -1,42 +1,38 @@
-/* ... keep your existing surface and branding logic ... */
-
-.toolbox-container {
-    position: fixed;
-    bottom: 2rem; /* Floating at the bottom */
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 1000;
-    background: rgba(15, 15, 15, 0.7);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 0.5rem 1rem;
-    border-radius: 50px; /* Pill shape */
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+/* --- Menubar Customization --- */
+.p-menubar {
+    background: transparent !important;
+    border: none !important;
+    justify-content: center !important;
+    padding: 1.5rem 0 !important;
 }
 
-.toolbox-link {
-    text-decoration: none;
-    color: #ffffff;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    padding: 0.8rem 1.2rem;
-    transition: all 0.3s ease;
-    display: inline-block;
+/* Menu Items Styling */
+.p-menubar .p-menuitem-link {
+    background: transparent !important;
+    padding: 0.5rem 1.5rem !important;
+    transition: all 0.3s ease !important;
+}
+
+.p-menubar .p-menuitem-text {
+    color: var(--text-main) !important;
+    font-size: 0.75rem !important;
+    letter-spacing: 3px !important;
+    text-transform: uppercase !important;
+    font-weight: 600 !important;
     opacity: 0.6;
 }
 
-.toolbox-link:hover {
-    opacity: 1;
-    color: var(--accent-gold);
+.p-menubar .p-menuitem-link:hover .p-menuitem-text {
+    opacity: 1 !important;
+    color: var(--accent-gold) !important;
 }
 
-/* Subtle divider inside the toolbox */
-.toolbox-divider {
-    width: 1px;
-    height: 15px;
-    background: rgba(255, 255, 255, 0.1);
-    display: inline-block;
-    margin: 0 5px;
+/* Remove the default submenu arrow if not needed */
+.p-menubar .p-submenu-icon {
+    display: none !important;
+}
+
+/* Mobile Menu Icon */
+.p-menubar .p-menubar-button {
+    color: white !important;
 }
