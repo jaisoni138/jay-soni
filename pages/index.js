@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
-import { useRouter } from 'next/router'; // Added for navigation
+import { useRouter } from 'next/router';
 import { TabMenu } from 'primereact/tabmenu';
 import { Image } from 'primereact/image';
 import { Button } from 'primereact/button';
@@ -10,14 +10,23 @@ import { Divider } from 'primereact/divider';
 import { motion } from 'framer-motion';
 
 export default function JanaviSoniRestored() {
-    const router = useRouter(); // Initialize router
+    const router = useRouter();
     const [activeIndex, setActiveIndex] = useState(0);
 
+    // Safety function for smooth scrolling during Build/SSR
+    const scrollToSection = (id, index) => {
+        setActiveIndex(index);
+        const element = document.getElementById(id);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
+
     const items = [
-        { label: 'WORK', command: () => document.getElementById('work').scrollIntoView({ behavior: 'smooth' }) },
-        { label: 'ABOUT', command: () => router.push('/about') }, // Points to pages/about.js
-        { label: 'RATES', command: () => document.getElementById('rates').scrollIntoView({ behavior: 'smooth' }) },
-        { label: 'CONTACT', command: () => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' }) }
+        { label: 'WORK', command: () => scrollToSection('work', 0) },
+        { label: 'ABOUT', command: () => router.push('/about') },
+        { label: 'RATES', command: () => scrollToSection('rates', 2) },
+        { label: 'CONTACT', command: () => scrollToSection('contact', 3) }
     ];
 
     const portfolio = [
@@ -60,7 +69,7 @@ export default function JanaviSoniRestored() {
                     />
                 </section>
 
-                {/* --- UPDATED ABOUT SECTION --- */}
+                {/* --- ABOUT SECTION --- */}
                 <section id="about" className="py-8 text-center max-w-screen-md mx-auto">
                     <h2 className="text-4xl mb-4" style={{ fontFamily: "'Bodoni Moda', serif", fontStyle: 'italic' }}>The Persona</h2>
                     <p className="text-lg font-light opacity-70 italic leading-relaxed">
@@ -132,6 +141,7 @@ export default function JanaviSoniRestored() {
                 .p-tabmenu-ink-bar { display: none !important; }
                 .noir-input-light { background: transparent; border: none; border-bottom: 1px solid #ddd; border-radius: 0; padding: 1rem 0; font-family: 'Montserrat', sans-serif; }
                 .noir-input-light:focus { border-color: #000; box-shadow: none; outline: none; }
+                .p-float-label label { left: 0px !important; }
             `}</style>
         </div>
     );
