@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
-import { useRouter } from 'next/router'; // 1. Added missing import
+import { useRouter } from 'next/router';
 import { TabMenu } from 'primereact/tabmenu';
 import { Image } from 'primereact/image';
 import { Divider } from 'primereact/divider';
@@ -8,7 +8,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 
 export default function AboutMe() {
-    const router = useRouter(); // 2. Added missing initialization
+    const router = useRouter(); 
     const [activeIndex, setActiveIndex] = useState(1); 
 
     const items = [
@@ -70,7 +70,7 @@ export default function AboutMe() {
                             </h2>
                             
                             <p className="line-height-4 text-lg opacity-80 mb-4" style={{ fontFamily: "'Montserrat', sans-serif" }}>
-                                Based in India, Janavi Soni is a Creative Director and Visual Artist specializing in high-contrast editorial and product photography. Her work explores the delicate balance between commercial precision and artistic vulnerability.
+                                Based in North Carolina, Janavi Soni is a Creative Director and Visual Artist specializing in high-contrast editorial and product photography. Her work explores the delicate balance between commercial precision and artistic vulnerability.
                             </p>
                             
                             <p className="line-height-4 text-lg opacity-80 mb-6" style={{ fontFamily: "'Montserrat', sans-serif" }}>
@@ -84,11 +84,7 @@ export default function AboutMe() {
                                 </div>
                                 <div className="col-4">
                                     <h4 className="m-0 text-xl font-serif italic">50+</h4>
-                                    <p className="text-xs uppercase opacity-40 mt-1">Brands</p>
-                                </div>
-                                <div className="col-4">
-                                    <h4 className="m-0 text-xl font-serif italic">12</h4>
-                                    <p className="text-xs uppercase opacity-40 mt-1">Exhibitions</p>
+                                    <p className="text-xs uppercase opacity-40 mt-1">Events</p>
                                 </div>
                             </div>
                         </motion.div>

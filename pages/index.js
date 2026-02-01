@@ -69,19 +69,6 @@ export default function JanaviSoniRestored() {
                     />
                 </section>
 
-                {/* --- ABOUT SECTION --- */}
-                <section id="about" className="py-8 text-center max-w-screen-md mx-auto">
-                    <h2 className="text-4xl mb-4" style={{ fontFamily: "'Bodoni Moda', serif", fontStyle: 'italic' }}>The Persona</h2>
-                    <p className="text-lg font-light opacity-70 italic leading-relaxed">
-                        Navigating the intersection of shadow and light. Capturing the raw, unscripted moments that define the human experience.
-                    </p>
-                    <Button 
-                        label="READ FULL BIO" 
-                        onClick={() => router.push('/about')}
-                        className="p-button-text text-black-alpha-90 mt-4 font-bold tracking-widest text-xs" 
-                    />
-                </section>
-
                 <Divider className="max-w-screen-xl mx-auto" />
 
                 {/* --- PORTFOLIO WORK --- */}
