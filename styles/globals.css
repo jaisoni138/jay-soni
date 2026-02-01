@@ -1,62 +1,30 @@
-/* Import PrimeReact Core */
-@import "primereact/resources/themes/lara-dark-indigo/theme.css";
-@import "primereact/resources/primereact.min.css";
-@import "primeicons/primeicons.css";
-@import "primeflex/primeflex.css";
-
-:root {
-    --bg-pure-black: #000000;
-    --text-platinum: #e5e5e5;
-    --text-muted: #666666;
-    --accent-gold: #d4af37;
+/* Custom OverlayPanel Styling */
+.p-overlaypanel {
+    background: #0a0a0a !important; /* Matte Off-Black */
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
 }
 
-/* Force Global Background */
-html, body {
-    background-color: var(--bg-pure-black) !important;
-    color: var(--text-platinum);
-    margin: 0;
-    padding: 0;
+/* Remove the little "beak" (arrow) or style it black */
+.p-overlaypanel:after, .p-overlaypanel:before {
+    border-bottom-color: #0a0a0a !important;
 }
 
-/* Force Surface Overrides */
-.surface-ground, .surface-section, .surface-card {
-    background-color: var(--bg-pure-black) !important;
-}
-
-/* Menubar Fixes: Removing gray background and blue hover */
-.p-menubar {
-    background: transparent !important;
-    border: none !important;
-}
-
-.p-menubar .p-menuitem-link {
+.p-overlaypanel .p-overlaypanel-content {
+    padding: 1.5rem !important;
     background: transparent !important;
 }
 
-.p-menubar .p-menuitem-text {
-    color: var(--text-platinum) !important;
-    font-size: 0.75rem !important;
-    letter-spacing: 2px !important;
-    text-transform: uppercase !important;
+.details-label {
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    color: var(--accent-gold);
+    text-transform: uppercase;
+    font-weight: 700;
 }
 
-.p-menubar .p-menuitem-link:hover .p-menuitem-text {
-    color: var(--accent-gold) !important;
-}
-
-/* Input/Form Fixes */
-.p-inputtext, .p-inputtextarea {
-    background-color: transparent !important;
-    border-color: rgba(255, 255, 255, 0.1) !important;
-    color: white !important;
-}
-
-.p-inputtext:focus {
-    border-color: var(--accent-gold) !important;
-    box-shadow: none !important;
-}
-
-.font-serif {
+.details-value {
+    font-size: 0.9rem;
+    color: #e5e5e5;
     font-family: 'Prata', serif;
 }
