@@ -26,11 +26,6 @@ export default function JanaviSoniRestored() {
 
     return (
         <div style={{ minHeight: '100vh', backgroundColor: '#ffffff', color: '#1a1a1a', fontFamily: "'Montserrat', sans-serif" }}>
-            <Head>
-                <title>JANAVI SONI | Visuals</title>
-                <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@1,400;1,700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet" />
-            </Head>
-
             {/* --- HEADER & NAV BLOCK --- */}
             <header className="pt-8 pb-4 text-center">
                 <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
@@ -85,7 +80,7 @@ export default function JanaviSoniRestored() {
                 {/* --- RATES --- */}
                 <section id="rates" className="py-8 border-y-1 border-gray-200">
                     <div className="max-w-screen-sm mx-auto">
-                        <h2 className="text-4xl text-center mb-8" style={{ fontFamily: "'Bodoni Moda', serif", fontStyle: 'italic' }}>Investment</h2>
+                        <h2 className="text-4xl text-center mb-8" style={{ fontFamily: "'Bodoni Moda', serif", fontStyle: 'italic' }}>Packages</h2>
                         <div className="flex justify-content-between py-4 border-bottom-1 border-gray-100">
                             <span className="font-semibold tracking-tight">Full Day Session</span>
                             <span className="italic">₹45,000+</span>
