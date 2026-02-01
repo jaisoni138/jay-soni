@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
+import { useRouter } from 'next/router'; // Added for navigation
 import { TabMenu } from 'primereact/tabmenu';
 import { Image } from 'primereact/image';
 import { Button } from 'primereact/button';
@@ -9,11 +10,12 @@ import { Divider } from 'primereact/divider';
 import { motion } from 'framer-motion';
 
 export default function JanaviSoniRestored() {
+    const router = useRouter(); // Initialize router
     const [activeIndex, setActiveIndex] = useState(0);
 
     const items = [
         { label: 'WORK', command: () => document.getElementById('work').scrollIntoView({ behavior: 'smooth' }) },
-        { label: 'ABOUT', command: () => document.getElementById('about').scrollIntoView({ behavior: 'smooth' }) },
+        { label: 'ABOUT', command: () => router.push('/about') }, // Updated to link to new page
         { label: 'RATES', command: () => document.getElementById('rates').scrollIntoView({ behavior: 'smooth' }) },
         { label: 'CONTACT', command: () => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' }) }
     ];
@@ -26,6 +28,11 @@ export default function JanaviSoniRestored() {
 
     return (
         <div style={{ minHeight: '100vh', backgroundColor: '#ffffff', color: '#1a1a1a', fontFamily: "'Montserrat', sans-serif" }}>
+            <Head>
+                <title>JANAVI SONI | Visuals</title>
+                <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@1,400;1,700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet" />
+            </Head>
+
             {/* --- HEADER & NAV BLOCK --- */}
             <header className="pt-8 pb-4 text-center">
                 <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
@@ -53,12 +60,17 @@ export default function JanaviSoniRestored() {
                     />
                 </section>
 
-                {/* --- ABOUT --- */}
+                {/* --- UPDATED ABOUT SECTION --- */}
                 <section id="about" className="py-8 text-center max-w-screen-md mx-auto">
                     <h2 className="text-4xl mb-4" style={{ fontFamily: "'Bodoni Moda', serif", fontStyle: 'italic' }}>The Persona</h2>
                     <p className="text-lg font-light opacity-70 italic leading-relaxed">
                         Navigating the intersection of shadow and light. Capturing the raw, unscripted moments that define the human experience.
                     </p>
+                    <Button 
+                        label="READ FULL BIO" 
+                        onClick={() => router.push('/about')}
+                        className="p-button-text text-black-alpha-90 mt-4 font-bold tracking-widest text-xs" 
+                    />
                 </section>
 
                 <Divider className="max-w-screen-xl mx-auto" />
