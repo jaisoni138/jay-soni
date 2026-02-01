@@ -1,32 +1,31 @@
-/* Import PrimeReact Core */
-@import "primereact/resources/themes/lara-dark-indigo/theme.css";
-@import "primereact/resources/primereact.min.css";
-@import "primeicons/primeicons.css";
-@import "primeflex/primeflex.css";
-
-:root {
-    --bg-black: #000000;
-    --text-platinum: #e5e5e5;
+/* FORCE RESET FOR TRUE BLACK THEME */
+html, 
+body, 
+.surface-ground, 
+.surface-section,
+.p-menubar {
+    background-color: #000000 !important;
+    color: #e5e5e5 !important; /* Platinum White text */
 }
 
-/* This is the key: Override PrimeReact's default surfaces */
-body, .surface-ground, .surface-section {
-    background-color: var(--bg-black) !important;
-    color: var(--text-platinum) !important;
-}
-
-/* Optional: Keep sections slightly visible with a tiny hint of gray for depth */
-.branding-box, .surface-section {
-    background-color: #050505 !important; /* Almost black, but creates a subtle layer */
-    border-color: rgba(255, 255, 255, 0.05) !important;
-}
-
-.font-serif {
-    font-family: 'Prata', serif;
-}
-
-/* Remove gray borders from PrimeReact components */
+/* Remove the blue-ish tint from PrimeReact Menubar */
 .p-menubar {
     border: none !important;
-    background: transparent !important;
+}
+
+.p-menubar .p-menuitem-link .p-menuitem-text,
+.p-menubar .p-menubar-button {
+    color: #e5e5e5 !important;
+}
+
+/* Fix for the Branding Box background */
+.branding-box {
+    background-color: #000000 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Ensure inputs aren't gray */
+.p-inputtext, .p-inputtextarea {
+    background-color: transparent !important;
+    color: white !important;
 }
