@@ -6,9 +6,9 @@ import { motion } from 'framer-motion';
 
 export default function JanaviSoniLysseStyle() {
     const categories = [
-        { name: 'STREET', price: '₹15,000', src: 'https://images.unsplash.com/photo-1524492459426-14fe33230ad0?q=60&w=1200' },
+        { name: 'PRODUCT', price: '₹15,000', src: 'https://697e96d7c4feaabd2d12359b.imgix.net/sneakers.jpg?fit=fill&auto=format' },
         { name: 'EDITORIAL', price: '₹30,000', src: 'https://images.unsplash.com/photo-1561414927-6d86591d0c4f?q=60&w=1200' },
-        { name: 'ARCHIVE', price: '₹25,000', src: 'https://images.unsplash.com/photo-1598333105121-69632886f42c?q=60&w=1200' }
+        { name: 'ARCHIVE', price: '₹25,000', src: 'https://697e96d7c4feaabd2d12359b.imgix.net/scooter.jpg?fit=fill&auto=format' }
     ];
 
     return (
