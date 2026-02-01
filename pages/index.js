@@ -15,7 +15,7 @@ export default function JanaviSoniRestored() {
 
     const items = [
         { label: 'WORK', command: () => document.getElementById('work').scrollIntoView({ behavior: 'smooth' }) },
-        { label: 'ABOUT', command: () => router.push('/about') }, // Updated to link to new page
+        { label: 'ABOUT', command: () => router.push('/about') }, // Points to pages/about.js
         { label: 'RATES', command: () => document.getElementById('rates').scrollIntoView({ behavior: 'smooth' }) },
         { label: 'CONTACT', command: () => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' }) }
     ];
