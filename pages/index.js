@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { TabMenu } from 'primereact/tabmenu';
@@ -6,103 +6,113 @@ import { Image } from 'primereact/image';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { InputTextarea } from 'primereact/inputtextarea';
+import { motion } from 'framer-motion';
 
-export default function JanaviSoniFinalFix() {
+export default function JanaviSoniOriginalRestored() {
     const router = useRouter();
     const [activeIndex, setActiveIndex] = useState(0);
 
-    // Simple Template to ensure text is white and links work
-    const itemTemplate = (item, options) => (
-        <a className={options.className} onClick={options.onClick} style={{ cursor: 'pointer' }}>
-            <span className="p-menuitem-text" style={{ color: '#ffffff', fontWeight: 'bold' }}>{item.label}</span>
-        </a>
-    );
-
+    // TabMenu Items with Routing
     const items = [
-        { label: 'WORK', command: () => router.push('#work'), template: itemTemplate },
-        { label: 'ABOUT', command: () => router.push('#about'), template: itemTemplate },
-        { label: 'RATES', command: () => router.push('#rates'), template: itemTemplate },
-        { label: 'CONTACT', command: () => router.push('#contact'), template: itemTemplate }
+        { label: 'Work', icon: 'pi pi-fw pi-th-large', command: () => router.push('#work') },
+        { label: 'About', icon: 'pi pi-fw pi-user', command: () => router.push('#about') },
+        { label: 'Investment', icon: 'pi pi-fw pi-wallet', command: () => router.push('#rates') },
+        { label: 'Inquire', icon: 'pi pi-fw pi-envelope', command: () => router.push('#contact') }
     ];
 
-    // Sync menu highlight with scroll/URL
+    const portfolio = [
+        { id: '01', title: 'Product', src: 'https://697e96d7c4feaabd2d12359b.imgix.net/sneakers.jpg?auto=format&w=800' },
+        { id: '02', title: 'Editorial', src: 'https://images.unsplash.com/photo-1561414927-6d86591d0c4f?auto=format&w=800' },
+        { id: '03', title: 'Archive', src: 'https://697e96d7c4feaabd2d12359b.imgix.net/scooter.jpg?auto=format&w=800' }
+    ];
+
     useEffect(() => {
-        const path = router.asPath;
-        if (path.includes('#about')) setActiveIndex(1);
-        else if (path.includes('#rates')) setActiveIndex(2);
-        else if (path.includes('#contact')) setActiveIndex(3);
+        const hash = window.location.hash;
+        if (hash === '#about') setActiveIndex(1);
+        else if (hash === '#rates') setActiveIndex(2);
+        else if (hash === '#contact') setActiveIndex(3);
         else setActiveIndex(0);
     }, [router.asPath]);
 
     return (
-        <div style={{ backgroundColor: '#000', minHeight: '100vh', color: '#fff' }}>
+        <div style={{ backgroundColor: '#000', minHeight: '100vh' }}>
             <Head>
-                <title>JANAVI SONI | STUDIO</title>
-                <link href="https://fonts.googleapis.com/css2?family=Prata&display=swap" rel="stylesheet" />
+                <title>JANAVI SONI | MODERN VISUALS</title>
+                <link href="https://fonts.googleapis.com/css2?family=Prata&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
             </Head>
 
-            {/* Navigation */}
+            {/* --- STICKY TABMENU --- */}
             <nav className="sticky-nav">
-                <TabMenu model={items} activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)} className="noir-tabs" />
+                <TabMenu model={items} activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)} />
             </nav>
 
-            <main style={{ paddingTop: '80px' }}>
-                {/* Hero Header */}
-                <header className="text-center py-8">
-                    <h1 className="font-serif text-7xl md:text-8xl m-0 uppercase" style={{ color: '#fff' }}>Janavi Soni</h1>
-                    <p className="opacity-50 tracking-widest uppercase mt-2" style={{ color: '#fff' }}>Visual Identity & Photography</p>
-                </header>
+            <header className="pt-8 pb-4 text-center mt-8">
+                <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }}>
+                    <h1 className="text-7xl md:text-8xl font-serif m-0 tracking-tighter uppercase">Janavi Soni</h1>
+                    <p className="text-xs tracking-widest opacity-40 font-bold uppercase mt-2">Visual Storyteller & Creative Director</p>
+                </motion.div>
+            </header>
 
-                {/* Work Section */}
-                <section id="work" className="py-8 px-4 md:px-8 max-w-screen-xl mx-auto">
-                    <div className="grid">
-                        <div className="col-12 md:col-6 p-4">
-                            <Image src="https://697e96d7c4feaabd2d12359b.imgix.net/sneakers.jpg?auto=format&w=800" width="100%" imageClassName="grayscale border-1 border-white-alpha-10" />
-                            <h2 className="font-serif text-2xl mt-4" style={{ color: '#fff' }}>Portfolio Series 01</h2>
-                        </div>
-                        <div className="col-12 md:col-6 p-4">
-                            <Image src="https://images.unsplash.com/photo-1561414927-6d86591d0c4f?auto=format&w=800" width="100%" imageClassName="grayscale border-1 border-white-alpha-10" />
-                            <h2 className="font-serif text-2xl mt-4" style={{ color: '#fff' }}>Portfolio Series 02</h2>
-                        </div>
-                    </div>
+            <main>
+                {/* --- HERO IMAGE --- */}
+                <section className="px-4 md:px-8 py-4">
+                    <Image 
+                        src="https://697e96d7c4feaabd2d12359b.imgix.net/pexels-bingotheme-421879.jpg?auto=format&w=1800&q=80" 
+                        alt="Main Hero" width="100%" 
+                        imageClassName="w-full h-30rem md:h-screen object-cover grayscale" 
+                    />
                 </section>
 
-                {/* About Section */}
-                <section id="about" className="py-8 px-6 text-center max-w-screen-md mx-auto">
-                    <h2 className="font-serif text-5xl italic mb-4" style={{ color: '#fff' }}>The Persona</h2>
-                    <p className="text-xl opacity-80" style={{ color: '#fff', lineHeight: '1.8' }}>
-                        Exploring the architecture of light and shadow within Mumbai's urban landscapes. 
-                        Every frame is a curated visual story.
+                {/* --- ABOUT --- */}
+                <section id="about" className="py-8 px-6 max-w-screen-md mx-auto text-center">
+                    <h2 className="text-3xl font-serif italic mb-4">The Persona</h2>
+                    <p className="text-lg font-light line-height-4 italic opacity-80">
+                        Navigating the intersection of shadow and light in Mumbai. Every frame is a study of 
+                        minimalist geometry and raw human emotion.
                     </p>
                 </section>
 
-                {/* Rates Section */}
+                {/* --- WORK GRID --- */}
+                <section id="work" className="py-8 px-4 md:px-8 max-w-screen-xl mx-auto">
+                    <div className="grid">
+                        {portfolio.map((item, i) => (
+                            <div key={item.id} className="col-12 md:col-4 p-4">
+                                <div className="border-1 border-white-alpha-10 overflow-hidden">
+                                    <Image src={item.src} alt={item.title} width="100%" 
+                                           imageClassName="w-full h-30rem object-cover grayscale hover:grayscale-0 transition-all duration-1000" />
+                                </div>
+                                <div className="mt-4 flex justify-content-between">
+                                    <h3 className="font-serif text-2xl m-0">{item.title}</h3>
+                                    <span className="text-xs opacity-30 font-bold uppercase tracking-widest">{item.id}</span>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </section>
+
+                {/* --- INVESTMENT --- */}
                 <section id="rates" className="py-8 px-4 md:px-8 border-y-1 border-white-alpha-10 text-center">
-                    <h2 className="font-serif text-5xl mb-8" style={{ color: '#fff' }}>Investment</h2>
-                    <div className="max-w-screen-sm mx-auto">
-                        <div className="flex justify-content-between py-4 border-bottom-1 border-white-alpha-10">
-                            <span style={{ color: '#fff' }}>Commercial Photography</span>
-                            <span style={{ color: '#fff' }}>₹45,000+</span>
-                        </div>
-                        <div className="flex justify-content-between py-4 border-bottom-1 border-white-alpha-10">
-                            <span style={{ color: '#fff' }}>Creative Direction</span>
-                            <span style={{ color: '#fff' }}>₹25,000+</span>
+                    <h2 className="text-4xl font-serif italic mb-8">Investment</h2>
+                    <div className="max-w-screen-md mx-auto">
+                        <div className="flex justify-content-between py-5 border-bottom-1 border-white-alpha-10">
+                            <span className="text-xs font-bold tracking-widest opacity-40 uppercase">Commercial Series</span>
+                            <span className="text-2xl font-serif italic">₹20,000+</span>
                         </div>
                     </div>
                 </section>
 
-                {/* Contact Section */}
+                {/* --- INQUIRY --- */}
                 <section id="contact" className="py-8 px-6 max-w-screen-sm mx-auto">
-                    <h2 className="font-serif text-5xl text-center mb-8" style={{ color: '#fff' }}>Inquire</h2>
-                    <div className="flex flex-column gap-6">
+                    <h2 className="text-5xl font-serif italic text-center mb-6">Inquire</h2>
+                    <div className="flex flex-column gap-4">
                         <InputText placeholder="NAME" className="noir-input" />
-                        <InputTextarea placeholder="TELL ME ABOUT YOUR VISION" rows={4} className="noir-input" />
-                        <Button label="SEND MESSAGE" className="p-button-outlined border-white p-3" style={{ color: '#fff', fontWeight: 'bold' }} />
+                        <InputTextarea placeholder="TELL ME ABOUT YOUR PROJECT" rows={3} className="noir-input" />
+                        <Button label="SEND INQUIRY" className="p-button-outlined border-white p-3 font-bold text-xs" />
                     </div>
                 </section>
             </main>
 
-            <footer className="py-8 text-center opacity-30 text-xs">
+            <footer className="py-8 text-center opacity-20 text-xs tracking-widest uppercase border-top-1 border-white-alpha-10">
                 &copy; 2026 JANAVI SONI STUDIO &bull; MUMBAI
             </footer>
         </div>

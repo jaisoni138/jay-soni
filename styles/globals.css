@@ -3,22 +3,19 @@
 @import "primeicons/primeicons.css";
 @import "primeflex/primeflex.css";
 
-/* Reset and Force White Text */
+/* Force White Text Globally */
+* {
+    color: #ffffff !important;
+}
+
 html, body {
     background-color: #000000 !important;
-    color: #ffffff !important;
     margin: 0;
     padding: 0;
-    font-family: 'Inter', sans-serif;
     scroll-behavior: smooth;
 }
 
-/* Force every PrimeReact component text to white */
-.p-component, .p-menuitem-text, .p-button-label, .p-inputtext, .pi {
-    color: #ffffff !important;
-}
-
-/* Sticky Navigation bar */
+/* TabMenu Styling */
 .sticky-nav {
     position: fixed;
     top: 0;
@@ -31,19 +28,21 @@ html, body {
     justify-content: center;
 }
 
-/* TabMenu overrides */
-.noir-tabs {
+.p-tabmenu {
+    background: transparent !important;
+}
+
+.p-tabmenu .p-tabmenu-nav {
     background: transparent !important;
     border: none !important;
 }
 
-.noir-tabs .p-tabmenuitem .p-menuitem-link {
+.p-tabmenu .p-tabmenuitem .p-menuitem-link {
     background: transparent !important;
     border: none !important;
-    padding: 1.2rem !important;
 }
 
-.noir-tabs .p-tabmenuitem.p-highlight .p-menuitem-link {
+.p-tabmenu .p-tabmenuitem.p-highlight .p-menuitem-link {
     border-bottom: 2px solid #ffffff !important;
 }
 
@@ -52,12 +51,7 @@ html, body {
     background: transparent !important;
     border: none !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
-    color: #ffffff !important;
     border-radius: 0 !important;
     width: 100%;
-}
-
-.noir-input:focus {
-    border-bottom-color: #ffffff !important;
-    box-shadow: none !important;
+    padding: 1rem 0 !important;
 }
