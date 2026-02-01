@@ -29,11 +29,23 @@ export default function JanaviSoniRestored() {
 
     return (
         <div style={{ minHeight: '100vh', position: 'relative' }}>
-<Head>
-    <title>JANAVI SONI | Visuals</title>
-    {/* Playfair Display for Serifs & Syne for a striking modern Sans-Serif */}
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;700;800&display=swap" rel="stylesheet" />
-</Head>
+<header className="pt-8 pb-4 text-center mt-8">
+    <motion.h1 
+        className="text-7xl md:text-9xl m-0"
+        style={{ 
+            fontFamily: "'Bodoni Moda', serif", 
+            fontStyle: 'italic', 
+            fontWeight: 400,
+            letterSpacing: '-2px',
+            textTransform: 'none' // "Janavi Soni" looks more modern in Title Case than All Caps when italicized
+        }}
+    >
+        Janavi Soni
+    </motion.h1>
+    <p style={{ fontFamily: "'Montserrat', sans-serif", letterSpacing: '0.5em' }} className="text-xs opacity-50 uppercase">
+        Creative Director
+    </p>
+</header>
 
             {/* Background Layer */}
             <div className="modern-bg"><div className="glow-overlay"></div></div>
