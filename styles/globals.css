@@ -1,30 +1,58 @@
-/* Custom OverlayPanel Styling */
+@import "primereact/resources/themes/lara-dark-indigo/theme.css";
+@import "primereact/resources/primereact.min.css";
+@import "primeicons/primeicons.css";
+@import "primeflex/primeflex.css";
+
+:root {
+    --bg-pure: #000000;
+    --text-platinum: #e5e5e5;
+    --accent-gold: #d4af37;
+}
+
+/* Force True Black Reset */
+html, body {
+    background-color: var(--bg-pure) !important;
+    color: var(--text-platinum);
+    margin: 0;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Serif Typography */
+.font-serif { font-family: 'Prata', serif; }
+.font-sans { font-family: 'Inter', sans-serif; }
+
+/* Menubar Modern Overrides */
+.p-menubar {
+    background: rgba(0, 0, 0, 0.8) !important;
+    backdrop-filter: blur(10px);
+    border: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+    padding: 1rem 2rem !important;
+}
+
+.p-menubar .p-menuitem-text {
+    color: var(--text-platinum) !important;
+    font-size: 0.7rem !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase !important;
+    font-weight: 600 !important;
+}
+
+/* Image Viewport Interaction */
+.modern-card {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    overflow: hidden;
+}
+
+.modern-card:hover {
+    border-color: var(--accent-gold);
+    transform: translateY(-5px);
+}
+
+/* Overlay Panel Styling */
 .p-overlaypanel {
-    background: #0a0a0a !important; /* Matte Off-Black */
-    border: 1px solid rgba(255, 255, 255, 0.15) !important;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
-}
-
-/* Remove the little "beak" (arrow) or style it black */
-.p-overlaypanel:after, .p-overlaypanel:before {
-    border-bottom-color: #0a0a0a !important;
-}
-
-.p-overlaypanel .p-overlaypanel-content {
-    padding: 1.5rem !important;
-    background: transparent !important;
-}
-
-.details-label {
-    font-size: 0.65rem;
-    letter-spacing: 2px;
-    color: var(--accent-gold);
-    text-transform: uppercase;
-    font-weight: 700;
-}
-
-.details-value {
-    font-size: 0.9rem;
-    color: #e5e5e5;
-    font-family: 'Prata', serif;
-}
+    background: #0a0a0a !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 20px 40px rgba
