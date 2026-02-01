@@ -1,31 +1,62 @@
-/* FORCE RESET FOR TRUE BLACK THEME */
-html, 
-body, 
-.surface-ground, 
-.surface-section,
-.p-menubar {
-    background-color: #000000 !important;
-    color: #e5e5e5 !important; /* Platinum White text */
+/* Import PrimeReact Core */
+@import "primereact/resources/themes/lara-dark-indigo/theme.css";
+@import "primereact/resources/primereact.min.css";
+@import "primeicons/primeicons.css";
+@import "primeflex/primeflex.css";
+
+:root {
+    --bg-pure-black: #000000;
+    --text-platinum: #e5e5e5;
+    --text-muted: #666666;
+    --accent-gold: #d4af37;
 }
 
-/* Remove the blue-ish tint from PrimeReact Menubar */
+/* Force Global Background */
+html, body {
+    background-color: var(--bg-pure-black) !important;
+    color: var(--text-platinum);
+    margin: 0;
+    padding: 0;
+}
+
+/* Force Surface Overrides */
+.surface-ground, .surface-section, .surface-card {
+    background-color: var(--bg-pure-black) !important;
+}
+
+/* Menubar Fixes: Removing gray background and blue hover */
 .p-menubar {
+    background: transparent !important;
     border: none !important;
 }
 
-.p-menubar .p-menuitem-link .p-menuitem-text,
-.p-menubar .p-menubar-button {
-    color: #e5e5e5 !important;
+.p-menubar .p-menuitem-link {
+    background: transparent !important;
 }
 
-/* Fix for the Branding Box background */
-.branding-box {
-    background-color: #000000 !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1) !important;
+.p-menubar .p-menuitem-text {
+    color: var(--text-platinum) !important;
+    font-size: 0.75rem !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase !important;
 }
 
-/* Ensure inputs aren't gray */
+.p-menubar .p-menuitem-link:hover .p-menuitem-text {
+    color: var(--accent-gold) !important;
+}
+
+/* Input/Form Fixes */
 .p-inputtext, .p-inputtextarea {
     background-color: transparent !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
     color: white !important;
+}
+
+.p-inputtext:focus {
+    border-color: var(--accent-gold) !important;
+    box-shadow: none !important;
+}
+
+.font-serif {
+    font-family: 'Prata', serif;
 }
