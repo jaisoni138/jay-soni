@@ -3,37 +3,22 @@
 @import "primeicons/primeicons.css";
 @import "primeflex/primeflex.css";
 
-/* --- THE ULTIMATE WHITE TEXT OVERRIDE --- */
-:root {
-    --primary-color: #ffffff !important;
-    --text-color: #ffffff !important;
-    --text-color-secondary: #ffffff !important;
-}
-
+/* Reset and Force White Text */
 html, body {
     background-color: #000000 !important;
     color: #ffffff !important;
     margin: 0;
     padding: 0;
+    font-family: 'Inter', sans-serif;
+    scroll-behavior: smooth;
 }
 
-/* Target every possible text element in PrimeReact */
-.p-component, 
-.p-menubar .p-menuitem-text, 
-.p-tabmenu .p-menuitem-text,
-.p-button-label,
-.p-inputtext,
-h1, h2, h3, h4, p, span, i {
+/* Force every PrimeReact component text to white */
+.p-component, .p-menuitem-text, .p-button-label, .p-inputtext, .pi {
     color: #ffffff !important;
 }
 
-/* Placeholder color fix */
-::placeholder {
-    color: rgba(255, 255, 255, 0.4) !important;
-    opacity: 1;
-}
-
-/* Navigation Specifics */
+/* Sticky Navigation bar */
 .sticky-nav {
     position: fixed;
     top: 0;
@@ -42,25 +27,37 @@ h1, h2, h3, h4, p, span, i {
     background: rgba(0, 0, 0, 0.9);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: center;
+}
+
+/* TabMenu overrides */
+.noir-tabs {
+    background: transparent !important;
+    border: none !important;
 }
 
 .noir-tabs .p-tabmenuitem .p-menuitem-link {
     background: transparent !important;
     border: none !important;
+    padding: 1.2rem !important;
 }
 
-/* Keep the underline white instead of indigo */
 .noir-tabs .p-tabmenuitem.p-highlight .p-menuitem-link {
     border-bottom: 2px solid #ffffff !important;
 }
 
+/* Input Fields */
 .noir-input {
     background: transparent !important;
     border: none !important;
-    border-bottom: 1px solid #333 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3) !important;
+    color: #ffffff !important;
     border-radius: 0 !important;
+    width: 100%;
 }
 
 .noir-input:focus {
     border-bottom-color: #ffffff !important;
+    box-shadow: none !important;
 }
