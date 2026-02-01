@@ -29,10 +29,11 @@ export default function JanaviSoniRestored() {
 
     return (
         <div style={{ minHeight: '100vh', position: 'relative' }}>
-            <Head>
-                <title>JANAVI SONI | Visuals</title>
-                <link href="https://fonts.googleapis.com/css2?family=Prata&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
-            </Head>
+<Head>
+    <title>JANAVI SONI | Visuals</title>
+    {/* Playfair Display for Serifs & Syne for a striking modern Sans-Serif */}
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;700;800&display=swap" rel="stylesheet" />
+</Head>
 
             {/* Background Layer */}
             <div className="modern-bg"><div className="glow-overlay"></div></div>
