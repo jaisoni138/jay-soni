@@ -7,6 +7,7 @@ import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { motion } from 'framer-motion';
+import { Divider } from 'primereact/divider';
 
 export default function JanaviSoniRestored() {
     const router = useRouter();
@@ -59,12 +60,30 @@ export default function JanaviSoniRestored() {
                     />
                 </section>
 
+                <section id="about" className="py-8 px-6 text-center max-w-screen-md mx-auto">
+    <h2 className="text-3xl font-serif italic mb-4">The Persona</h2>
+    <p className="text-lg font-light opacity-80 italic">Navigating the intersection of shadow and light.</p>
+</section>
+
+{/* ADD THE DIVIDER HERE */}
+<div className="px-8 max-w-screen-xl mx-auto">
+    <Divider style={{ background: 'rgba(255,255,255,0.1)' }} />
+</div>
+
                 {/* About */}
                 <section id="about" className="py-8 px-6 text-center max-w-screen-md mx-auto">
                     <h2 className="text-3xl font-serif italic mb-4">The Persona</h2>
                     <p className="text-lg font-light opacity-80 italic">Navigating the intersection of shadow and light.</p>
                 </section>
+                <section id="about" className="py-8 px-6 text-center max-w-screen-md mx-auto">
+    <h2 className="text-3xl font-serif italic mb-4">The Persona</h2>
+    <p className="text-lg font-light opacity-80 italic">Navigating the intersection of shadow and light.</p>
+</section>
 
+{/* ADD THE DIVIDER HERE */}
+<div className="px-8 max-w-screen-xl mx-auto">
+    <Divider style={{ background: 'rgba(255,255,255,0.1)' }} />
+</div>
                 {/* Work */}
                 <section id="work" className="py-8 px-4 md:px-8 max-w-screen-xl mx-auto">
                     <div className="grid">
@@ -77,6 +96,16 @@ export default function JanaviSoniRestored() {
                     </div>
                 </section>
 
+                <section id="about" className="py-8 px-6 text-center max-w-screen-md mx-auto">
+    <h2 className="text-3xl font-serif italic mb-4">The Persona</h2>
+    <p className="text-lg font-light opacity-80 italic">Navigating the intersection of shadow and light.</p>
+</section>
+
+{/* ADD THE DIVIDER HERE */}
+<div className="px-8 max-w-screen-xl mx-auto">
+    <Divider style={{ background: 'rgba(255,255,255,0.1)' }} />
+</div>
+
                 {/* Rates */}
                 <section id="rates" className="py-8 px-4 md:px-8 border-y-1 border-white-alpha-10 text-center">
                     <h2 className="text-4xl font-serif italic mb-8">Investment</h2>
@@ -86,6 +115,15 @@ export default function JanaviSoniRestored() {
                     </div>
                 </section>
 
+                <section id="about" className="py-8 px-6 text-center max-w-screen-md mx-auto">
+    <h2 className="text-3xl font-serif italic mb-4">The Persona</h2>
+    <p className="text-lg font-light opacity-80 italic">Navigating the intersection of shadow and light.</p>
+</section>
+
+{/* ADD THE DIVIDER HERE */}
+<div className="px-8 max-w-screen-xl mx-auto">
+    <Divider style={{ background: 'rgba(255,255,255,0.1)' }} />
+</div>
                 {/* Contact */}
                 <section id="contact" className="py-8 px-6 max-w-screen-sm mx-auto">
                     <h2 className="text-5xl font-serif text-center mb-8">Inquire</h2>
