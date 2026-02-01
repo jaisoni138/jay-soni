@@ -1,149 +1,112 @@
 import React, { useRef, useState } from 'react';
 import Head from 'next/head';
 import { Menubar } from 'primereact/menubar';
-import { OverlayPanel } from 'primereact/overlaypanel';
-import { Image } from 'primereact/image';
 import { Button } from 'primereact/button';
 import { InputText } from 'primereact/inputtext';
 import { InputTextarea } from 'primereact/inputtextarea';
 import { motion } from 'framer-motion';
 
-export default function JanaviSoniModernNoir() {
-    const op = useRef(null);
-    const [activeDetails, setActiveDetails] = useState(null);
-
+export default function JanaviSoniBrandIdentity() {
     const menuItems = [
-        { label: 'Work', command: () => document.getElementById('work').scrollIntoView() },
-        { label: 'About', command: () => document.getElementById('about').scrollIntoView() },
-        { label: 'Investment', command: () => document.getElementById('rates').scrollIntoView() },
-        { label: 'Inquire', command: () => document.getElementById('contact').scrollIntoView() }
-    ];
-
-    const portfolio = [
-        { id: '01', title: 'Product', gear: 'Sony A7R IV', loc: 'Studio Mumbai', src: 'https://697e96d7c4feaabd2d12359b.imgix.net/sneakers.jpg?auto=format&w=800' },
-        { id: '02', title: 'Editorial', gear: 'Leica Q2', loc: 'South Mumbai', src: 'https://images.unsplash.com/photo-1561414927-6d86591d0c4f?auto=format&w=800' },
-        { id: '03', title: 'Archive', gear: 'Fujifilm X100V', loc: 'Bandra', src: 'https://697e96d7c4feaabd2d12359b.imgix.net/scooter.jpg?auto=format&w=800' }
+        { label: 'Philosophy', command: () => document.getElementById('about').scrollIntoView({ behavior: 'smooth' }) },
+        { label: 'Services', command: () => document.getElementById('rates').scrollIntoView({ behavior: 'smooth' }) },
+        { label: 'Connect', command: () => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' }) }
     ];
 
     return (
-        <div className="surface-ground">
+        <div className="surface-ground min-h-screen">
             <Head>
-                <title>JANAVI SONI | MODERN VISUALS</title>
+                <title>JANAVI SONI | Visual Identity</title>
                 <link href="https://fonts.googleapis.com/css2?family=Prata&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
             </Head>
 
-            {/* --- STICKY NAVIGATION --- */}
             <Menubar model={menuItems} className="fixed top-0 w-full z-50" />
 
-            {/* --- HERO BRANDING --- */}
-            <header className="pt-8 pb-4 text-center mt-8">
-                <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }}>
-                    <h1 className="text-7xl md:text-huge font-serif m-0 tracking-tighter uppercase">Janavi Soni</h1>
-                    <p className="text-xs tracking-widest opacity-40 font-bold uppercase mt-2">Visual Storyteller & Creative Director</p>
+            {/* --- THE BRAND BLOCK (Full Screen Overlay Style) --- */}
+            <section className="relative h-screen flex flex-column justify-content-center align-items-center text-center px-4 overflow-hidden">
+                {/* Background Text Overlay (Decorative) */}
+                <div className="absolute opacity-5 select-none pointer-events-none" style={{ fontSize: '25vw', whiteSpace: 'nowrap', fontWeight: 900 }}>
+                    SONI STUDIO
+                </div>
+
+                <motion.div 
+                    initial={{ opacity: 0, scale: 0.95 }} 
+                    animate={{ opacity: 1, scale: 1 }} 
+                    transition={{ duration: 1.5 }}
+                    className="z-10"
+                >
+                    <h1 className="text-7xl md:text-huge font-serif m-0 tracking-tighter uppercase leading-none">Janavi Soni</h1>
+                    <div className="flex align-items-center justify-content-center gap-3 mt-4">
+                        <div className="h-1px w-2rem bg-white-alpha-30"></div>
+                        <p className="text-xs tracking-widest opacity-60 font-bold uppercase m-0">Creative Direction & Visual Identity</p>
+                        <div className="h-1px w-2rem bg-white-alpha-30"></div>
+                    </div>
                 </motion.div>
-            </header>
+
+                {/* Call to action arrow */}
+                <motion.div 
+                    animate={{ y: [0, 10, 0] }} 
+                    transition={{ repeat: Infinity, duration: 2 }}
+                    className="absolute bottom-0 mb-8 opacity-30"
+                >
+                    <i className="pi pi-arrow-down" style={{ fontSize: '1.5rem' }}></i>
+                </motion.div>
+            </section>
 
             <main>
-                {/* --- HERO IMAGE --- */}
-                <section className="px-4 md:px-8 py-4">
-                    <motion.div initial={{ scale: 1.05, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 1.5 }}>
-                        <Image 
-                            src="https://697e96d7c4feaabd2d12359b.imgix.net/pexels-bingotheme-421879.jpg?auto=format&w=1800&q=80" 
-                            alt="Main Hero" width="100%" 
-                            imageClassName="w-full h-30rem md:h-screen object-cover grayscale" 
-                        />
-                    </motion.div>
-                </section>
-
-                {/* --- ABOUT --- */}
-                <section id="about" className="py-8 px-6 max-w-screen-md mx-auto text-center">
-                    <motion.div whileInView={{ opacity: 1 }} initial={{ opacity: 0 }} transition={{ duration: 1 }}>
-                        <h2 className="text-3xl font-serif italic mb-4">The Persona</h2>
-                        <p className="text-lg font-light line-height-4 italic opacity-80">
-                            Navigating the intersection of shadow and light in Mumbai. Every frame is a study of 
-                            minimalist geometry and raw human emotion.
-                        </p>
-                    </motion.div>
-                </section>
-
-                {/* --- MODERN STAGGERED GRID --- */}
-                <section id="work" className="py-8 px-4 md:px-8 max-w-screen-xl mx-auto">
-                    <div className="grid">
-                        {portfolio.map((item, i) => (
-                            <motion.div 
-                                key={item.id} 
-                                className={`col-12 md:col-4 p-4 ${i % 2 !== 0 ? 'md:mt-8' : ''}`}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                initial={{ opacity: 0, y: 50 }}
-                            >
-                                <div 
-                                    className="modern-card cursor-pointer"
-                                    onClick={(e) => { setActiveDetails(item); op.current.toggle(e); }}
-                                >
-                                    <Image src={item.src} alt={item.title} width="100%" 
-                                           imageClassName="w-full h-30rem object-cover grayscale hover:grayscale-0 transition-all duration-1000" />
-                                </div>
-                                <div className="mt-4 flex justify-content-between align-items-center">
-                                    <h3 className="font-serif text-2xl m-0">{item.title}</h3>
-                                    <span className="text-xs opacity-30 font-bold uppercase tracking-widest">{item.id}</span>
-                                </div>
-                            </motion.div>
-                        ))}
-                    </div>
-                </section>
-
-                {/* --- METADATA OVERLAY --- */}
-                <OverlayPanel ref={op} style={{ width: '220px' }}>
-                    {activeDetails && (
-                        <div className="flex flex-column gap-3 py-2">
-                            <div>
-                                <span className="text-gold text-xs font-bold uppercase tracking-widest">Location</span>
-                                <p className="m-0 text-sm mt-1">{activeDetails.loc}</p>
-                            </div>
-                            <div className="border-bottom-1 border-white-alpha-10"></div>
-                            <div>
-                                <span className="text-gold text-xs font-bold uppercase tracking-widest">Gear</span>
-                                <p className="m-0 text-sm mt-1">{activeDetails.gear}</p>
-                            </div>
+                {/* --- PHILOSOPHY (REPLACES ABOUT) --- */}
+                <section id="about" className="py-8 px-6 max-w-screen-lg mx-auto">
+                    <div className="grid align-items-center">
+                        <div className="col-12 md:col-6">
+                            <h2 className="text-5xl font-serif italic m-0">The Philosophy</h2>
                         </div>
-                    )}
-                </OverlayPanel>
+                        <div className="col-12 md:col-6">
+                            <p className="text-xl font-light line-height-4 opacity-70 border-left-1 border-white-alpha-20 pl-4">
+                                I don't just capture images; I build visual languages. Based in Mumbai, my work is a 
+                                reaction to the digital noise—focusing on intentionality, shadow, and the 
+                                timeless architecture of the human form.
+                            </p>
+                        </div>
+                    </div>
+                </section>
 
-                {/* --- INVESTMENT --- */}
-                <section id="rates" className="py-8 px-4 md:px-8 border-y-1 border-white-alpha-10 text-center">
-                    <h2 className="text-4xl font-serif italic mb-8">Investment</h2>
+                {/* --- SERVICE INVESTMENT --- */}
+                <section id="rates" className="py-8 px-4 md:px-8 border-y-1 border-white-alpha-10 surface-section">
                     <div className="max-w-screen-md mx-auto">
-                        {portfolio.map((item, i) => (
-                            <div key={i} className="flex justify-content-between py-5 border-bottom-1 border-white-alpha-10">
-                                <span className="text-xs font-bold tracking-widest opacity-40 uppercase">{item.title} SERIES</span>
-                                <span className="text-2xl font-serif italic">{item.price || '₹20,000+'}</span>
+                        <h2 className="text-center text-3xl font-serif mb-8 italic">Service Framework</h2>
+                        {[
+                            { name: 'Creative Direction', price: 'Inquire' },
+                            { name: 'Brand Storyboarding', price: '₹45,000+' },
+                            { name: 'Visual Identity Consult', price: '₹25,000' }
+                        ].map((item, i) => (
+                            <div key={i} className="flex justify-content-between py-5 border-bottom-1 border-white-alpha-10 hover:text-gold transition-colors cursor-default">
+                                <span className="text-sm font-bold tracking-widest uppercase">{item.name}</span>
+                                <span className="text-xl font-serif">{item.price}</span>
                             </div>
                         ))}
                     </div>
                 </section>
 
-                {/* --- MODERN INQUIRY --- */}
+                {/* --- MODERN CONTACT --- */}
                 <section id="contact" className="py-8 px-6 max-w-screen-sm mx-auto">
-                    <div className="text-center mb-6">
-                        <h2 className="text-5xl font-serif italic m-0">Inquire</h2>
-                        <p className="text-xs tracking-widest opacity-30 uppercase mt-2">Worldwide availability 2026</p>
-                    </div>
-                    <div className="flex flex-column gap-4">
-                        <InputText placeholder="NAME" className="modern-input" />
+                    <h2 className="text-5xl font-serif italic text-center mb-8">Initiate</h2>
+                    <div className="flex flex-column gap-5">
+                        <InputText placeholder="NAME / BRAND" className="modern-input" />
                         <InputText placeholder="EMAIL" className="modern-input" />
-                        <InputTextarea placeholder="TELL ME ABOUT YOUR PROJECT" rows={3} className="modern-input" />
-                        <Button label="SEND INQUIRY" className="p-button-outlined border-white text-white p-3 font-bold text-xs tracking-widest mt-4 hover:bg-white hover:text-black transition-all" />
+                        <InputTextarea placeholder="THE VISION" rows={3} className="modern-input" />
+                        <Button label="SEND INQUIRY" className="p-button-outlined border-white text-white p-3 font-bold text-xs tracking-widest mt-4" />
                     </div>
                 </section>
             </main>
 
             <footer className="py-8 text-center opacity-20 text-xs tracking-widest uppercase border-top-1 border-white-alpha-10">
-                &copy; 2026 JANAVI SONI STUDIO &bull; MUMBAI
+                &copy; 2026 JANAVI SONI STUDIO &bull; MUMBAI &bull; INTERNATIONALLY AVAILABLE
             </footer>
 
             <style jsx>{`
-                :global(.text-huge) { font-size: clamp(3rem, 10vw, 8rem); line-height: 0.9; }
-                :global(.p-button.p-button-outlined:hover) { background-color: white !important; color: black !important; }
+                :global(.text-huge) { font-size: clamp(4rem, 12vw, 10rem); }
+                :global(.modern-input) { border-radius: 0; background: transparent; border: none; border-bottom: 1px solid rgba(255,255,255,0.2); color: white; padding: 1rem 0; font-family: 'Inter', sans-serif; }
+                :global(.modern-input:focus) { border-bottom-color: #d4af37; box-shadow: none; outline: none; }
             `}</style>
         </div>
     );
