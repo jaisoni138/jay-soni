@@ -1,35 +1,42 @@
-/* ... keep your existing imports ... */
+/* ... keep your existing surface and branding logic ... */
 
-:root {
-    --bg-deep: #000000;
-    --bg-header: #0a0a0a; /* The dark background for the name box */
-    --text-main: #e5e5e5;
-    --accent-gold: #d4af37;
+.toolbox-container {
+    position: fixed;
+    bottom: 2rem; /* Floating at the bottom */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    background: rgba(15, 15, 15, 0.7);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 50px; /* Pill shape */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
 }
 
-/* Custom Branding Box Style */
-.branding-box {
-    background-color: var(--bg-header);
-    padding: 6rem 2rem; /* Increased padding for luxury feel */
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    text-align: center;
-}
-
-.font-serif {
-    font-family: 'Prata', serif;
-}
-
-.nav-link {
+.toolbox-link {
     text-decoration: none;
-    color: var(--text-main);
-    font-size: 0.75rem;
-    letter-spacing: 3px;
+    color: #ffffff;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
     text-transform: uppercase;
-    opacity: 0.5;
+    padding: 0.8rem 1.2rem;
     transition: all 0.3s ease;
+    display: inline-block;
+    opacity: 0.6;
 }
 
-.nav-link:hover {
+.toolbox-link:hover {
     opacity: 1;
     color: var(--accent-gold);
+}
+
+/* Subtle divider inside the toolbox */
+.toolbox-divider {
+    width: 1px;
+    height: 15px;
+    background: rgba(255, 255, 255, 0.1);
+    display: inline-block;
+    margin: 0 5px;
 }
