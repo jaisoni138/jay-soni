@@ -1,134 +1,144 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { TabMenu } from 'primereact/tabmenu';
 import { Image } from 'primereact/image';
-import { Button } from 'primereact/button';
-import { InputText } from 'primereact/inputtext';
-import { InputTextarea } from 'primereact/inputtextarea';
 import { motion } from 'framer-motion';
 
-export default function JanaviSoniFinal() {
+export default function JanaviSoniRoutedTabs() {
+    const router = useRouter();
     const [activeIndex, setActiveIndex] = useState(0);
 
-    // TabMenu Items
+    // Custom Template for the Tab Items
+    const itemTemplate = (item, options) => {
+        return (
+            <a 
+                className={options.className} 
+                target={item.target} 
+                onClick={options.onClick}
+                style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '8px' }}
+            >
+                <i className={`${item.icon} text-xs`} style={{ color: options.active ? '#d4af37' : 'inherit' }}></i>
+                <span className="p-menuitem-text">{item.label}</span>
+            </a>
+        );
+    };
+
     const items = [
-        { label: 'Work', icon: 'pi pi-fw pi-th-large', command: () => document.getElementById('work').scrollIntoView({ behavior: 'smooth' }) },
-        { label: 'About', icon: 'pi pi-fw pi-user', command: () => document.getElementById('about').scrollIntoView({ behavior: 'smooth' }) },
-        { label: 'Investment', icon: 'pi pi-fw pi-wallet', command: () => document.getElementById('rates').scrollIntoView({ behavior: 'smooth' }) },
-        { label: 'Contact', icon: 'pi pi-fw pi-envelope', command: () => document.getElementById('contact').scrollIntoView({ behavior: 'smooth' }) }
+        { 
+            label: 'WORK', 
+            icon: 'pi pi-th-large', 
+            template: itemTemplate,
+            command: () => router.push('/#work') 
+        },
+        { 
+            label: 'ABOUT', 
+            icon: 'pi pi-user', 
+            template: itemTemplate,
+            command: () => router.push('/#about') 
+        },
+        { 
+            label: 'RATES', 
+            icon: 'pi pi-wallet', 
+            template: itemTemplate,
+            command: () => router.push('/#rates') 
+        },
+        { 
+            label: 'CONTACT', 
+            icon: 'pi pi-envelope', 
+            template: itemTemplate,
+            command: () => router.push('/#contact') 
+        }
     ];
 
-    const portfolio = [
-        { id: '01', title: 'Product', gear: 'Sony A7R IV', loc: 'Studio Mumbai', src: 'https://697e96d7c4feaabd2d12359b.imgix.net/sneakers.jpg?auto=format&w=800' },
-        { id: '02', title: 'Editorial', gear: 'Leica Q2', loc: 'South Mumbai', src: 'https://images.unsplash.com/photo-1561414927-6d86591d0c4f?auto=format&w=800' },
-        { id: '03', title: 'Archive', gear: 'Fujifilm X100V', loc: 'Bandra', src: 'https://697e96d7c4feaabd2d12359b.imgix.net/scooter.jpg?auto=format&w=800' }
-    ];
+    // Synchronize activeIndex with URL on load/change
+    useEffect(() => {
+        const hash = window.location.hash;
+        if (hash === '#about') setActiveIndex(1);
+        else if (hash === '#rates') setActiveIndex(2);
+        else if (hash === '#contact') setActiveIndex(3);
+        else setActiveIndex(0);
+    }, [router.asPath]);
 
     return (
-        <div className="surface-ground" style={{ backgroundColor: '#000000', color: '#e5e5e5', minHeight: '100vh' }}>
+        <div style={{ backgroundColor: '#000', color: '#e5e5e5', minHeight: '100vh' }}>
             <Head>
                 <title>JANAVI SONI | Visuals</title>
-                <link href="https://fonts.googleapis.com/css2?family=Prata&family=Inter:wght@300;400;600&display=swap" rel="stylesheet" />
+                <link href="https://fonts.googleapis.com/css2?family=Prata&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
             </Head>
 
-            {/* --- BRANDING HEADER --- */}
-            <header className="pt-8 pb-4 text-center">
-                <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1 }}>
-                    <h1 className="text-7xl md:text-8xl font-serif m-0 tracking-tighter uppercase">Janavi Soni</h1>
-                    <p className="text-xs tracking-widest opacity-40 font-bold uppercase mt-2">Photography & Creative Direction</p>
+            {/* --- FIXED ROUTED TABMENU --- */}
+            <nav className="sticky-nav">
+                <TabMenu 
+                    model={items} 
+                    activeIndex={activeIndex} 
+                    onTabChange={(e) => setActiveIndex(e.index)} 
+                    className="noir-tabmenu"
+                />
+            </nav>
+
+            <header className="pt-8 pb-4 text-center mt-8">
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5 }}>
+                    <h1 className="text-7xl md:text-8xl font-serif m-0 uppercase tracking-tighter">Janavi Soni</h1>
+                    <p className="text-xs tracking-widest opacity-40 uppercase mt-2">Noir Visual Identity</p>
                 </motion.div>
-                
-                {/* --- TAB MENU --- */}
-                <div className="flex justify-content-center mt-6">
-                    <TabMenu 
-                        model={items} 
-                        activeIndex={activeIndex} 
-                        onTabChange={(e) => setActiveIndex(e.index)} 
-                        style={{ background: 'transparent', border: 'none' }}
-                    />
-                </div>
             </header>
 
-            <main>
-                {/* --- HERO IMAGE --- */}
-                <section className="px-4 md:px-8 py-4">
-                    <Image 
-                        src="https://697e96d7c4feaabd2d12359b.imgix.net/pexels-bingotheme-421879.jpg?auto=format&w=1800&q=80" 
-                        alt="Main Hero" width="100%" 
-                        imageClassName="w-full h-30rem md:h-screen object-cover grayscale" 
-                    />
-                </section>
-
-                {/* --- ABOUT --- */}
-                <section id="about" className="py-8 px-6 max-w-screen-md mx-auto text-center">
-                    <h2 className="text-3xl font-serif italic mb-4">The Persona</h2>
-                    <p className="text-lg font-light line-height-4 italic opacity-80">
-                        Navigating the intersection of shadow and light in Mumbai. Every frame is a study of 
-                        minimalist geometry and raw human emotion.
-                    </p>
-                </section>
-
-                {/* --- PORTFOLIO GRID --- */}
-                <section id="work" className="py-8 px-4 md:px-8 max-w-screen-xl mx-auto">
+            <main className="px-4 md:px-8">
+                <section id="work" className="py-8 min-h-screen">
                     <div className="grid">
-                        {portfolio.map((item, i) => (
-                            <div key={item.id} className="col-12 md:col-4 p-4">
-                                <div className="border-1 border-white-alpha-10 overflow-hidden">
-                                    <Image src={item.src} alt={item.title} width="100%" 
-                                           imageClassName="w-full h-30rem object-cover grayscale hover:grayscale-0 transition-all duration-1000" />
-                                </div>
-                                <div className="mt-4 flex justify-content-between">
-                                    <h3 className="font-serif text-2xl m-0">{item.title}</h3>
-                                    <span className="text-xs opacity-30 font-bold uppercase">{item.id}</span>
-                                </div>
-                            </div>
-                        ))}
+                        <div className="col-12 md:col-6 p-4">
+                            <Image src="https://697e96d7c4feaabd2d12359b.imgix.net/sneakers.jpg?auto=format&w=800" width="100%" imageClassName="grayscale" />
+                        </div>
+                        <div className="col-12 md:col-6 p-4">
+                            <Image src="https://images.unsplash.com/photo-1561414927-6d86591d0c4f?auto=format&w=800" width="100%" imageClassName="grayscale" />
+                        </div>
                     </div>
                 </section>
 
-                {/* --- INVESTMENT --- */}
-                <section id="rates" className="py-8 px-4 md:px-8 border-y-1 border-white-alpha-10 text-center">
-                    <h2 className="text-4xl font-serif italic mb-8">Investment</h2>
-                    <div className="max-w-screen-md mx-auto">
-                        {portfolio.map((item, i) => (
-                            <div key={i} className="flex justify-content-between py-5 border-bottom-1 border-white-alpha-10">
-                                <span className="text-xs font-bold tracking-widest opacity-40 uppercase">{item.title}</span>
-                                <span className="text-2xl font-serif italic">₹20,000+</span>
-                            </div>
-                        ))}
-                    </div>
+                <section id="about" className="py-8 min-h-screen flex align-items-center justify-content-center">
+                    <h2 className="text-5xl font-serif italic opacity-50">The Visionary</h2>
                 </section>
 
-                {/* --- CONTACT --- */}
-                <section id="contact" className="py-8 px-6 max-w-screen-sm mx-auto">
-                    <h2 className="text-5xl font-serif italic text-center mb-8">Inquire</h2>
-                    <div className="flex flex-column gap-4">
-                        <InputText placeholder="NAME" style={{ background: 'transparent', border: 'none', borderBottom: '1px solid #333', color: 'white' }} />
-                        <InputText placeholder="EMAIL" style={{ background: 'transparent', border: 'none', borderBottom: '1px solid #333', color: 'white' }} />
-                        <InputTextarea placeholder="MESSAGE" rows={3} style={{ background: 'transparent', border: 'none', borderBottom: '1px solid #333', color: 'white' }} />
-                        <Button label="SEND MESSAGE" className="p-button-outlined border-white text-white p-3 font-bold text-xs" />
-                    </div>
+                <section id="rates" className="py-8 min-h-screen flex align-items-center justify-content-center">
+                    <h2 className="text-5xl font-serif italic opacity-50">Investment</h2>
+                </section>
+
+                <section id="contact" className="py-8 min-h-screen flex align-items-center justify-content-center">
+                    <h2 className="text-5xl font-serif italic opacity-50">Inquire</h2>
                 </section>
             </main>
 
-            <footer className="py-8 text-center opacity-20 text-xs tracking-widest uppercase border-top-1 border-white-alpha-10">
-                &copy; 2026 JANAVI SONI STUDIO &bull; MUMBAI
-            </footer>
-
             <style jsx>{`
-                /* Ensuring TabMenu respects the black theme */
-                :global(.p-tabmenu .p-tabmenu-nav) {
-                    background: transparent !important;
-                    border: none !important;
+                .sticky-nav {
+                    position: fixed;
+                    top: 0;
+                    width: 100%;
+                    z-index: 1000;
+                    background: rgba(0, 0, 0, 0.9);
+                    backdrop-filter: blur(15px);
+                    display: flex;
+                    justify-content: center;
+                    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
                 }
-                :global(.p-tabmenu .p-tabmenuitem .p-menuitem-link) {
-                    background: transparent !important;
-                    border: none !important;
-                    color: rgba(255, 255, 255, 0.4) !important;
+
+                :global(.noir-tabmenu) { background: transparent !important; border: none !important; }
+                :global(.noir-tabmenu .p-tabmenu-nav) { background: transparent !important; border: none !important; }
+                :global(.noir-tabmenu .p-tabmenuitem .p-menuitem-link) { 
+                    background: transparent !important; 
+                    border: none !important; 
+                    color: #666 !important; 
+                    padding: 1.5rem !important;
+                    transition: color 0.4s ease;
                 }
-                :global(.p-tabmenu .p-tabmenuitem.p-highlight .p-menuitem-link) {
-                    color: #d4af37 !important;
-                    border-bottom: 2px solid #d4af37 !important;
+                :global(.noir-tabmenu .p-tabmenuitem.p-highlight .p-menuitem-link) { 
+                    color: #d4af37 !important; 
+                    border-bottom: 1px solid #d4af37 !important; 
+                }
+                :global(.noir-tabmenu .p-menuitem-text) { 
+                    font-size: 0.7rem; 
+                    letter-spacing: 3px; 
+                    font-weight: 600; 
                 }
             `}</style>
         </div>
