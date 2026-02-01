@@ -28,7 +28,7 @@ export default function Services() {
         {
             title: 'New Born',
             description: 'Pure, minimalist captures of your newest arrival, focusing on raw emotion and delicate details.',
-            src: 'https://images.unsplash.com/photo-1519689680058-324335c77eba?auto=format&w=800'
+            src: 'https://images.unsplash.com/photo-1510154221590-ff63e90a136f?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YmFieXxlbnwwfHwwfHx8MA%3D%3D'
         },
         {
             title: 'Family',
@@ -38,7 +38,7 @@ export default function Services() {
         {
             title: 'Business Portraits',
             description: 'Elevated headshots and personal branding that project confidence, character, and professionalism.',
-            src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&w=800'
+            src: 'https://images.unsplash.com/photo-1724128191061-c89bcd6e6146?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTR8fGJ1c2luZXNzJTIwcG9ydHJhaXRzfGVufDB8fDB8fHww'
         }
     ];
 
