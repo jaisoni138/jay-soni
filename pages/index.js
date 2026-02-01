@@ -29,17 +29,7 @@ export default function JanaviSoniRestored() {
 
     return (
         <div style={{ minHeight: '100vh', position: 'relative' }}>
-
-
-            {/* Background Layer */}
-            <div className="modern-bg"><div className="glow-overlay"></div></div>
-
-            {/* Sticky Nav */}
-            <nav className="sticky-nav">
-                <TabMenu model={items} activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)} />
-            </nav>
-
-            <header className="pt-8 pb-4 text-center mt-8">
+<header className="pt-8 pb-4 text-center mt-8">
     <motion.h1 
         className="text-7xl md:text-9xl m-0"
         style={{ 
@@ -51,12 +41,20 @@ export default function JanaviSoniRestored() {
         }}
     >
         Janavi Soni
-        
     </motion.h1>
     <p style={{ fontFamily: "'Montserrat', sans-serif", letterSpacing: '0.5em' }} className="text-xs opacity-50 uppercase">
         Creative Director
     </p>
 </header>
+
+            {/* Background Layer */}
+            <div className="modern-bg"><div className="glow-overlay"></div></div>
+
+            {/* Sticky Nav */}
+            <nav className="sticky-nav">
+                <TabMenu model={items} activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)} />
+            </nav>
+
             <main className="relative z-10">
                 {/* Hero */}
                 <section className="px-4 md:px-8 py-4">
