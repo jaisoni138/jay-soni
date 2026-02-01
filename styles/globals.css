@@ -1,38 +1,22 @@
-/* --- Menubar Customization --- */
-.p-menubar {
-    background: transparent !important;
-    border: none !important;
-    justify-content: center !important;
-    padding: 1.5rem 0 !important;
+:root {
+    --bg-deep: #000000;
+    --bg-header: #070707; /* Slightly off-black for the branding box */
+    --accent-gold: #d4af37;
 }
 
-/* Menu Items Styling */
-.p-menubar .p-menuitem-link {
-    background: transparent !important;
-    padding: 0.5rem 1.5rem !important;
-    transition: all 0.3s ease !important;
+/* Ensure the body is deep black */
+body {
+    background-color: var(--bg-deep) !important;
+    color: #e5e5e5;
 }
 
-.p-menubar .p-menuitem-text {
-    color: var(--text-main) !important;
-    font-size: 0.75rem !important;
-    letter-spacing: 3px !important;
-    text-transform: uppercase !important;
-    font-weight: 600 !important;
-    opacity: 0.6;
+.surface-ground {
+    background-color: var(--bg-deep) !important;
 }
 
-.p-menubar .p-menuitem-link:hover .p-menuitem-text {
-    opacity: 1 !important;
-    color: var(--accent-gold) !important;
-}
-
-/* Remove the default submenu arrow if not needed */
-.p-menubar .p-submenu-icon {
-    display: none !important;
-}
-
-/* Mobile Menu Icon */
-.p-menubar .p-menubar-button {
-    color: white !important;
+/* Subtle styling for the About text */
+.about-text {
+    line-height: 1.8;
+    letter-spacing: 0.5px;
+    font-weight: 300;
 }
