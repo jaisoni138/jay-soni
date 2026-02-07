@@ -1,28 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { TabMenu } from 'primereact/tabmenu';
 import { Image } from 'primereact/image';
 import { Divider } from 'primereact/divider';
 import { motion } from 'framer-motion';
-import Link from 'next/link';
 
 export default function JanaviSoniHome() {
     const router = useRouter();
-    const [scrolled, setScrolled] = useState(false);
+    const [activeIndex, setActiveIndex] = useState(0);
 
-    useEffect(() => {
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 50);
-        };
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+    const items = [
+        { label: 'HOME', command: () => window.scrollTo({top: 0, behavior: 'smooth'}) },
+        { label: 'ABOUT', command: () => router.push('/about') },
+        { label: 'SERVICES', command: () => router.push('/services') }, 
+        { label: 'CONTACT', command: () => router.push('/contact') }
+    ];
 
-    const navItems = [
-        { label: 'HOME', path: '/' },
-        { label: 'ABOUT', path: '/about' },
-        { label: 'SERVICES', path: '/services' },
-        { label: 'CONTACT', path: '/contact' }
+    const portfolio = [
+        { id: '01', title: 'Product', category: 'Commercial', src: 'https://697e96d7c4feaabd2d12359b.imgix.net/sneakers.jpg?auto=format&w=800' },
+        { id: '02', title: 'Editorial', category: 'Fashion', src: 'https://images.unsplash.com/photo-1561414927-6d86591d0c4f?auto=format&w=800' },
+        { id: '03', title: 'Business Portraits', category: 'Professional', src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&w=800' },
+        { id: '04', title: 'Maternity', category: 'Editorial Life', src: 'https://plus.unsplash.com/premium_photo-1664053011441-e61b42285903?w=800&auto=format&fit=crop' },
+        { id: '05', title: 'New Born', category: 'Minimalist Life', src: 'https://images.unsplash.com/photo-1510154221590-ff63e90a136f?w=800&auto=format&fit=crop' },
+        { id: '06', title: 'Archive', category: 'Personal', src: 'https://697e96d7c4feaabd2d12359b.imgix.net/scooter.jpg?auto=format&w=800' }
     ];
 
     return (
@@ -32,76 +33,74 @@ export default function JanaviSoniHome() {
                 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@1,400;1,700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet" />
             </Head>
 
-            {/* --- NAVIGATION --- */}
-            <nav className={`fixed top-0 left-0 w-full z-5 transition-all duration-500 ${scrolled ? 'bg-white py-3 shadow-1' : 'bg-transparent py-5'}`}>
-                <div className="flex align-items-center justify-content-between px-6 md:px-8">
-                    
-                    {/* LOGO */}
-                    <div className="cursor-pointer flex align-items-center" onClick={() => router.push('/')}>
-                        <span style={{ fontFamily: "'Bodoni Moda', serif", fontWeight: 700, fontSize: '1.8rem' }}>J.</span>
-                        <span style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 300, fontSize: '0.75rem', letterSpacing: '0.4em', marginLeft: '0.6rem', marginTop: '0.4rem' }}>SONI</span>
+            {/* --- HERO & HEADER WRAPPER --- */}
+            <section className="relative h-screen md:h-70rem overflow-hidden">
+                {/* Fixed/Sticky Header Overlay */}
+                <header className="absolute top-0 left-0 w-full pt-8 pb-4 text-center z-5 bg-gradient-to-b from-white-alpha-40 to-transparent backdrop-blur-sm">
+                    <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+                        <h1 className="text-7xl md:text-8xl m-0 cursor-pointer" 
+                            style={{ fontFamily: "'Bodoni Moda', serif", fontStyle: 'italic', fontWeight: 400 }}
+                            onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
+                            Janavi Soni
+                        </h1>
+                        <p style={{ letterSpacing: '0.8em', fontSize: '0.65rem', textIndent: '0.8em' }} className="mt-2 opacity-60 uppercase font-bold text-center">
+                            Photography
+                        </p>
+                    </motion.div>
+
+                    <div className="mt-6 flex justify-content-center">
+                        <TabMenu model={items} activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)} className="noir-menu transparent-menu" />
                     </div>
+                </header>
 
-                    {/* CENTER MENU (Manual mapping to avoid TabMenu breaks) */}
-                    <div className="hidden md:flex gap-6">
-                        {navItems.map((item) => (
-                            <Link key={item.label} href={item.path} style={{ textDecoration: 'none' }}>
-                                <span className={`text-xs font-bold tracking-widest cursor-pointer hover:opacity-100 transition-opacity ${router.pathname === item.path ? 'opacity-100 border-bottom-1 border-black-alpha-90' : 'opacity-40'}`}>
-                                    {item.label}
-                                </span>
-                            </Link>
-                        ))}
-                    </div>
-
-                    {/* EMPTY DIV FOR FLEX BALANCE */}
-                    <div className="hidden md:block w-8rem"></div>
-                </div>
-            </nav>
-
-            {/* --- HERO SECTION --- */}
-            <section className="relative h-screen w-full">
-                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.2 }} className="h-full w-full">
+                {/* Hero Image - Blended Background */}
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5 }} className="h-full w-full">
                     <img 
                         src="/images/Newborn-Baby-HD-Background-Wallpaper-55635.jpg" 
                         alt="Hero" 
-                        className="w-full h-full object-cover grayscale"
+                        className="w-full h-full object-cover grayscale transition-all duration-1000"
+                        style={{ filter: 'contrast(1.1) brightness(0.9)' }} 
                     />
-                    {/* Top Gradient for Logo Visibility */}
-                    <div className="absolute top-0 left-0 w-full h-15rem bg-gradient-to-b from-black-alpha-30 to-transparent"></div>
-                    {/* Bottom Blend */}
-                    <div className="absolute bottom-0 left-0 w-full h-25rem bg-gradient-to-t from-white to-transparent"></div>
+                    {/* Gradient Overlay to blend image into the white content below */}
+                    <div className="absolute bottom-0 left-0 w-full h-20rem bg-gradient-to-t from-white to-transparent"></div>
                 </motion.div>
             </section>
 
-            <main className="relative z-2 bg-white px-4 md:px-8">
-                <section className="max-w-screen-xl mx-auto py-8">
+            <main className="px-4 md:px-8 relative z-2 bg-white">
+                <div className="max-w-screen-xl mx-auto py-8 text-center">
+                    <span className="text-xs tracking-widest opacity-40 uppercase">Selected Works</span>
+                </div>
+
+                {/* --- PORTFOLIO --- */}
+                <section id="work" className="pb-8 max-w-screen-xl mx-auto">
                     <div className="grid">
-                        {portfolioData.map((item, index) => (
+                        {portfolio.map((item, index) => (
                             <div key={item.id} className="col-12 md:col-4 p-3">
                                 <motion.div 
                                     initial={{ opacity: 0, y: 20 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: index * 0.1 }}
-                                    className="relative overflow-hidden group border-1 border-gray-100"
+                                    className="relative overflow-hidden group"
                                 >
                                     <Image 
                                         src={item.src} 
                                         alt={item.title} 
                                         width="100%" 
                                         preview
-                                        imageClassName="w-full h-30rem object-cover grayscale group-hover:grayscale-0 transition-all duration-1000" 
+                                        imageClassName="w-full h-30rem object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000 cursor-pointer" 
                                     />
-                                    <div className="absolute bottom-0 left-0 w-full p-4 bg-white-alpha-80 opacity-0 group-hover:opacity-100 transition-opacity duration-400">
+                                    <div className="absolute bottom-0 left-0 w-full p-4 bg-white-alpha-70 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
                                         <p className="m-0 text-xs tracking-widest opacity-60 uppercase">{item.category}</p>
-                                        <h3 className="m-0 text-xl font-serif italic">{item.title}</h3>
+                                        <h3 className="m-0 text-2xl font-serif italic">{item.title}</h3>
                                     </div>
                                 </motion.div>
                             </div>
                         ))}
                     </div>
                 </section>
-
+                
+                {/* --- CALL TO ACTION --- */}
                 <section className="py-8 text-center">
                    <Divider className="max-w-screen-sm mx-auto mb-8" />
                    <h2 className="text-4xl mb-6" style={{ fontFamily: "'Bodoni Moda', serif", fontStyle: 'italic' }}>Interested in a session?</h2>
@@ -117,16 +116,18 @@ export default function JanaviSoniHome() {
             <footer className="py-8 text-center border-top-1 border-gray-100 bg-white">
                 <p className="opacity-40 text-xs tracking-widest m-0">&copy; 2026 JANAVI SONI STUDIO</p>
             </footer>
+
+            <style jsx global>{`
+                .noir-menu.p-tabmenu .p-tabmenu-nav { background: transparent; border: none; justify-content: center; }
+                .noir-menu.p-tabmenu .p-tabmenu-nav .p-tabmenuitem .p-menuitem-link { background: transparent !important; border: none !important; color: #1a1a1a; font-size: 0.7rem; letter-spacing: 0.25em; font-weight: 400; }
+                .noir-menu.p-tabmenu .p-tabmenu-nav .p-tabmenuitem.p-highlight .p-menuitem-link { border-bottom: 1px solid #1a1a1a !important; font-weight: 600; }
+                .p-tabmenu-ink-bar { display: none !important; }
+                
+                /* Ensure the hero doesn't cut off awkwardly on mobile */
+                @media (max-width: 768px) {
+                    h1 { font-size: 4rem !important; }
+                }
+            `}</style>
         </div>
     );
 }
-
-// Data moved outside component to prevent re-renders
-const portfolioData = [
-    { id: '01', title: 'Product', category: 'Commercial', src: 'https://697e96d7c4feaabd2d12359b.imgix.net/sneakers.jpg?auto=format&w=800' },
-    { id: '02', title: 'Editorial', category: 'Fashion', src: 'https://images.unsplash.com/photo-1561414927-6d86591d0c4f?auto=format&w=800' },
-    { id: '03', title: 'Portraits', category: 'Professional', src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&w=800' },
-    { id: '04', title: 'Maternity', category: 'Editorial Life', src: 'https://plus.unsplash.com/premium_photo-1664053011441-e61b42285903?w=800&auto=format&fit=crop' },
-    { id: '05', title: 'New Born', category: 'Minimalist Life', src: 'https://images.unsplash.com/photo-1510154221590-ff63e90a136f?w=800&auto=format&fit=crop' },
-    { id: '06', title: 'Archive', category: 'Personal', src: 'https://697e96d7c4feaabd2d12359b.imgix.net/scooter.jpg?auto=format&w=800' }
-];
