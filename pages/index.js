@@ -20,7 +20,7 @@ export default function JanaviSoniHome() {
     const portfolio = [
         { id: '01', title: 'Product', category: 'Commercial', src: 'https://697e96d7c4feaabd2d12359b.imgix.net/sneakers.jpg?auto=format&w=800' },
         { id: '02', title: 'Editorial', category: 'Fashion', src: 'https://images.unsplash.com/photo-1561414927-6d86591d0c4f?auto=format&w=800' },
-        { id: '03', title: 'Business Portraits', category: 'Professional', src: 'https://r.jina.ai/i/655f448c66e24b088e50529d6389f417' },
+        { id: '03', title: 'Business Portraits', category: 'Professional', src: '/images/business.jpg' },
         { id: '04', title: 'Maternity', category: 'Editorial Life', src: 'https://plus.unsplash.com/premium_photo-1664053011441-e61b42285903?w=800&auto=format&fit=crop' },
         { id: '05', title: 'New Born', category: 'Minimalist Life', src: 'https://images.unsplash.com/photo-1510154221590-ff63e90a136f?w=800&auto=format&fit=crop' },
         { id: '06', title: 'Archive', category: 'Personal', src: 'https://697e96d7c4feaabd2d12359b.imgix.net/scooter.jpg?auto=format&w=800' }
@@ -56,7 +56,7 @@ export default function JanaviSoniHome() {
                 <section className="py-4">
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5 }}>
                         <Image 
-                            src="https://697e96d7c4feaabd2d12359b.imgix.net/pexels-bingotheme-421879.jpg?auto=format&w=1800" 
+                            src="/images/Newborn-Baby-HD-Background-Wallpaper-55635.jpg" 
                             alt="Hero" width="100%" 
                             imageClassName="w-full h-30rem md:h-screen object-cover grayscale hover:grayscale-0 transition-all duration-1000" 
                         />
