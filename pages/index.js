@@ -3,9 +3,6 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { TabMenu } from 'primereact/tabmenu';
 import { Image } from 'primereact/image';
-import { Button } from 'primereact/button';
-import { InputText } from 'primereact/inputtext';
-import { InputTextarea } from 'primereact/inputtextarea';
 import { Divider } from 'primereact/divider';
 import { motion } from 'framer-motion';
 
@@ -13,22 +10,11 @@ export default function JanaviSoniHome() {
     const router = useRouter();
     const [activeIndex, setActiveIndex] = useState(0);
 
-    const scrollToSection = (id, index) => {
-        setActiveIndex(index);
-        const element = document.getElementById(id);
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth' });
-        } else {
-            // If we are on a different page, go home first
-            router.push('/' + (id ? `#${id}` : ''));
-        }
-    };
-
     const items = [
         { label: 'HOME', command: () => window.scrollTo({top: 0, behavior: 'smooth'}) },
         { label: 'ABOUT', command: () => router.push('/about') },
         { label: 'SERVICES', command: () => router.push('/services') }, 
-        { label: 'CONTACT', command: () => scrollToSection('contact', 3) }
+        { label: 'CONTACT', command: () => router.push('/contact') } // Updated to route to contact page
     ];
 
     const portfolio = [
@@ -55,7 +41,7 @@ export default function JanaviSoniHome() {
                         onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
                         Janavi Soni
                     </h1>
-                    <p style={{ letterSpacing: '0.8em', fontSize: '0.65rem', textIndent: '0.8em' }} className="mt-2 opacity-50 uppercase font-bold">
+                    <p style={{ letterSpacing: '0.8em', fontSize: '0.65rem', textIndent: '0.8em' }} className="mt-2 opacity-50 uppercase font-bold text-center">
                         Photography
                     </p>
                 </motion.div>
@@ -107,30 +93,17 @@ export default function JanaviSoniHome() {
                         ))}
                     </div>
                 </section>
-
-                <Divider className="max-w-screen-sm mx-auto" />
-
-                {/* --- CONTACT --- */}
-                <section id="contact" className="py-8 max-w-screen-sm mx-auto">
-                    <div className="text-center mb-8">
-                        <span className="text-xs tracking-widest opacity-40 uppercase">Get in Touch</span>
-                        <h2 className="text-6xl mt-2" style={{ fontFamily: "'Bodoni Moda', serif", fontStyle: 'italic' }}>Inquire</h2>
-                    </div>
-                    <div className="flex flex-column gap-5">
-                        <div className="p-float-label">
-                            <InputText id="name" className="w-full noir-input-light" />
-                            <label htmlFor="name">NAME</label>
-                        </div>
-                        <div className="p-float-label">
-                            <InputText id="email" className="w-full noir-input-light" />
-                            <label htmlFor="email">EMAIL ADDRESS</label>
-                        </div>
-                        <div className="p-float-label">
-                            <InputTextarea id="msg" rows={4} className="w-full noir-input-light" />
-                            <label htmlFor="msg">TELL ME ABOUT YOUR VISION</label>
-                        </div>
-                        <Button label="SEND MESSAGE" className="p-3 bg-black-alpha-90 text-white border-none hover:bg-black-alpha-70 transition-all font-bold tracking-widest text-xs" />
-                    </div>
+                
+                {/* --- CALL TO ACTION --- */}
+                <section className="py-8 text-center">
+                   <Divider className="max-w-screen-sm mx-auto mb-8" />
+                   <h2 className="text-4xl mb-6" style={{ fontFamily: "'Bodoni Moda', serif", fontStyle: 'italic' }}>Interested in a session?</h2>
+                   <button 
+                        onClick={() => router.push('/contact')}
+                        className="bg-transparent border-1 border-black-alpha-90 py-3 px-8 text-xs tracking-widest uppercase font-bold hover:bg-black-alpha-90 hover:text-white transition-all duration-300"
+                    >
+                        Get in Touch
+                    </button>
                 </section>
             </main>
 
@@ -143,9 +116,6 @@ export default function JanaviSoniHome() {
                 .noir-menu.p-tabmenu .p-tabmenu-nav .p-tabmenuitem .p-menuitem-link { background: transparent; border: none; color: #1a1a1a; font-size: 0.7rem; letter-spacing: 0.25em; font-weight: 400; }
                 .noir-menu.p-tabmenu .p-tabmenu-nav .p-tabmenuitem.p-highlight .p-menuitem-link { border-bottom: 1px solid #1a1a1a; font-weight: 600; }
                 .p-tabmenu-ink-bar { display: none !important; }
-                .noir-input-light { background: transparent; border: none; border-bottom: 1px solid #ddd; border-radius: 0; padding: 1rem 0; font-family: 'Montserrat', sans-serif; }
-                .noir-input-light:focus { border-color: #000; box-shadow: none; outline: none; }
-                .p-float-label label { left: 0px !important; font-size: 0.7rem; letter-spacing: 0.1em; opacity: 0.5; }
             `}</style>
         </div>
     );
