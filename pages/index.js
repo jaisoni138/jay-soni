@@ -14,13 +14,13 @@ export default function JanaviSoniHome() {
         { label: 'HOME', command: () => window.scrollTo({top: 0, behavior: 'smooth'}) },
         { label: 'ABOUT', command: () => router.push('/about') },
         { label: 'SERVICES', command: () => router.push('/services') }, 
-        { label: 'CONTACT', command: () => router.push('/contact') } // Updated to route to contact page
+        { label: 'CONTACT', command: () => router.push('/contact') }
     ];
 
     const portfolio = [
         { id: '01', title: 'Product', category: 'Commercial', src: 'https://697e96d7c4feaabd2d12359b.imgix.net/sneakers.jpg?auto=format&w=800' },
         { id: '02', title: 'Editorial', category: 'Fashion', src: 'https://images.unsplash.com/photo-1561414927-6d86591d0c4f?auto=format&w=800' },
-        { id: '03', title: 'Business Portraits', category: 'Professional', src: '/images/business.jpg' },
+        { id: '03', title: 'Business Portraits', category: 'Professional', src: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&w=800' },
         { id: '04', title: 'Maternity', category: 'Editorial Life', src: 'https://plus.unsplash.com/premium_photo-1664053011441-e61b42285903?w=800&auto=format&fit=crop' },
         { id: '05', title: 'New Born', category: 'Minimalist Life', src: 'https://images.unsplash.com/photo-1510154221590-ff63e90a136f?w=800&auto=format&fit=crop' },
         { id: '06', title: 'Archive', category: 'Personal', src: 'https://697e96d7c4feaabd2d12359b.imgix.net/scooter.jpg?auto=format&w=800' }
@@ -33,40 +33,46 @@ export default function JanaviSoniHome() {
                 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@1,400;1,700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet" />
             </Head>
 
-            {/* --- HEADER --- */}
-            <header className="pt-8 pb-4 text-center sticky top-0 z-5 bg-white-alpha-90 backdrop-blur-md">
-                <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-                    <h1 className="text-7xl md:text-8xl m-0 cursor-pointer" 
-                        style={{ fontFamily: "'Bodoni Moda', serif", fontStyle: 'italic', fontWeight: 400 }}
-                        onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
-                        Janavi Soni
-                    </h1>
-                    <p style={{ letterSpacing: '0.8em', fontSize: '0.65rem', textIndent: '0.8em' }} className="mt-2 opacity-50 uppercase font-bold text-center">
-                        Photography
-                    </p>
-                </motion.div>
-
-                <div className="mt-6 flex justify-content-center">
-                    <TabMenu model={items} activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)} className="noir-menu" />
-                </div>
-            </header>
-
-            <main className="px-4 md:px-8">
-                {/* --- HERO --- */}
-                <section className="py-4">
-                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5 }}>
-                        <Image 
-                            src="/images/Newborn-Baby-HD-Background-Wallpaper-55635.jpg" 
-                            alt="Hero" width="100%" 
-                            imageClassName="w-full h-30rem md:h-screen object-cover grayscale hover:grayscale-0 transition-all duration-1000" 
-                        />
+            {/* --- HERO & HEADER WRAPPER --- */}
+            <section className="relative h-screen md:h-70rem overflow-hidden">
+                {/* Fixed/Sticky Header Overlay */}
+                <header className="absolute top-0 left-0 w-full pt-8 pb-4 text-center z-5 bg-gradient-to-b from-white-alpha-40 to-transparent backdrop-blur-sm">
+                    <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+                        <h1 className="text-7xl md:text-8xl m-0 cursor-pointer" 
+                            style={{ fontFamily: "'Bodoni Moda', serif", fontStyle: 'italic', fontWeight: 400 }}
+                            onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
+                            Janavi Soni
+                        </h1>
+                        <p style={{ letterSpacing: '0.8em', fontSize: '0.65rem', textIndent: '0.8em' }} className="mt-2 opacity-60 uppercase font-bold text-center">
+                            Photography
+                        </p>
                     </motion.div>
-                </section>
 
-                <div className="max-w-screen-xl mx-auto py-4"><Divider /></div>
+                    <div className="mt-6 flex justify-content-center">
+                        <TabMenu model={items} activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)} className="noir-menu transparent-menu" />
+                    </div>
+                </header>
 
-                {/* --- PORTFOLIO (Home Content) --- */}
-                <section id="work" className="py-8 max-w-screen-xl mx-auto">
+                {/* Hero Image - Blended Background */}
+                <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5 }} className="h-full w-full">
+                    <img 
+                        src="/images/Newborn-Baby-HD-Background-Wallpaper-55635.jpg" 
+                        alt="Hero" 
+                        className="w-full h-full object-cover grayscale transition-all duration-1000"
+                        style={{ filter: 'contrast(1.1) brightness(0.9)' }} 
+                    />
+                    {/* Gradient Overlay to blend image into the white content below */}
+                    <div className="absolute bottom-0 left-0 w-full h-20rem bg-gradient-to-t from-white to-transparent"></div>
+                </motion.div>
+            </section>
+
+            <main className="px-4 md:px-8 relative z-2 bg-white">
+                <div className="max-w-screen-xl mx-auto py-8 text-center">
+                    <span className="text-xs tracking-widest opacity-40 uppercase">Selected Works</span>
+                </div>
+
+                {/* --- PORTFOLIO --- */}
+                <section id="work" className="pb-8 max-w-screen-xl mx-auto">
                     <div className="grid">
                         {portfolio.map((item, index) => (
                             <div key={item.id} className="col-12 md:col-4 p-3">
@@ -75,7 +81,7 @@ export default function JanaviSoniHome() {
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true }}
                                     transition={{ delay: index * 0.1 }}
-                                    className="relative overflow-hidden group border-1 border-gray-100"
+                                    className="relative overflow-hidden group"
                                 >
                                     <Image 
                                         src={item.src} 
@@ -100,22 +106,27 @@ export default function JanaviSoniHome() {
                    <h2 className="text-4xl mb-6" style={{ fontFamily: "'Bodoni Moda', serif", fontStyle: 'italic' }}>Interested in a session?</h2>
                    <button 
                         onClick={() => router.push('/contact')}
-                        className="bg-transparent border-1 border-black-alpha-90 py-3 px-8 text-xs tracking-widest uppercase font-bold hover:bg-black-alpha-90 hover:text-white transition-all duration-300"
+                        className="bg-transparent border-1 border-black-alpha-90 py-3 px-8 text-xs tracking-widest uppercase font-bold hover:bg-black-alpha-90 hover:text-white transition-all duration-300 mb-8"
                     >
                         Get in Touch
                     </button>
                 </section>
             </main>
 
-            <footer className="py-8 text-center border-top-1 border-gray-100">
+            <footer className="py-8 text-center border-top-1 border-gray-100 bg-white">
                 <p className="opacity-40 text-xs tracking-widest m-0">&copy; 2026 JANAVI SONI STUDIO</p>
             </footer>
 
             <style jsx global>{`
                 .noir-menu.p-tabmenu .p-tabmenu-nav { background: transparent; border: none; justify-content: center; }
-                .noir-menu.p-tabmenu .p-tabmenu-nav .p-tabmenuitem .p-menuitem-link { background: transparent; border: none; color: #1a1a1a; font-size: 0.7rem; letter-spacing: 0.25em; font-weight: 400; }
-                .noir-menu.p-tabmenu .p-tabmenu-nav .p-tabmenuitem.p-highlight .p-menuitem-link { border-bottom: 1px solid #1a1a1a; font-weight: 600; }
+                .noir-menu.p-tabmenu .p-tabmenu-nav .p-tabmenuitem .p-menuitem-link { background: transparent !important; border: none !important; color: #1a1a1a; font-size: 0.7rem; letter-spacing: 0.25em; font-weight: 400; }
+                .noir-menu.p-tabmenu .p-tabmenu-nav .p-tabmenuitem.p-highlight .p-menuitem-link { border-bottom: 1px solid #1a1a1a !important; font-weight: 600; }
                 .p-tabmenu-ink-bar { display: none !important; }
+                
+                /* Ensure the hero doesn't cut off awkwardly on mobile */
+                @media (max-width: 768px) {
+                    h1 { font-size: 4rem !important; }
+                }
             `}</style>
         </div>
     );
