@@ -13,7 +13,7 @@ export default function Services() {
     const [activeIndex, setActiveIndex] = useState(2); 
 
     const items = [
-        { label: 'WORK', template: (item) => <Link href="/" className="p-menuitem-link">{item.label}</Link> },
+        { label: 'HOME', template: (item) => <Link href="/" className="p-menuitem-link">{item.label}</Link> },
         { label: 'ABOUT', template: (item) => <Link href="/about" className="p-menuitem-link">{item.label}</Link> },
         { label: 'SERVICES', template: (item) => <Link href="/services" className="p-menuitem-link">{item.label}</Link> },
         { label: 'CONTACT', template: (item) => <Link href="/#contact" className="p-menuitem-link">{item.label}</Link> }
@@ -38,8 +38,7 @@ export default function Services() {
         {
             title: 'Business Portraits',
             description: 'Elevated headshots and personal branding that project confidence, character, and professionalism.',
-            // Using your newly generated portrait here
-            src: 'https://plus.unsplash.com/premium_photo-1682438002958-3211f7107e46?w=900&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OXx8YnVzaW5lc3MlMjBwb3J0cmFpdHN8ZW58MHx8MHx8fDA%3D' 
+            src: 'https://plus.unsplash.com/premium_photo-1682438002958-3211f7107e46?w=900&auto=format&fit=crop&q=60' 
         }
     ];
 
@@ -50,10 +49,19 @@ export default function Services() {
                 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@1,400;1,700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet" />
             </Head>
 
-            <header className="pt-8 pb-4 text-center">
-                <h1 className="text-7xl md:text-8xl m-0" style={{ fontFamily: "'Bodoni Moda', serif", fontStyle: 'italic', fontWeight: 400 }}>
-                    Janavi Soni
-                </h1>
+            {/* --- HEADER --- */}
+            <header className="pt-8 pb-4 text-center sticky top-0 z-5 bg-white-alpha-90 backdrop-blur-md">
+                <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+                    <h1 className="text-7xl md:text-8xl m-0 cursor-pointer" 
+                        style={{ fontFamily: "'Bodoni Moda', serif", fontStyle: 'italic', fontWeight: 400 }}
+                        onClick={() => router.push('/')}>
+                        Janavi Soni
+                    </h1>
+                    <p style={{ letterSpacing: '0.8em', fontSize: '0.65rem', textIndent: '0.8em' }} className="mt-2 opacity-50 uppercase font-bold text-center">
+                        Photography
+                    </p>
+                </motion.div>
+
                 <div className="mt-6 flex justify-content-center">
                     <TabMenu model={items} activeIndex={activeIndex} className="noir-menu" />
                 </div>
@@ -83,7 +91,6 @@ export default function Services() {
                                         src={service.src} 
                                         alt={service.title} 
                                         width="100%" 
-                                        // Changed height and added object-position to ensure faces are centered
                                         imageClassName="w-full h-30rem object-cover object-top grayscale hover:grayscale-0 transition-all duration-700" 
                                     />
                                 </div>
@@ -108,8 +115,8 @@ export default function Services() {
 
             <style jsx global>{`
                 .noir-menu.p-tabmenu .p-tabmenu-nav { background: transparent; border: none; justify-content: center; }
-                .noir-menu.p-tabmenu .p-tabmenu-nav .p-tabmenuitem .p-menuitem-link { background: transparent !important; border: none; color: #1a1a1a; font-size: 0.75rem; letter-spacing: 0.2em; text-decoration: none; }
-                .noir-menu.p-tabmenu .p-tabmenu-nav .p-tabmenuitem.p-highlight .p-menuitem-link { border-bottom: 2px solid #1a1a1a; font-weight: 600; }
+                .noir-menu.p-tabmenu .p-tabmenu-nav .p-tabmenuitem .p-menuitem-link { background: transparent !important; border: none; color: #1a1a1a; font-size: 0.7rem; letter-spacing: 0.25em; text-decoration: none; }
+                .noir-menu.p-tabmenu .p-tabmenu-nav .p-tabmenuitem.p-highlight .p-menuitem-link { border-bottom: 1px solid #1a1a1a; font-weight: 600; }
                 .p-tabmenu-ink-bar { display: none !important; }
             `}</style>
         </div>
