@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { TabMenu } from 'primereact/tabmenu';
@@ -9,6 +9,16 @@ import { motion } from 'framer-motion';
 export default function JanaviSoniHome() {
     const router = useRouter();
     const [activeIndex, setActiveIndex] = useState(0);
+    const [scrolled, setScrolled] = useState(false);
+
+    // Effect to handle header background change on scroll
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrolled(window.scrollY > 50);
+        };
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
 
     const items = [
         { label: 'HOME', command: () => window.scrollTo({top: 0, behavior: 'smooth'}) },
@@ -33,46 +43,46 @@ export default function JanaviSoniHome() {
                 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@1,400;1,700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet" />
             </Head>
 
-            {/* --- HERO & HEADER WRAPPER --- */}
-            <section className="relative h-screen md:h-70rem overflow-hidden">
-                {/* Fixed/Sticky Header Overlay */}
-                <header className="absolute top-0 left-0 w-full pt-8 pb-4 text-center z-5 bg-gradient-to-b from-white-alpha-40 to-transparent backdrop-blur-sm">
-                    <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-                        <h1 className="text-7xl md:text-8xl m-0 cursor-pointer" 
-                            style={{ fontFamily: "'Bodoni Moda', serif", fontStyle: 'italic', fontWeight: 400 }}
-                            onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>
-                            Janavi Soni
-                        </h1>
-                        <p style={{ letterSpacing: '0.8em', fontSize: '0.65rem', textIndent: '0.8em' }} className="mt-2 opacity-60 uppercase font-bold text-center">
-                            Photography
-                        </p>
-                    </motion.div>
+            {/* --- NAVIGATION --- */}
+            <nav className={`fixed top-0 left-0 w-full z-5 px-6 py-4 flex align-items-center justify-content-between transition-all duration-500 ${scrolled ? 'bg-white shadow-2' : 'bg-transparent'}`}>
+                {/* MODERN LOGO (Top Left) */}
+                <motion.div 
+                    initial={{ opacity: 0, x: -20 }} 
+                    animate={{ opacity: 1, x: 0 }}
+                    className="cursor-pointer"
+                    onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}
+                >
+                    <span style={{ fontFamily: "'Bodoni Moda', serif", fontWeight: 700, fontSize: '1.5rem', letterSpacing: '-0.02em' }}>J.</span>
+                    <span style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 300, fontSize: '0.7rem', letterSpacing: '0.4em', marginLeft: '0.5rem' }} className="uppercase">Soni</span>
+                </motion.div>
 
-                    <div className="mt-6 flex justify-content-center">
-                        <TabMenu model={items} activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)} className="noir-menu transparent-menu" />
-                    </div>
-                </header>
+                {/* CENTERED MENU */}
+                <div className="flex-grow-1 flex justify-content-center hidden md:flex">
+                    <TabMenu model={items} activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)} className="noir-menu-minimal" />
+                </div>
 
-                {/* Hero Image - Blended Background */}
+                {/* PLACEHOLDER FOR BALANCE (Right Side) */}
+                <div className="hidden md:block w-4rem"></div>
+            </nav>
+
+            {/* --- HERO SECTION --- */}
+            <section className="relative h-screen overflow-hidden">
                 <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 1.5 }} className="h-full w-full">
                     <img 
                         src="/images/Newborn-Baby-HD-Background-Wallpaper-55635.jpg" 
                         alt="Hero" 
-                        className="w-full h-full object-cover grayscale transition-all duration-1000"
-                        style={{ filter: 'contrast(1.1) brightness(0.9)' }} 
+                        className="w-full h-full object-cover grayscale"
+                        style={{ filter: 'contrast(1.05) brightness(0.95)' }} 
                     />
-                    {/* Gradient Overlay to blend image into the white content below */}
+                    {/* Dark overlay for logo readability */}
+                    <div className="absolute top-0 left-0 w-full h-10rem bg-gradient-to-b from-black-alpha-20 to-transparent"></div>
+                    {/* Bottom blend to white */}
                     <div className="absolute bottom-0 left-0 w-full h-20rem bg-gradient-to-t from-white to-transparent"></div>
                 </motion.div>
             </section>
 
             <main className="px-4 md:px-8 relative z-2 bg-white">
-                <div className="max-w-screen-xl mx-auto py-8 text-center">
-                    <span className="text-xs tracking-widest opacity-40 uppercase">Selected Works</span>
-                </div>
-
-                {/* --- PORTFOLIO --- */}
-                <section id="work" className="pb-8 max-w-screen-xl mx-auto">
+                <section id="work" className="py-8 max-w-screen-xl mx-auto">
                     <div className="grid">
                         {portfolio.map((item, index) => (
                             <div key={item.id} className="col-12 md:col-4 p-3">
@@ -100,7 +110,6 @@ export default function JanaviSoniHome() {
                     </div>
                 </section>
                 
-                {/* --- CALL TO ACTION --- */}
                 <section className="py-8 text-center">
                    <Divider className="max-w-screen-sm mx-auto mb-8" />
                    <h2 className="text-4xl mb-6" style={{ fontFamily: "'Bodoni Moda', serif", fontStyle: 'italic' }}>Interested in a session?</h2>
@@ -118,15 +127,10 @@ export default function JanaviSoniHome() {
             </footer>
 
             <style jsx global>{`
-                .noir-menu.p-tabmenu .p-tabmenu-nav { background: transparent; border: none; justify-content: center; }
-                .noir-menu.p-tabmenu .p-tabmenu-nav .p-tabmenuitem .p-menuitem-link { background: transparent !important; border: none !important; color: #1a1a1a; font-size: 0.7rem; letter-spacing: 0.25em; font-weight: 400; }
-                .noir-menu.p-tabmenu .p-tabmenu-nav .p-tabmenuitem.p-highlight .p-menuitem-link { border-bottom: 1px solid #1a1a1a !important; font-weight: 600; }
+                .noir-menu-minimal.p-tabmenu .p-tabmenu-nav { background: transparent; border: none; }
+                .noir-menu-minimal.p-tabmenu .p-tabmenu-nav .p-tabmenuitem .p-menuitem-link { background: transparent !important; border: none !important; color: #1a1a1a; font-size: 0.65rem; letter-spacing: 0.3em; font-weight: 600; }
+                .noir-menu-minimal.p-tabmenu .p-tabmenu-nav .p-tabmenuitem.p-highlight .p-menuitem-link { border-bottom: 2px solid #1a1a1a !important; }
                 .p-tabmenu-ink-bar { display: none !important; }
-                
-                /* Ensure the hero doesn't cut off awkwardly on mobile */
-                @media (max-width: 768px) {
-                    h1 { font-size: 4rem !important; }
-                }
             `}</style>
         </div>
     );
