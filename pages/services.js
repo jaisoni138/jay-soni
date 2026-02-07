@@ -22,21 +22,29 @@ export default function Services() {
     const serviceList = [
         {
             title: 'Maternity',
+            duration: '90 Minutes',
+            price: '$450',
             description: 'Celebrating the quiet strength and beauty of new beginnings through soft, editorial lighting.',
             src: 'https://plus.unsplash.com/premium_photo-1664053011441-e61b42285903?w=900&auto=format&fit=crop&q=60'
         },
         {
             title: 'New Born',
+            duration: '2 Hours',
+            price: '$500',
             description: 'Pure, minimalist captures of your newest arrival, focusing on raw emotion and delicate details.',
             src: 'https://images.unsplash.com/photo-1510154221590-ff63e90a136f?w=900&auto=format&fit=crop&q=60'
         },
         {
             title: 'Family',
+            duration: '60 Minutes',
+            price: '$400',
             description: 'Unscripted moments that tell the unique story of your bond. Real, unposed, and timeless.',
             src: 'https://images.unsplash.com/photo-1542037104857-ffbb0b9155fb?auto=format&w=800'
         },
         {
             title: 'Business Portraits',
+            duration: '45 Minutes',
+            price: '$350',
             description: 'Elevated headshots and personal branding that project confidence, character, and professionalism.',
             src: 'https://plus.unsplash.com/premium_photo-1682438002958-3211f7107e46?w=900&auto=format&fit=crop&q=60' 
         }
@@ -45,7 +53,7 @@ export default function Services() {
     return (
         <div style={{ minHeight: '100vh', backgroundColor: '#ffffff', color: '#1a1a1a', fontFamily: "'Montserrat', sans-serif" }}>
             <Head>
-                <title>SERVICES | JANAVI SONI</title>
+                <title>Janavi Soni Photography</title>
                 <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@1,400;1,700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet" />
             </Head>
 
@@ -71,7 +79,7 @@ export default function Services() {
             <main className="max-w-screen-xl mx-auto px-4 md:px-8 py-8">
                 <section className="text-center mb-8">
                     <span style={{ letterSpacing: '0.8em', fontSize: '0.65rem' }} className="opacity-40 uppercase font-light">
-                        Visual Offerings
+                        The Investment
                     </span>
                     <h2 className="text-5xl mt-3" style={{ fontFamily: "'Bodoni Moda', serif", fontStyle: 'italic' }}>Curated Experiences</h2>
                 </section>
@@ -94,13 +102,23 @@ export default function Services() {
                                         imageClassName="w-full h-30rem object-cover object-top grayscale hover:grayscale-0 transition-all duration-700" 
                                     />
                                 </div>
-                                <h3 className="text-3xl mb-2" style={{ fontFamily: "'Bodoni Moda', serif", fontStyle: 'italic' }}>{service.title}</h3>
+                                
+                                <div className="flex justify-content-between align-items-end mb-2">
+                                    <h3 className="text-3xl m-0" style={{ fontFamily: "'Bodoni Moda', serif", fontStyle: 'italic' }}>{service.title}</h3>
+                                    <span className="text-xl font-light tracking-widest">{service.price}</span>
+                                </div>
+                                
+                                <span className="text-xs opacity-50 uppercase tracking-widest mb-3 block">
+                                    Session Duration: {service.duration}
+                                </span>
+
                                 <p className="line-height-3 opacity-70 mb-4 font-light italic flex-grow-1">
                                     {service.description}
                                 </p>
+                                
                                 <Button 
                                     label="INQUIRE FOR AVAILABILITY" 
-                                    onClick={() => router.push('/contact')} // Updated route
+                                    onClick={() => router.push('/contact')}
                                     className="p-button-text p-0 text-black-alpha-90 font-bold tracking-widest text-xs hover:ml-2 transition-all w-max" 
                                 />
                             </motion.div>
