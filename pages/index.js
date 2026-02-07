@@ -25,7 +25,7 @@ export default function JanaviSoniRestored() {
     const items = [
         { label: 'Portfolio', command: () => scrollToSection('work', 0) },
         { label: 'About', command: () => router.push('/about') },
-        { label: 'Services', command: () => router.push('/services') }, // Updated to route to your new services page
+        { label: 'Services', command: () => router.push('/services') }, 
         { label: 'Contact', command: () => scrollToSection('contact', 3) }
     ];
 
@@ -48,7 +48,6 @@ export default function JanaviSoniRestored() {
                     <h1 className="text-7xl md:text-8xl m-0" style={{ fontFamily: "'Bodoni Moda', serif", fontStyle: 'italic', fontWeight: 400 }}>
                         Janavi Soni
                     </h1>
-                    {/* Text-based subheading as requested */}
                     <p style={{ letterSpacing: '0.8em', fontSize: '0.65rem', textIndent: '0.8em' }} className="mt-2 opacity-50 uppercase font-bold">
                         Photography
                     </p>
@@ -83,21 +82,6 @@ export default function JanaviSoniRestored() {
                                 <h3 className="text-xl mt-4 opacity-80" style={{ fontFamily: "'Bodoni Moda', serif", fontStyle: 'italic' }}>{item.title}</h3>
                             </div>
                         ))}
-                    </div>
-                </section>
-
-                {/* --- RATES (Now accessible via Services page, or keep as section) --- */}
-                <section id="rates" className="py-8 border-y-1 border-gray-200">
-                    <div className="max-w-screen-sm mx-auto">
-                        <h2 className="text-4xl text-center mb-8" style={{ fontFamily: "'Bodoni Moda', serif", fontStyle: 'italic' }}>Packages</h2>
-                        <div className="flex justify-content-between py-4 border-bottom-1 border-gray-100">
-                            <span className="font-semibold tracking-tight">Full Day Session</span>
-                            <span className="italic">₹45,000+</span>
-                        </div>
-                        <div className="flex justify-content-between py-4 border-bottom-1 border-gray-100">
-                            <span className="font-semibold tracking-tight">Half Day Session</span>
-                            <span className="italic">₹25,000+</span>
-                        </div>
                     </div>
                 </section>
 
