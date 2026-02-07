@@ -16,7 +16,7 @@ export default function Services() {
         { label: 'HOME', template: (item) => <Link href="/" className="p-menuitem-link">{item.label}</Link> },
         { label: 'ABOUT', template: (item) => <Link href="/about" className="p-menuitem-link">{item.label}</Link> },
         { label: 'SERVICES', template: (item) => <Link href="/services" className="p-menuitem-link">{item.label}</Link> },
-        { label: 'CONTACT', template: (item) => <Link href="/#contact" className="p-menuitem-link">{item.label}</Link> }
+        { label: 'CONTACT', template: (item) => <Link href="/contact" className="p-menuitem-link">{item.label}</Link> }
     ];
 
     const serviceList = [
@@ -100,7 +100,7 @@ export default function Services() {
                                 </p>
                                 <Button 
                                     label="INQUIRE FOR AVAILABILITY" 
-                                    onClick={() => router.push('/#contact')}
+                                    onClick={() => router.push('/contact')} // Updated route
                                     className="p-button-text p-0 text-black-alpha-90 font-bold tracking-widest text-xs hover:ml-2 transition-all w-max" 
                                 />
                             </motion.div>
